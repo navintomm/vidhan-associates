@@ -1,0 +1,164 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "practiceAreas": "Practice Areas",
+    "caseExperience": "Experience",
+    "blog": "Blog",
+    "careers": "Careers"
+  },
+  "header": {
+    "quote": "Where law ends, tyranny begins.",
+    "quoteAuthor": "John Locke",
+    "cta": "Consult"
+  },
+  "home": {
+    "hero": {
+      "title": "The Pursuit of Justice.",
+      "description": "An independent legal practice providing strategic counsel to individuals, businesses, and institutions across Kerala and beyond.",
+      "cta": "Book a Consultation",
+      "tagline": "Justice. Integrity. Excellence.",
+      "scrollDown": "SCROLL DOWN"
+    },
+    "firmIntro": {
+      "quote": "The good of the people is the greatest law.",
+      "quoteAuthor": "Cicero",
+      "heading": "Rooted in Kerala. Trusted Across India.",
+      "body1": "Vidhan Associates is an independent legal practice providing rigorous, principled representation across civil, criminal, family, and property matters. We bring the discipline of structured legal thinking to every case — no matter its size.",
+      "body2": "Our work is founded on three principles: excellence in counsel, integrity in conduct, and an unwavering commitment to the client's cause. We are not the biggest firm — we are the most invested.",
+      "cta": "About the Firm"
+    },
+    "firmNumbers": {
+      "label": "The Firm in Numbers",
+      "years": { "value": "14", "suffix": "+", "label": "Years of Practice" },
+      "cases": { "value": "500", "suffix": "+", "label": "Cases Argued" },
+      "clients": { "value": "300", "suffix": "+", "label": "Clients Served" },
+      "areas": { "value": "8", "suffix": "", "label": "Practice Areas" }
+    },
+    "perspectives": {
+      "label": "Legal Perspectives",
+      "sublabel": "Insight from the bench, the bar, and the books.",
+      "viewAll": "View All Articles",
+      "posts": [
+        {
+          "category": "Civil Law",
+          "title": "Understanding Property Disputes in Kerala: A Practical Guide",
+          "date": "August 2026"
+        },
+        {
+          "category": "Criminal Defence",
+          "title": "Bail Conditions and Personal Liberty: What Every Accused Must Know",
+          "date": "July 2026"
+        },
+        {
+          "category": "Family Law",
+          "title": "Navigating Divorce Proceedings Under the Hindu Marriage Act",
+          "date": "June 2026"
+        },
+        {
+          "category": "Real Estate",
+          "title": "Title Verification Before Purchase: Why It Cannot Be Skipped",
+          "date": "May 2026"
+        }
+      ]
+    },
+    "story": {
+      "beat1": {
+        "title": "Justice",
+        "description": "We believe in relentless advocacy and unwavering dedication to achieving justice for our clients."
+      },
+      "beat2": {
+        "title": "Integrity",
+        "description": "Our foundation is built on absolute transparency, ethical practice, and honest counsel."
+      },
+      "beat3": {
+        "title": "Excellence",
+        "description": "Delivering unparalleled legal expertise with meticulous attention to detail in every case."
+      }
+    },
+    "practiceShowcase": {
+      "sectionLabel": "Practice",
+      "areas": {
+        "area1": {
+          "title": "Civil Litigation",
+          "description": "Comprehensive representation in civil disputes, property matters, and contractual obligations with a track record of decisive outcomes."
+        },
+        "area2": {
+          "title": "Criminal Defence",
+          "description": "Vigorous defence strategy rooted in constitutional rights, ensuring every accused receives fair and competent representation."
+        },
+        "area3": {
+          "title": "Family & Matrimonial",
+          "description": "Sensitive and strategic counsel in divorce, custody, maintenance, and domestic matters — protecting what matters most."
+        },
+        "area4": {
+          "title": "Property & Real Estate",
+          "description": "Expert guidance on land acquisition, title verification, tenancy disputes, and real estate transactions across Kerala."
+        }
+      }
+    }
+  },
+  "about": {
+    "hero": {
+      "label": "About the Firm",
+      "title": "Principled Counsel.\nUnwavering Advocacy.",
+      "scrollDown": "SCROLL DOWN"
+    },
+    "story": {
+      "label": "Our Story",
+      "heading": "Founded on Principle,\nBuilt on Trust.",
+      "body1": "Vidhan Associates was established with a singular conviction: that every individual deserves rigorous, principled legal representation — regardless of the complexity of their case or their position in society.",
+      "body2": "Over more than a decade of practice in Kerala's courts, we have built a reputation not through volume, but through depth. Each client receives our full attention. Each case is prepared as if it will be argued before the highest court.",
+      "body3": "Our name, Vidhan, is derived from the Sanskrit for 'rule of law' — a reminder that our practice exists to uphold the very architecture of justice."
+    },
+    "values": {
+      "label": "Our Values",
+      "items": [
+        {
+          "title": "Integrity",
+          "description": "We maintain absolute transparency with clients and conduct ourselves with the highest ethical standards in and out of court."
+        },
+        {
+          "title": "Excellence",
+          "description": "Every brief is researched exhaustively, every argument prepared with precision. We do not settle for adequate when exceptional is possible."
+        },
+        {
+          "title": "Accountability",
+          "description": "We are answerable to our clients at every step. You will always know where your matter stands and why."
+        }
+      ]
+    },
+    "team": {
+      "label": "Our Advocates",
+      "heading": "The Counsel Behind the Cases.",
+      "members": [
+        {
+          "name": "Adv. [Name TBD]",
+          "role": "Founding Partner",
+          "specialisation": "Civil Litigation, Property Law",
+          "education": "[Law School TBD], LLB",
+          "bio": "With over 14 years of practice across Kerala's civil courts, [Name] has argued landmark property and contract disputes before the Kerala High Court. A graduate of [Law School], he brings both scholarly rigour and practical courtroom experience to every matter."
+        },
+        {
+          "name": "Adv. [Name TBD]",
+          "role": "Senior Associate",
+          "specialisation": "Criminal Defence, Constitutional Law",
+          "education": "[Law School TBD], LLB, LLM",
+          "bio": "Specialising in criminal defence and constitutional matters, [Name] has successfully represented clients across Sessions Courts and the High Court. Known for meticulous case preparation and persuasive advocacy."
+        },
+        {
+          "name": "Adv. [Name TBD]",
+          "role": "Associate",
+          "specialisation": "Family Law, Matrimonial Disputes",
+          "education": "[Law School TBD], LLB",
+          "bio": "A compassionate and strategic family law practitioner, [Name] guides clients through divorce, custody, and domestic matters with sensitivity and resolve, ensuring their interests are protected at every stage."
+        }
+      ]
+    }
+  },
+  "whatsapp": {
+    "tooltip": "Chat on WhatsApp",
+    "defaultMessage": "Hello, I would like to book a consultation with Vidhan Associates."
+  }
+}

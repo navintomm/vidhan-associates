@@ -2,26 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-ink text-slate;
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Hide scrollbar globally for horizontal strips */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* Gold hairline draw animation */
+  @keyframes draw-line {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  .animate-draw-line {
+    animation: draw-line 1.2s ease-out forwards;
+  }
+
+  /* Hero Ken Burns slow zoom */
+  @keyframes kenBurns {
+    0%   { transform: scale(1.0); }
+    100% { transform: scale(1.06); }
+  }
+  .animate-ken-burns {
+    animation: kenBurns 18s ease-in-out infinite alternate;
+  }
+
+  /* Subtle idle float for objects */
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+  }
+  .animate-float {
+    animation: floatY 4s ease-in-out infinite;
+  }
+
+  /* Watermark text — giant faded background text */
+  .watermark-text {
+    @apply text-[12vw] font-serif uppercase tracking-wide-2xl text-parchment/[0.04] select-none pointer-events-none leading-none whitespace-nowrap;
   }
 }
+
