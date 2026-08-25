@@ -4,9 +4,13 @@ import SectionDivider from "@/components/SectionDivider";
 import PracticeShowcase from "@/components/PracticeShowcase";
 import FirmNumbers from "@/components/FirmNumbers";
 import InsightsCarousel from "@/components/InsightsCarousel";
+import LandingSplash from "@/components/LandingSplash";
+
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
   return (
     <div>
+      <LandingSplash />
+
       {/* 1. Dark cinematic hero */}
       <div className="bg-ink">
         <HomeHero locale={locale} />
