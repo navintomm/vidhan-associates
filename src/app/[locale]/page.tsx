@@ -3,8 +3,7 @@ import FirmIntro from "@/components/FirmIntro";
 import SectionDivider from "@/components/SectionDivider";
 import PracticeShowcase from "@/components/PracticeShowcase";
 import FirmNumbers from "@/components/FirmNumbers";
-import LegalPerspectives from "@/components/LegalPerspectives";
-
+import InsightsCarousel from "@/components/InsightsCarousel";
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
   return (
     <div>
@@ -27,7 +26,7 @@ export default function Home({ params: { locale } }: { params: { locale: string 
         <FirmNumbers />
 
         {/* 6. Blog / perspectives strip */}
-        <LegalPerspectives locale={locale} />
+        <InsightsCarousel locale={locale} />
 
         {/* Bottom padding for BottomNav */}
         <div className="pb-14 lg:pb-20" />
