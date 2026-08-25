@@ -32,7 +32,7 @@ export default function HomeHero({ locale }: { locale: string }) {
         </video>
       ) : (
         <div
-          className="absolute inset-0 z-0 bg-cover bg-center animate-ken-burns"
+          className="absolute inset-0 z-0 bg-cover bg-[70%_top] md:bg-center animate-ken-burns"
           style={{ backgroundImage: "url('/hero-justice.png')" }}
         />
       )}
@@ -71,7 +71,7 @@ export default function HomeHero({ locale }: { locale: string }) {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-serif text-parchment leading-tight mb-6"
+              className="text-6xl md:text-7xl lg:text-8xl font-serif text-parchment leading-tight mb-6"
             >
               {t("title")}
             </motion.h1>
@@ -80,7 +80,7 @@ export default function HomeHero({ locale }: { locale: string }) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-              className="text-base md:text-lg text-parchment/60 font-sans leading-relaxed max-w-lg"
+              className="text-lg md:text-xl lg:text-2xl text-parchment/70 font-sans leading-relaxed max-w-lg"
             >
               {t("description")}
             </motion.p>
@@ -91,15 +91,15 @@ export default function HomeHero({ locale }: { locale: string }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.7 }}
-            className="flex-shrink-0"
+            className="flex-shrink-0 pb-16 md:pb-0"
           >
             <Link
               href={`/${locale}/contact`}
               className="group inline-flex items-center gap-4 text-parchment/80 hover:text-gold transition-colors"
             >
-              <span className="text-sm tracking-wide-xl uppercase">{t("cta")}</span>
-              <span className="w-12 h-12 rounded-full border border-parchment/30 group-hover:border-gold/60 flex items-center justify-center transition-colors">
-                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+              <span className="text-base tracking-wide-xl uppercase">{t("cta")}</span>
+              <span className="w-14 h-14 rounded-full border border-parchment/30 group-hover:border-gold/60 flex items-center justify-center transition-colors">
+                <ArrowRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
               </span>
             </Link>
           </motion.div>

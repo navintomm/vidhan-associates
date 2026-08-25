@@ -8,61 +8,90 @@ export default function Footer({ locale }: { locale: string }) {
   };
 
   return (
-    <footer className="bg-ink text-parchment pt-20 pb-10 lg:pb-20 px-6">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-slate/50 pb-12 mb-8">
+    <footer className="bg-ink text-parchment relative overflow-hidden min-h-screen flex flex-col justify-between pt-24 px-8 lg:px-16">
+      
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 flex-grow relative z-10">
         
-        {/* Brand */}
-        <div className="col-span-1 md:col-span-1">
-          <a href={`/${locale}`} className="text-3xl font-serif text-parchment mb-4 block">
-            Vidhan<span className="text-gold">.</span>
-          </a>
-          <p className="text-mist text-sm max-w-xs mt-4">
-            Professional legal advocacy and consultation.
-          </p>
+        {/* LEFT COLUMN: Navigation & Info */}
+        <div className="flex flex-col justify-between h-full">
+          {/* Navigation */}
+          <nav className="flex flex-col gap-6 mt-8">
+            {['HOME', 'ABOUT', 'PRACTICE AREAS', 'CASE EXPERIENCE', 'INSIGHTS', 'TEAM', 'CAREERS', 'CONTACT'].map((item) => (
+              <a 
+                key={item}
+                href={
+                  item === 'HOME' ? `/${locale}` : 
+                  `/${locale}/${item.toLowerCase().replace(' ', '-')}`
+                }
+                className="text-lg lg:text-xl tracking-[0.3em] font-serif hover:text-gold transition-colors w-fit"
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+
+          {/* Firm Info & Copyright */}
+          <div className="mt-24 lg:mt-auto pb-8 max-w-xs">
+            <p className="text-xs text-parchment/60 font-sans leading-relaxed mb-8">
+              Law, strategy, and timing. An independent legal and advisory platform offering integrated, strategic counsel to our clients at their most critical decisions.
+            </p>
+            <p className="text-[10px] text-parchment/40">
+              &copy; {new Date().getFullYear()} Vidhan Associates. All rights reserved.
+            </p>
+          </div>
         </div>
 
-        {/* Contact details */}
-        <div className="col-span-1">
-          <h4 className="text-sm tracking-widest uppercase text-gold mb-6">Contact</h4>
-          <ul className="space-y-4 text-mist text-sm">
-            <li>+91 98765 43210</li>
-            <li>consult@vidhan.test</li>
-            <li>Kochi, Kerala</li>
-          </ul>
-        </div>
-
-        {/* Quick Links */}
-        <div className="col-span-1">
-          <h4 className="text-sm tracking-widest uppercase text-gold mb-6">Quick Links</h4>
-          <ul className="space-y-4 text-mist text-sm">
-            <li><a href={`/${locale}/practice-areas`} className="hover:text-parchment transition-colors">Practice Areas</a></li>
-            <li><a href={`/${locale}/case-experience`} className="hover:text-parchment transition-colors">Case Experience</a></li>
-            <li><a href={`/${locale}/careers`} className="hover:text-parchment transition-colors">Careers</a></li>
-          </ul>
-        </div>
-
-        {/* CTA */}
-        <div className="col-span-1">
-          <h4 className="text-sm tracking-widest uppercase text-gold mb-6">Consultation</h4>
-          <p className="text-mist text-sm mb-6">Schedule an appointment or reach out via WhatsApp.</p>
-          <a 
-            href={`/${locale}/contact`}
-            className="bg-seal hover:bg-seal/90 transition-colors text-parchment px-6 py-3 rounded text-sm tracking-widest uppercase inline-block"
+        {/* CENTER COLUMN: Back to Top */}
+        <div className="flex flex-col items-center justify-between h-full relative order-last lg:order-none w-full">
+          <button 
+            onClick={scrollToTop}
+            className="flex flex-col items-center gap-4 hover:text-gold transition-colors group z-20 mb-12 lg:mt-32 lg:mb-0"
           >
-            Book a Consultation
-          </a>
-        </div>
-      </div>
+            <ArrowUp size={24} strokeWidth={1} className="group-hover:-translate-y-2 transition-transform" />
+            <span className="text-xs tracking-[0.3em] uppercase">BACK TO TOP</span>
+          </button>
 
-      {/* Bottom Bar */}
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between text-xs text-mist">
-        <p>&copy; {new Date().getFullYear()} Vidhan Associates. All rights reserved.</p>
-        <button 
-          onClick={scrollToTop}
-          className="mt-6 md:mt-0 flex items-center gap-2 hover:text-gold transition-colors"
-        >
-          Back to Top <ArrowUp size={14} />
-        </button>
+          {/* Massive Scale Image anchored to bottom */}
+          <div className="relative lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 w-[70%] md:w-[60%] lg:w-[130%] pointer-events-none flex items-end justify-center">
+            <img 
+              src="/images/icons/scale-of-justice-transparent.png" 
+              alt="Scale of Justice"
+              className="w-full h-auto object-contain drop-shadow-2xl opacity-90 lg:translate-y-[5%]"
+            />
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: Contact & Socials */}
+        <div className="flex flex-col justify-between h-full lg:pl-16">
+          
+          {/* Contact Details */}
+          <div className="flex flex-col mt-8">
+            <div className="border-t border-parchment/20 py-6">
+              <p className="text-[10px] tracking-widest uppercase text-parchment/50 mb-2">E-MAIL ADDRESS</p>
+              <a href="mailto:consult@vidhan.test" className="text-sm tracking-widest hover:text-gold transition-colors">CONSULT@VIDHAN.TEST</a>
+            </div>
+            <div className="border-t border-parchment/20 py-6">
+              <p className="text-[10px] tracking-widest uppercase text-parchment/50 mb-2">PHONE NUMBER</p>
+              <p className="text-sm tracking-widest">+91 98765 43210</p>
+            </div>
+            <div className="border-t border-b border-parchment/20 py-6">
+              <p className="text-[10px] tracking-widest uppercase text-parchment/50 mb-2">LOCATION</p>
+              <p className="text-sm tracking-widest">KOCHI / KERALA</p>
+            </div>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex flex-col mt-16 lg:mt-auto pb-4 lg:pb-12">
+            <div className="border-t border-parchment/20 py-6">
+              <a href="#" className="text-sm tracking-widest uppercase hover:text-gold transition-colors">LINKEDIN</a>
+            </div>
+            <div className="border-t border-b border-parchment/20 py-6">
+              <a href="#" className="text-sm tracking-widest uppercase hover:text-gold transition-colors">X.COM</a>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </footer>
   );

@@ -6,7 +6,8 @@
     "practiceAreas": "Practice Areas",
     "caseExperience": "Experience",
     "blog": "Blog",
-    "careers": "Careers"
+    "careers": "Careers",
+    "team": "Team"
   },
   "header": {
     "quote": "Where law ends, tyranny begins.",
@@ -22,8 +23,13 @@
       "scrollDown": "SCROLL DOWN"
     },
     "firmIntro": {
-      "quote": "The good of the people is the greatest law.",
-      "quoteAuthor": "Cicero",
+      "quotes": [
+        { "text": "The good of the people is the greatest law.", "author": "Cicero" },
+        { "text": "Where law ends, tyranny begins.", "author": "John Locke" },
+        { "text": "Injustice anywhere is a threat to justice everywhere.", "author": "Martin Luther King Jr." },
+        { "text": "Law is reason, free from passion.", "author": "Aristotle" },
+        { "text": "Justice delayed is justice denied.", "author": "William E. Gladstone" }
+      ],
       "heading": "Rooted in Kerala. Trusted Across India.",
       "body1": "Vidhan Associates is an independent legal practice providing rigorous, principled representation across civil, criminal, family, and property matters. We bring the discipline of structured legal thinking to every case — no matter its size.",
       "body2": "Our work is founded on three principles: excellence in counsel, integrity in conduct, and an unwavering commitment to the client's cause. We are not the biggest firm — we are the most invested.",

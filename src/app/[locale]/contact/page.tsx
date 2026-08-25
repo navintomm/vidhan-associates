@@ -253,10 +253,23 @@ export default function ContactPage() {
 
             <div className="space-y-8">
               <div className="flex gap-4">
+                <MapPin size={15} className="text-gold/50 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-[9px] tracking-wide-2xl uppercase text-gold/40 mb-1">Office</p>
+                  <p className="text-parchment/70 font-sans text-sm leading-relaxed">
+                    <strong className="text-parchment font-serif font-medium">Rones and Das Associates</strong><br />
+                    First Floor, Alukkas Castle<br />
+                    Civil Lines Road, Ayyanthole<br />
+                    Thrissur, Kerala
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
                 <Phone size={15} className="text-gold/50 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="text-[9px] tracking-wide-2xl uppercase text-gold/40 mb-1">Phone</p>
-                  <p className="text-parchment/70 font-sans text-sm">+91 98765 43210</p>
+                  <p className="text-parchment/70 font-sans text-sm">+91 86067 23820</p>
                 </div>
               </div>
 
@@ -264,21 +277,30 @@ export default function ContactPage() {
                 <Mail size={15} className="text-gold/50 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="text-[9px] tracking-wide-2xl uppercase text-gold/40 mb-1">Email</p>
-                  <p className="text-parchment/70 font-sans text-sm">contact@vidhanassociates.com</p>
+                  <p className="text-parchment/70 font-sans text-sm">ronesndasassociates@gmail.com</p>
                 </div>
               </div>
+            </div>
 
-              <div className="flex gap-4">
-                <MapPin size={15} className="text-gold/50 mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-[9px] tracking-wide-2xl uppercase text-gold/40 mb-1">Office</p>
-                  <p className="text-parchment/70 font-sans text-sm leading-relaxed">
-                    Vidhan Associates<br />
-                    [Address], Kerala<br />
-                    India — 000000
-                  </p>
-                </div>
-              </div>
+            <a
+              href="https://maps.google.com/?q=Alukkas+Castle,+Civil+Lines+Road,+Ayyanthole,+Thrissur"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-full py-4 bg-gold hover:bg-gold/90 text-ink font-serif text-base transition-colors"
+            >
+              Get Directions on Google Maps
+            </a>
+
+            <div className="w-full h-64 bg-ink/50 border border-gold/15 overflow-hidden group">
+              <iframe
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                className="grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-in-out"
+                src="https://maps.google.com/maps?q=Alukkas%20Castle,%20Ayyanthole,%20Thrissur&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              ></iframe>
             </div>
 
             <div className="h-px bg-gold/15" />

@@ -72,7 +72,7 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1024px)", () => {
+    mm.add("all", () => {
       if (!sectionRef.current || !trackRef.current) return;
 
       const cards = gsap.utils.toArray<HTMLElement>(".insight-card");
@@ -144,33 +144,32 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         
         {/* Section Header */}
         <div className="container mx-auto px-6 lg:px-12 mb-16 flex flex-col items-center justify-center text-center flex-shrink-0">
-          <h2 className="text-sm md:text-base tracking-[0.5em] uppercase text-parchment mb-4">
-            I n s i g h t s
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif tracking-[0.5em] uppercase text-parchment mb-6 drop-shadow-md pl-[0.5em]">
+            INSIGHTS
           </h2>
-          <p className="text-xs md:text-sm font-serif text-parchment/70 max-w-lg">
+          <p className="text-base md:text-lg lg:text-xl font-serif text-parchment/80 max-w-lg">
             {t("sublabel")}
           </p>
         </div>
 
-        {/* Desktop Carousel */}
-        <div className="hidden lg:block relative w-full h-[60vh] flex-shrink-0 overflow-hidden">
+        {/* Universal Carousel */}
+        <div className="relative w-full h-[60vh] flex-shrink-0 overflow-hidden">
           <div 
             ref={trackRef} 
-            className="flex h-full px-12 gap-8 items-center"
-            style={{ width: `${mergedPosts.length * 45}vw` }}
+            className="flex h-full px-6 md:px-12 gap-6 md:gap-8 items-center w-max"
           >
             {mergedPosts.map((post, i) => (
               <div 
                 key={`carousel-${i}`} 
-                className="insight-card relative w-[40vw] flex flex-col group cursor-pointer"
+                className="insight-card relative w-[85vw] lg:w-[40vw] flex flex-col group cursor-pointer"
                 onClick={() => setActiveCard(i)}
               >
                 <motion.div 
-                  layoutId={`image-container-${i}`}
+                  layoutId={isDesktop ? `image-container-${i}` : `image-container-mobile-${i}`}
                   className="relative w-full aspect-video overflow-hidden border border-gold/10"
                 >
                   <motion.div 
-                    layoutId={`image-${i}`}
+                    layoutId={isDesktop ? `image-${i}` : `image-mobile-${i}`}
                     className="absolute inset-0"
                   >
                     <Image
@@ -183,50 +182,19 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
                   <div className="absolute inset-0 bg-ink/40 group-hover:bg-transparent transition-colors duration-500" />
                   
                   {/* Click affordance */}
-                  <div className="absolute bottom-6 right-6 w-12 h-12 rounded-full border border-gold/30 bg-ink/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                  <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 w-10 h-10 md:w-12 md:h-12 rounded-full border border-gold/30 bg-ink/80 backdrop-blur-sm flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 transform lg:translate-y-4 lg:group-hover:translate-y-0">
                     <ArrowRight size={18} className="text-gold" />
                   </div>
                 </motion.div>
 
-                <div className="pt-8 text-center px-4">
-                  <h3 className="text-xl lg:text-2xl font-serif text-parchment/90 leading-snug group-hover:text-gold transition-colors">
+                <div className="pt-6 md:pt-8 text-center px-4">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-serif text-parchment/90 leading-snug group-hover:text-gold transition-colors">
                     {post.title}
                   </h3>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Mobile View (Static Stack) */}
-        <div className="lg:hidden flex flex-col gap-12 px-6 pb-24">
-          {mergedPosts.map((post, i) => (
-            <div 
-              key={`mobile-${i}`} 
-              className="flex flex-col group cursor-pointer"
-              onClick={() => setActiveCard(i)}
-            >
-              <motion.div 
-                layoutId={`image-container-mobile-${i}`}
-                className="relative w-full aspect-video mb-6 overflow-hidden border border-gold/10"
-              >
-                <motion.div layoutId={`image-mobile-${i}`} className="absolute inset-0">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                  />
-                </motion.div>
-                <div className="absolute inset-0 bg-ink/20" />
-              </motion.div>
-              <div className="text-center">
-                <h3 className="text-lg font-serif text-parchment/90 leading-snug">
-                  {post.title}
-                </h3>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 

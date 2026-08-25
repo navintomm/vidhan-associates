@@ -74,7 +74,7 @@ export default function FirmNumbers() {
     <section className="bg-ink py-24 md:py-32 px-6 lg:px-12 border-t border-gold/10">
       <div className="container mx-auto max-w-5xl">
         {/* Section label */}
-        <p className="text-[10px] tracking-wide-2xl uppercase text-gold/50 text-center mb-16">
+        <p className="text-xs md:text-sm tracking-wide-2xl uppercase text-gold/50 text-center mb-16">
           {t("label")}
         </p>
 
@@ -87,10 +87,10 @@ export default function FirmNumbers() {
                 i < statData.length - 1 ? "md:border-r border-gold/10" : ""
               } ${i < 2 ? "border-b md:border-b-0 border-gold/10" : ""}`}
             >
-              <span className="text-5xl md:text-6xl font-serif text-parchment leading-none mb-4">
+              <span className="text-6xl md:text-7xl font-serif text-parchment leading-none mb-4">
                 <CountUp target={stat.value} suffix={stat.suffix} />
               </span>
-              <span className="text-[10px] tracking-wide-xl uppercase text-mist text-center">
+              <span className="text-xs md:text-sm tracking-wide-xl uppercase text-mist text-center">
                 {stat.label}
               </span>
             </div>

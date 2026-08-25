@@ -13,6 +13,7 @@ const navLinks = [
   { key: "caseExperience", href: "/case-experience" },
   { key: "blog", href: "/blog" },
   { key: "careers", href: "/careers" },
+  { key: "team", href: "/team" },
   { key: "contact", href: "/contact" },
 ];
 
@@ -23,6 +24,19 @@ export default function Header({ locale }: { locale: string }) {
   const router = useRouter();
   const tNav = useTranslations("nav");
   const tHeader = useTranslations("header");
+  const tQuotes = useTranslations("home.firmIntro");
+
+  const quotes = tQuotes.raw("quotes") as Array<{ text: string; author: string }>;
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+    setQuoteIndex(dayOfYear % quotes.length);
+    setIsMounted(true);
+  }, [quotes.length]);
+
+  const dailyQuote = isMounted ? quotes[quoteIndex] : quotes[0];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -53,19 +67,20 @@ export default function Header({ locale }: { locale: string }) {
   };
 
   return (
-    <header
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+    <>
+      <header
+        className={`fixed top-0 w-full z-[9999] transition-all duration-500 ${
         scrolled ? "bg-ink/80 backdrop-blur-md" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 lg:px-12 py-5 grid grid-cols-3 items-center">
         {/* Left — Legal Quote */}
-        <div className="hidden lg:block">
-          <p className="text-xs text-parchment/50 italic font-serif leading-snug">
-            {tHeader("quote")}
+        <div className="hidden lg:block max-w-xs transition-opacity duration-500" style={{ opacity: isMounted ? 1 : 0.4 }}>
+          <p className="text-sm lg:text-base text-parchment/60 italic font-serif leading-snug">
+            &ldquo;{dailyQuote.text}&rdquo;
           </p>
-          <p className="text-[10px] text-parchment/30 mt-0.5">
-            — {tHeader("quoteAuthor")}
+          <p className="text-xs text-parchment/40 mt-1">
+            — {dailyQuote.author}
           </p>
         </div>
 
@@ -101,6 +116,17 @@ export default function Header({ locale }: { locale: string }) {
         </div>
       </div>
 
+      {/* Mobile Quote — appears below the header when not scrolled */}
+      <div className={`lg:hidden absolute top-full left-0 w-full px-6 pt-2 pb-4 transition-all duration-500 pointer-events-none ${scrolled ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
+        <p className="text-sm text-parchment/60 italic font-serif leading-snug text-center">
+          &ldquo;{dailyQuote.text}&rdquo;
+        </p>
+        <p className="text-[10px] text-parchment/40 mt-1 uppercase tracking-widest text-center">
+          — {dailyQuote.author}
+        </p>
+      </div>
+      </header>
+
       {/* Full-Screen Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
@@ -109,7 +135,7 @@ export default function Header({ locale }: { locale: string }) {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 bg-ink z-40 flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-ink z-[10000] flex flex-col items-center justify-center"
           >
             {/* Close Button (top-right) */}
             <button
@@ -133,7 +159,7 @@ export default function Header({ locale }: { locale: string }) {
               ))}
             </nav>
 
-            <motion.div variants={linkVariants} className="mt-16">
+            <motion.div variants={linkVariants} className="mt-10">
               <a
                 href={`/${locale}/contact`}
                 onClick={() => setIsOpen(false)}
@@ -142,9 +168,18 @@ export default function Header({ locale }: { locale: string }) {
                 {tHeader("cta")}
               </a>
             </motion.div>
+
+            <motion.div variants={linkVariants} className="mt-12 text-center max-w-xs px-4">
+              <p className="text-sm text-parchment/60 italic font-serif leading-snug">
+                &ldquo;{dailyQuote.text}&rdquo;
+              </p>
+              <p className="text-[10px] text-parchment/40 mt-2 uppercase tracking-widest">
+                — {dailyQuote.author}
+              </p>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

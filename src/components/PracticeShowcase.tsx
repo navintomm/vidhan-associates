@@ -17,7 +17,7 @@ const VALUES = [
 export default function PracticeShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  
+
   const [isReducedMotion, setIsReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function PracticeShowcase() {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1024px)", () => {
+    mm.add("all", () => {
       if (!sectionRef.current || !trackRef.current) return;
 
       const panels = gsap.utils.toArray(".horizontal-panel");
@@ -54,11 +54,11 @@ export default function PracticeShowcase() {
         xPercent: -100 * (panels.length - 1) / panels.length,
         ease: "none",
       });
-      
+
       // Add subtle parallax to elements inside the panels
       panels.forEach((panel: any) => {
         const pillar = panel.querySelector('.pillar-parallax');
-        
+
         // Make the pillar drift slightly opposite to scroll to create depth
         if (pillar) {
           gsap.to(pillar, {
@@ -92,115 +92,81 @@ export default function PracticeShowcase() {
 
   return (
     <section ref={sectionRef} className="relative bg-ink overflow-hidden">
-      
+
       {/* BACKGROUND WATERMARK - Fixed during scroll */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
-        <h2 className="text-[25vw] font-serif uppercase tracking-wide-xl text-parchment/[0.02] whitespace-nowrap select-none">
+        <h2 className="text-[15vw] lg:text-[18vw] font-serif uppercase tracking-widest text-parchment/[0.02] whitespace-nowrap select-none">
           EXPERTISE
         </h2>
       </div>
 
-      {/* DESKTOP VIEW (Horizontal Scroll Track) */}
-      <div className="hidden lg:block h-screen relative z-10 w-full overflow-hidden">
-        <div 
-          ref={trackRef} 
+      {/* UNIFIED VIEW (Horizontal Scroll Track) */}
+      <div className="h-screen relative z-10 w-full overflow-hidden">
+        <div
+          ref={trackRef}
           className="flex h-full"
           style={{ width: `${VALUES.length * 100}vw` }}
         >
           {VALUES.map((val, i) => (
-            <div 
-              key={val.id} 
+            <div
+              key={val.id}
               className="horizontal-panel relative w-screen h-full flex flex-col items-center justify-end pb-0"
             >
               {/* Unit Container */}
-              <div className="relative flex flex-col items-center justify-end w-full max-w-7xl mx-auto h-[85vh]">
-                
-                {/* TEXT LAYER (Absolute positioned to float perfectly beside the scale without affecting its center alignment) */}
-                <div className="absolute top-[25%] w-full flex justify-between px-12 xl:px-24 z-20 pointer-events-none">
-                  <div className="w-[30%] text-right pr-8">
-                    <h3 className="text-4xl lg:text-5xl font-serif text-parchment leading-tight">
-                      {val.title.split(' ').map((word, j) => (
-                        <span key={j} className="block drop-shadow-md">{word}</span>
-                      ))}
-                    </h3>
-                  </div>
-                  <div className="w-[30%] text-left pl-8">
-                    <p className="text-base text-parchment/70 font-sans leading-relaxed drop-shadow-md">
-                      {val.description}
-                    </p>
-                  </div>
+              <div className="relative flex flex-col items-center justify-between w-full max-w-7xl mx-auto h-[100vh] pt-24 pb-8 md:pt-0 md:pb-0 md:h-[85vh] md:justify-end overflow-hidden">
+
+                {/* MOBILE TITLE / DESKTOP LEFT */}
+                <div className="w-full text-center md:text-right md:absolute md:top-[25%] md:left-0 md:w-[30%] px-4 md:px-12 xl:px-24 md:pr-8 z-20 order-1 md:order-none flex-shrink-0">
+                  <h3 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif text-parchment leading-tight">
+                    {val.title.split(' ').map((word, j) => (
+                      <span key={j} className="block drop-shadow-md">{word}</span>
+                    ))}
+                  </h3>
                 </div>
 
-                {/* VISUAL STACK: Scale -> Pillar */}
-                {/* Clean stack. Translate-y kisses the rim of the capital, translate-x adjusts for asymmetrical padding in the PNG */}
-                <div className="relative z-30 flex flex-col items-center justify-end w-full translate-y-4 lg:translate-y-6 translate-x-12 lg:translate-x-16">
-                  <Image
-                    src="/images/icons/scale-of-justice-transparent.png"
-                    alt="Scale of Justice"
-                    width={300}
-                    height={300}
-                    className="relative z-10 w-[180px] lg:w-[260px] h-auto object-contain drop-shadow-2xl"
-                  />
-                  {/* Contact Shadow */}
-                  <div className="absolute bottom-[2%] w-[120px] lg:w-[150px] h-[8px] lg:h-[12px] bg-black/90 blur-md rounded-[100%] z-0"></div>
+                {/* MOBILE DESCRIPTION / DESKTOP RIGHT */}
+                <div className="w-full text-center md:text-left md:absolute md:top-[25%] md:right-0 md:w-[30%] px-6 md:px-12 xl:px-24 md:pl-8 z-20 order-2 md:order-none mt-4 md:mt-0 flex-shrink-0">
+                  <p className="text-base sm:text-lg lg:text-xl text-parchment/70 font-sans leading-relaxed drop-shadow-md max-w-[90%] mx-auto md:max-w-none">
+                    {val.description}
+                  </p>
                 </div>
 
-                <div className="relative z-10 flex justify-center w-full">
-                  <Image
-                    src="/images/icons/ashoka-pillar-transparent.png"
-                    alt="Ashoka Pillar"
-                    width={800}
-                    height={1420}
-                    className={`w-auto object-contain object-bottom ${heights[i]}`}
-                    priority={i === 0}
-                  />
+                {/* VISUAL STACK */}
+                <div className="flex-1 flex flex-col justify-end items-center relative z-10 w-full order-3 md:order-none mb-4 md:mb-0">
+                  
+                  {/* Unified Visual Object (Bounding box defined by pillar) */}
+                  <div className="relative inline-block h-[45vh] lg:h-[55vh]">
+                    
+                    {/* Scale of Justice centered on axis with manual visual correction for PNG asymmetry */}
+                    <div className="absolute bottom-[96%] left-1/2 translate-x-[calc(-50%+32px)] lg:translate-x-[calc(-50%+62px)] w-[130px] lg:w-[260px] z-30 flex flex-col items-center">
+                      <Image
+                        src="/images/icons/scale-of-justice-transparent.png"
+                        alt="Scale of Justice"
+                        width={300}
+                        height={300}
+                        className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
+                      />
+                      {/* Contact Shadow */}
+                      <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[40%] h-[8px] bg-black/80 blur-[5px] rounded-[100%] z-0"></div>
+                    </div>
+
+                    {/* Ashoka Pillar (Defines the width of the wrapper) */}
+                    <Image
+                      src="/images/icons/ashoka-pillar-transparent.png"
+                      alt="Ashoka Pillar"
+                      width={800}
+                      height={1420}
+                      className="w-auto h-full object-contain object-bottom relative z-10"
+                      priority={i === 0}
+                    />
+
+                  </div>
                 </div>
 
               </div>
             </div>
           ))}
         </div>
-      </div>
-
-      {/* MOBILE VIEW (Static stacked layout) */}
-      <div className="lg:hidden flex flex-col gap-24 relative z-10 w-full py-24 px-6">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-serif text-parchment">EXPERTISE</h2>
-        </div>
-        
-        {VALUES.map((val) => (
-          <div key={val.id} className="flex flex-col items-center text-center gap-8">
-            <div className="relative flex flex-col items-center justify-end h-[35vh]">
-              <div className="relative z-20 flex flex-col items-center justify-end translate-y-2 translate-x-6">
-                <Image
-                  src="/images/icons/scale-of-justice-transparent.png"
-                  alt="Scale of Justice"
-                  width={200}
-                  height={200}
-                  className="relative z-10 w-[140px] h-auto object-contain drop-shadow-2xl"
-                />
-                {/* Mobile Contact Shadow */}
-                <div className="absolute bottom-[2%] w-[80px] h-[6px] bg-black/90 blur-sm rounded-[100%] z-0"></div>
-              </div>
-              <div className="relative z-10">
-                <Image
-                  src="/images/icons/ashoka-pillar-transparent.png"
-                  alt="Ashoka Pillar"
-                  width={400}
-                  height={710}
-                  className="h-[25vh] w-auto object-contain object-bottom opacity-80"
-                />
-              </div>
-            </div>
-            
-            <div className="px-4">
-              <h3 className="text-2xl font-serif text-parchment mb-4 whitespace-pre-line">{val.title}</h3>
-              <p className="text-sm text-parchment/60 font-sans leading-relaxed">
-                {val.description}
-              </p>
-            </div>
-          </div>
-        ))}
       </div>
 
     </section>
