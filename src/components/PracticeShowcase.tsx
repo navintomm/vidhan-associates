@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLocale } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +15,6 @@ const VALUES: { id: string; title: string; description: string; iconUrl?: string
 ];
 
 export default function PracticeShowcase() {
-  const locale = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 

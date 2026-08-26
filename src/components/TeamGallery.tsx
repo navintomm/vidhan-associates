@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Link as LinkIcon, Mail } from "lucide-react";
 import Image from "next/image";
-import { useLocale } from "next-intl";
 
 // Fallback Team Data
 const FALLBACK_TEAM_MEMBERS = [
@@ -32,7 +31,6 @@ const FALLBACK_TEAM_MEMBERS = [
 ];
 
 export default function TeamGallery() {
-  const locale = useLocale();
   const [activeMember, setActiveMember] = useState<string | null>(null);
 
   const members = FALLBACK_TEAM_MEMBERS;
