@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Link as LinkIcon, Mail } from "lucide-react";
+import Image from "next/image";
 
 // Mock Team Data with professional Unsplash portraits
 const TEAM_MEMBERS = [
@@ -67,10 +68,12 @@ export default function TeamGallery() {
                 {/* Dark overlay on hover */}
                 <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/20 transition-colors duration-500 z-10 pointer-events-none" />
                 
-                <img 
+                <Image 
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   crossOrigin="anonymous"
                 />
               </motion.div>
@@ -123,10 +126,12 @@ export default function TeamGallery() {
                 layoutId={`image-${activeData.id}`}
                 className="w-full h-[55vh] md:h-auto md:w-1/2 flex-shrink-0 relative md:aspect-[3/4] overflow-hidden shadow-none md:shadow-2xl bg-slate/10"
               >
-                <img 
+                <Image 
                   src={activeData.image}
                   alt={activeData.name}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
                   crossOrigin="anonymous"
                 />
               </motion.div>

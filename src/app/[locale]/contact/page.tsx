@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, ArrowRight, CheckCircle } from "lucide-react";
+import { Phone, MapPin, ArrowRight, CheckCircle } from "lucide-react";
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "918606723820";
 const WEB3FORMS_KEY   = process.env.NEXT_PUBLIC_WEB3FORMS_KEY  ?? "";
