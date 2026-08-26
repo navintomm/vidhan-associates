@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Link as LinkIcon, Mail } from "lucide-react";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 
-// Mock Team Data with professional Unsplash portraits
-const TEAM_MEMBERS = [
+// Fallback Team Data
+const FALLBACK_TEAM_MEMBERS = [
   {
     id: "rohit-s-madasseril",
     name: "Adv. Rohit S. Madasseril",
@@ -25,13 +26,16 @@ const TEAM_MEMBERS = [
     id: "rones-v-anil",
     name: "Adv. Rones V. Anil",
     role: "Advocate",
-    bio: "Adv. Rones V. Anil is a passionate advocate focused on delivering meticulous and highly effective legal representation across diverse areas of practice. (+91 7892614468 / 8606723820)",
+    bio: "Adv. Rones V. Anil combines rigorous analytical skills with a passionate approach to justice, providing clients with steadfast representation in complex matters. (+91 8606723820)",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1000",
   },
 ];
 
 export default function TeamGallery() {
+  const locale = useLocale();
   const [activeMember, setActiveMember] = useState<string | null>(null);
+
+  const members = FALLBACK_TEAM_MEMBERS;
 
   // Lock body scroll when modal is active
   useEffect(() => {
@@ -43,7 +47,7 @@ export default function TeamGallery() {
     return () => { document.body.style.overflow = ""; };
   }, [activeMember]);
 
-  const activeData = TEAM_MEMBERS.find(m => m.id === activeMember);
+  const activeData = members.find(m => m.id === activeMember);
 
   return (
     <div className="w-full relative min-h-screen pb-32">
@@ -51,7 +55,7 @@ export default function TeamGallery() {
       {/* Grid Layout */}
       <div className="container mx-auto px-4 md:px-6 lg:px-12">
         <div className="grid grid-cols-3 gap-3 md:gap-8 lg:gap-16">
-          {TEAM_MEMBERS.map((member) => (
+          {members.map((member) => (
             <div 
               key={member.id}
               className="group cursor-pointer flex flex-col"

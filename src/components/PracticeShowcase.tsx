@@ -4,10 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLocale } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const VALUES = [
+const VALUES: { id: string; title: string; description: string; iconUrl?: string }[] = [
   { id: "justice", title: "Justice", description: "Unwavering commitment to fairness and equity." },
   { id: "integrity", title: "Integrity", description: "Upholding the highest ethical standards in all matters." },
   { id: "excellence", title: "Excellence", description: "Delivering exceptional legal counsel and representation." },
@@ -15,10 +16,13 @@ const VALUES = [
 ];
 
 export default function PracticeShowcase() {
+  const locale = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const [isReducedMotion, setIsReducedMotion] = useState(false);
+
+  const areas = VALUES;
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -94,14 +98,13 @@ export default function PracticeShowcase() {
 
       {/* UNIFIED VIEW (Horizontal Scroll Track) */}
       <div className="h-screen relative z-10 w-full overflow-hidden">
-        <div
+        <div 
           ref={trackRef}
-          className="flex h-full"
-          style={{ width: `${VALUES.length * 100}vw` }}
+          className="flex h-full w-[400vw]"
         >
-          {VALUES.map((val, i) => (
-            <div
-              key={val.id}
+          {areas.map((value, index) => (
+            <div 
+              key={value.id}
               className="horizontal-panel relative w-screen h-full flex flex-col items-center justify-end pb-0"
             >
               {/* Unit Container */}
@@ -110,7 +113,7 @@ export default function PracticeShowcase() {
                 {/* MOBILE TITLE / DESKTOP LEFT */}
                 <div className="w-full text-center md:text-right md:absolute md:top-[25%] md:left-0 md:w-[30%] px-4 md:px-12 xl:px-24 md:pr-8 z-20 order-1 md:order-none flex-shrink-0">
                   <h3 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif text-parchment leading-tight">
-                    {val.title.split(' ').map((word, j) => (
+                    {value.title.split(' ').map((word: string, j: number) => (
                       <span key={j} className="block drop-shadow-md">{word}</span>
                     ))}
                   </h3>
@@ -118,8 +121,13 @@ export default function PracticeShowcase() {
 
                 {/* MOBILE DESCRIPTION / DESKTOP RIGHT */}
                 <div className="w-full text-center md:text-left md:absolute md:top-[25%] md:right-0 md:w-[30%] px-6 md:px-12 xl:px-24 md:pl-8 z-20 order-2 md:order-none mt-4 md:mt-0 flex-shrink-0">
+                  {value.iconUrl && (
+                    <div className="mb-4 w-12 h-12 relative mx-auto md:mx-0 opacity-50 pillar-parallax">
+                      <Image src={value.iconUrl} alt={value.title} fill className="object-contain" />
+                    </div>
+                  )}
                   <p className="text-base sm:text-lg lg:text-xl text-parchment/70 font-sans leading-relaxed drop-shadow-md max-w-[90%] mx-auto md:max-w-none">
-                    {val.description}
+                    {value.description}
                   </p>
                 </div>
 
@@ -129,8 +137,8 @@ export default function PracticeShowcase() {
                   {/* Unified Visual Object (Bounding box defined by pillar) */}
                   <div className="relative inline-block h-[45vh] lg:h-[55vh]">
                     
-                    {/* Scale of Justice centered on axis with manual visual correction for PNG asymmetry */}
-                    <div className="absolute bottom-[96%] left-1/2 translate-x-[calc(-50%+32px)] lg:translate-x-[calc(-50%+62px)] w-[130px] lg:w-[260px] z-30 flex flex-col items-center">
+                    {/* Scale of Justice centered on axis with relative visual correction for PNG asymmetry */}
+                    <div className="absolute bottom-[96%] left-[71%] -translate-x-1/2 w-[80%] md:w-[85%] lg:w-[90%] z-30 flex flex-col items-center">
                       <Image
                         src="/images/icons/scale-of-justice-transparent.png"
                         alt="Scale of Justice"
@@ -149,7 +157,7 @@ export default function PracticeShowcase() {
                       width={800}
                       height={1420}
                       className="w-auto h-full object-contain object-bottom relative z-10"
-                      priority={i === 0}
+                      priority={index === 0}
                     />
 
                   </div>

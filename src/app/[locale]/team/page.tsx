@@ -1,8 +1,10 @@
 import { useTranslations } from "next-intl";
 import TeamGallery from "@/components/TeamGallery";
-
-export default function TeamPage() {
-  const t = useTranslations("nav");
+export default async function TeamPage({ params: { locale } }: { params: { locale: string } }) {
+  // We can't use useTranslations in an async Server Component directly in next-intl v3 without getTranslations
+  // but since we aren't doing deep localization here, let's just use getTranslations.
+  const { getTranslations } = await import('next-intl/server');
+  const t = await getTranslations("nav");
 
   return (
     <main className="min-h-screen bg-ink pt-32">

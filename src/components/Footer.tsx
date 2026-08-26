@@ -37,9 +37,9 @@ export default function Footer({ locale }: { locale: string }) {
             <p className="text-sm text-parchment/60 font-sans leading-relaxed mb-8">
               Law, strategy, and timing. An independent legal and advisory platform offering integrated, strategic counsel to our clients at their most critical decisions.
             </p>
-            <p className="text-xs text-parchment/40">
-              &copy; {new Date().getFullYear()} Vidhan Law Chambers. All rights reserved.
-            </p>
+            <div className="flex items-center gap-3 text-xs text-parchment/40">
+              <p>&copy; {new Date().getFullYear()} Vidhan Law Chambers. All rights reserved.</p>
+            </div>
           </div>
         </div>
 

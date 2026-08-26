@@ -32,6 +32,11 @@ const CAROUSEL_DATA = [
 
 export default function InsightsCarousel({ locale }: { locale: string }) {
   const t = useTranslations("home.perspectives");
+  const posts = t.raw("posts") as Array<{
+    category: string;
+    title: string;
+    date: string;
+  }>;
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   
@@ -39,13 +44,6 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true);
 
-  const posts = t.raw("posts") as Array<{
-    category: string;
-    title: string;
-    date: string;
-  }>;
-
-  // Merge JSON translations with extended mock data
   const mergedPosts = posts.map((post, i) => ({
     ...post,
     ...CAROUSEL_DATA[i % CAROUSEL_DATA.length]

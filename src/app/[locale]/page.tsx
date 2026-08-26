@@ -7,6 +7,7 @@ import InsightsCarousel from "@/components/InsightsCarousel";
 import LandingSplash from "@/components/LandingSplash";
 
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
+
   return (
     <div>
       <LandingSplash />
