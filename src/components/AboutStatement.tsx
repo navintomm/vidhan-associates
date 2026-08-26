@@ -14,7 +14,6 @@ const STATEMENTS = [
 
 export default function AboutStatement() {
   const containerRef = useRef<HTMLElement>(null);
-  const textWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;

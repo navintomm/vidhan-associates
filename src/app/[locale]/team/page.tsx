@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import TeamGallery from "@/components/TeamGallery";
 
-export default function TeamPage({ params: { locale } }: { params: { locale: string } }) {
+export default function TeamPage() {
   const t = useTranslations("nav");
 
   return (

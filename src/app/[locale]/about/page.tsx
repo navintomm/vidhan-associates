@@ -1,26 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { X, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import SectionDivider from "@/components/SectionDivider";
 import AboutStatement from "@/components/AboutStatement";
-
-// Initials-based avatar colours per advocate
-const avatarColors = ["bg-slate", "bg-seal/80", "bg-gold/30"];
-
-function getInitials(name: string): string {
-  return name
-    .replace(/Adv\.\s*/i, "")
-    .replace(/\[.*?\]/g, "A")
-    .split(" ")
-    .map((w) => w[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-}
 
 export default function AboutPage() {
   const tHero = useTranslations("about.hero");

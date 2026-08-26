@@ -56,7 +56,7 @@ export default function PracticeShowcase() {
       });
 
       // Add subtle parallax to elements inside the panels
-      panels.forEach((panel: any) => {
+      (panels as HTMLElement[]).forEach((panel) => {
         const pillar = panel.querySelector('.pillar-parallax');
 
         // Make the pillar drift slightly opposite to scroll to create depth
@@ -81,14 +81,6 @@ export default function PracticeShowcase() {
 
     return () => mm.revert();
   }, [isReducedMotion]);
-
-  // We use slightly smaller height so the scale above it doesn't hit the navbar
-  const heights = [
-    "h-[50vh] lg:h-[55vh]",
-    "h-[50vh] lg:h-[55vh]",
-    "h-[50vh] lg:h-[55vh]",
-    "h-[50vh] lg:h-[55vh]",
-  ];
 
   return (
     <section ref={sectionRef} className="relative bg-ink overflow-hidden">

@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUp } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer({ locale }: { locale: string }) {
   const scrollToTop = () => {
@@ -17,7 +18,7 @@ export default function Footer({ locale }: { locale: string }) {
           {/* Navigation */}
           <nav className="flex flex-col gap-6 mt-8">
             {['HOME', 'ABOUT', 'PRACTICE AREAS', 'CASE EXPERIENCE', 'INSIGHTS', 'TEAM', 'CAREERS', 'CONTACT'].map((item) => (
-              <a 
+              <Link 
                 key={item}
                 href={
                   item === 'HOME' ? `/${locale}` : 
@@ -26,7 +27,7 @@ export default function Footer({ locale }: { locale: string }) {
                 className="text-lg lg:text-xl tracking-[0.3em] font-serif hover:text-gold transition-colors w-fit"
               >
                 {item}
-              </a>
+              </Link>
             ))}
           </nav>
 

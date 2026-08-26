@@ -90,8 +90,8 @@ export default function TeamGallery() {
     <div className="w-full relative min-h-screen pb-32">
       
       {/* Grid Layout */}
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+      <div className="container mx-auto px-4 md:px-6 lg:px-12">
+        <div className="grid grid-cols-3 gap-3 md:gap-8 lg:gap-16">
           {TEAM_MEMBERS.map((member) => (
             <div 
               key={member.id}
@@ -101,7 +101,7 @@ export default function TeamGallery() {
               {/* Image Container with 3:4 Aspect Ratio */}
               <motion.div 
                 layoutId={`image-${member.id}`}
-                className="relative w-full aspect-[3/4] overflow-hidden mb-6 bg-slate/10"
+                className="relative w-full aspect-[3/4] overflow-hidden mb-3 md:mb-6 bg-slate/10"
               >
                 {/* Gold border reveal on hover */}
                 <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/50 transition-colors duration-500 z-20 pointer-events-none" />
@@ -119,10 +119,10 @@ export default function TeamGallery() {
 
               {/* Text Information */}
               <motion.div layoutId={`text-${member.id}`} className="flex flex-col">
-                <h3 className="text-2xl font-serif text-parchment group-hover:text-gold transition-colors">
+                <h3 className="text-sm md:text-2xl font-serif text-parchment group-hover:text-gold transition-colors truncate">
                   {member.name}
                 </h3>
-                <p className="text-sm tracking-widest uppercase text-parchment/50 mt-2">
+                <p className="text-[0.6rem] md:text-sm tracking-wider md:tracking-widest uppercase text-parchment/50 mt-1 md:mt-2 truncate">
                   {member.role}
                 </p>
               </motion.div>

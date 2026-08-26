@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -86,9 +87,9 @@ export default function Header({ locale }: { locale: string }) {
 
         {/* Center — Logo */}
         <div className="col-span-2 lg:col-span-1 flex justify-start lg:justify-center">
-          <a href={`/${locale}`} className="text-2xl lg:text-3xl font-serif text-parchment tracking-tight">
+          <Link href={`/${locale}`} className="text-2xl lg:text-3xl font-serif text-parchment tracking-tight">
             Vidhan<span className="text-gold">.</span>
-          </a>
+          </Link>
         </div>
 
         {/* Right — Actions */}
@@ -100,12 +101,12 @@ export default function Header({ locale }: { locale: string }) {
             {locale === "en" ? "MAL" : "ENG"}
           </button>
 
-          <a
+          <Link
             href={`/${locale}/contact`}
             className="hidden md:inline-block text-xs tracking-wide-xl uppercase text-parchment/80 hover:text-gold transition-colors border border-parchment/20 hover:border-gold/50 rounded-full px-5 py-2"
           >
             {tHeader("cta")}
-          </a>
+          </Link>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -147,26 +148,26 @@ export default function Header({ locale }: { locale: string }) {
 
             <nav className="flex flex-col items-center gap-8">
               {navLinks.map((link) => (
-                <motion.a
-                  key={link.key}
-                  variants={linkVariants}
-                  href={`/${locale}${link.href === "/" ? "" : link.href}`}
-                  className="text-3xl md:text-4xl font-serif text-parchment hover:text-gold transition-colors tracking-wide"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {tNav(link.key)}
-                </motion.a>
+                <motion.div key={link.key} variants={linkVariants}>
+                  <Link
+                    href={`/${locale}${link.href === "/" ? "" : link.href}`}
+                    className="text-3xl md:text-4xl font-serif text-parchment hover:text-gold transition-colors tracking-wide"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {tNav(link.key)}
+                  </Link>
+                </motion.div>
               ))}
             </nav>
 
             <motion.div variants={linkVariants} className="mt-10">
-              <a
+              <Link
                 href={`/${locale}/contact`}
                 onClick={() => setIsOpen(false)}
-                className="border border-gold text-gold hover:bg-gold hover:text-ink transition-colors px-8 py-4 tracking-wide-xl uppercase text-sm"
+                className="border border-gold text-gold hover:bg-gold hover:text-ink transition-colors px-8 py-4 tracking-wide-xl uppercase text-sm inline-block"
               >
                 {tHeader("cta")}
-              </a>
+              </Link>
             </motion.div>
 
             <motion.div variants={linkVariants} className="mt-12 text-center max-w-xs px-4">
