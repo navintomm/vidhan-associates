@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, ArrowRight, CheckCircle } from "lucide-react";
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "919876543210";
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "918606723820";
 const WEB3FORMS_KEY   = process.env.NEXT_PUBLIC_WEB3FORMS_KEY  ?? "";
 
 type FormState = "idle" | "sending" | "success" | "error";
@@ -73,7 +73,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-[10px] tracking-wide-2xl uppercase text-gold/50 mb-6"
+            className="text-xs md:text-sm tracking-wide-2xl uppercase text-gold/50 mb-6"
           >
             Get in Touch
           </motion.p>
@@ -81,7 +81,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-serif text-parchment leading-tight mb-6 max-w-2xl"
+            className="text-5xl md:text-7xl font-serif text-parchment leading-tight mb-6 max-w-2xl"
           >
             Book a Consultation.
           </motion.h1>
@@ -89,7 +89,7 @@ export default function ContactPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-parchment/40 font-sans text-base max-w-xl leading-relaxed"
+            className="text-parchment/40 font-sans text-lg md:text-xl max-w-xl leading-relaxed"
           >
             Tell us about your matter. We respond within one business day. All enquiries are treated with complete confidentiality.
           </motion.p>
@@ -124,10 +124,10 @@ export default function ContactPage() {
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Name */}
                 <div>
-                  <label className="block text-[10px] tracking-wide-xl uppercase text-parchment/40 mb-2">
+                  <label className="block text-sm tracking-wide-xl uppercase text-parchment/50 mb-3">
                     Full Name *
                   </label>
                   <input
@@ -136,14 +136,14 @@ export default function ContactPage() {
                     value={form.name}
                     onChange={handleChange}
                     placeholder="Your full name"
-                    className="w-full bg-transparent border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-4 py-3 text-parchment placeholder-parchment/20 font-sans text-sm transition-colors"
+                    className="w-full bg-transparent border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-5 py-4 text-parchment placeholder-parchment/20 font-sans text-lg transition-colors"
                   />
                 </div>
 
                 {/* Phone + Email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                   <div>
-                    <label className="block text-[10px] tracking-wide-xl uppercase text-parchment/40 mb-2">
+                    <label className="block text-sm tracking-wide-xl uppercase text-parchment/50 mb-3">
                       Phone *
                     </label>
                     <input
@@ -152,11 +152,11 @@ export default function ContactPage() {
                       value={form.phone}
                       onChange={handleChange}
                       placeholder="+91 98765 43210"
-                      className="w-full bg-transparent border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-4 py-3 text-parchment placeholder-parchment/20 font-sans text-sm transition-colors"
+                      className="w-full bg-transparent border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-5 py-4 text-parchment placeholder-parchment/20 font-sans text-lg transition-colors"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] tracking-wide-xl uppercase text-parchment/40 mb-2">
+                    <label className="block text-sm tracking-wide-xl uppercase text-parchment/50 mb-3">
                       Email
                     </label>
                     <input
@@ -165,14 +165,14 @@ export default function ContactPage() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="you@example.com"
-                      className="w-full bg-transparent border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-4 py-3 text-parchment placeholder-parchment/20 font-sans text-sm transition-colors"
+                      className="w-full bg-transparent border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-5 py-4 text-parchment placeholder-parchment/20 font-sans text-lg transition-colors"
                     />
                   </div>
                 </div>
 
                 {/* Matter type */}
                 <div>
-                  <label className="block text-[10px] tracking-wide-xl uppercase text-parchment/40 mb-2">
+                  <label className="block text-sm tracking-wide-xl uppercase text-parchment/50 mb-3">
                     Nature of Matter *
                   </label>
                   <select
@@ -180,7 +180,7 @@ export default function ContactPage() {
                     name="matter"
                     value={form.matter}
                     onChange={handleChange}
-                    className="w-full bg-ink border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-4 py-3 text-parchment font-sans text-sm transition-colors appearance-none cursor-pointer"
+                    className="w-full bg-ink border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-5 py-4 text-parchment font-sans text-lg transition-colors appearance-none cursor-pointer"
                   >
                     {matters.map((m) => (
                       <option key={m} value={m} className="bg-ink text-parchment">
@@ -192,7 +192,7 @@ export default function ContactPage() {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-[10px] tracking-wide-xl uppercase text-parchment/40 mb-2">
+                  <label className="block text-sm tracking-wide-xl uppercase text-parchment/50 mb-3">
                     Brief Description *
                   </label>
                   <textarea
@@ -200,21 +200,21 @@ export default function ContactPage() {
                     name="message"
                     value={form.message}
                     onChange={handleChange}
-                    rows={5}
+                    rows={8}
                     placeholder="Briefly describe your legal matter…"
-                    className="w-full bg-transparent border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-4 py-3 text-parchment placeholder-parchment/20 font-sans text-sm transition-colors resize-none"
+                    className="w-full bg-transparent border border-gold/15 hover:border-gold/30 focus:border-gold/50 outline-none px-5 py-4 text-parchment placeholder-parchment/20 font-sans text-lg transition-colors resize-none"
                   />
                 </div>
 
                 {/* Action buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
                   {/* Primary — WhatsApp */}
                   <button
                     type="button"
                     onClick={handleWhatsApp}
-                    className="group flex-1 flex items-center justify-center gap-3 border border-gold/40 hover:border-gold px-6 py-4 text-xs tracking-wide-xl uppercase text-gold transition-all hover:bg-gold/5"
+                    className="group flex-1 flex items-center justify-center gap-3 border border-gold/40 hover:border-gold px-6 py-5 text-sm tracking-wide-xl uppercase text-gold transition-all hover:bg-gold/5"
                   >
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                     </svg>
                     Send via WhatsApp
@@ -224,21 +224,21 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={state === "sending"}
-                    className="group flex-1 flex items-center justify-center gap-3 bg-gold/10 hover:bg-gold/20 border border-gold/20 hover:border-gold/40 px-6 py-4 text-xs tracking-wide-xl uppercase text-parchment/80 hover:text-parchment transition-all disabled:opacity-50"
+                    className="group flex-1 flex items-center justify-center gap-3 bg-gold/10 hover:bg-gold/20 border border-gold/20 hover:border-gold/40 px-6 py-5 text-sm tracking-wide-xl uppercase text-parchment/80 hover:text-parchment transition-all disabled:opacity-50"
                   >
                     {state === "sending" ? (
                       "Sending…"
                     ) : (
                       <>
                         Send by Email
-                        <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                        <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
                       </>
                     )}
                   </button>
                 </div>
 
                 {state === "error" && (
-                  <p className="text-seal text-xs mt-2">
+                  <p className="text-seal text-base mt-2">
                     Something went wrong. Please try WhatsApp instead.
                   </p>
                 )}
@@ -247,65 +247,102 @@ export default function ContactPage() {
           </div>
 
           {/* ── Right: Contact info (2 cols) ──────────────────────────── */}
-          <aside className="lg:col-span-2 space-y-10 pt-2">
-            {/* Gold hairline */}
-            <div className="h-px bg-gold/15" />
-
-            <div className="space-y-8">
-              <div className="flex gap-4">
-                <MapPin size={15} className="text-gold/50 mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-[9px] tracking-wide-2xl uppercase text-gold/40 mb-1">Office</p>
-                  <p className="text-parchment/70 font-sans text-sm leading-relaxed">
-                    <strong className="text-parchment font-serif font-medium">Rones and Das Associates</strong><br />
-                    First Floor, Alukkas Castle<br />
-                    Civil Lines Road, Ayyanthole<br />
-                    Thrissur, Kerala
-                  </p>
-                </div>
+          <aside className="lg:col-span-2 space-y-12 pt-2">
+            
+            {/* ERNAKULAM OFFICE SECTION */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 border-b border-gold/15 pb-4">
+                <MapPin size={22} className="text-gold" />
+                <h3 className="text-base tracking-wide-2xl uppercase text-gold/80 font-medium">Ernakulam Office</h3>
+              </div>
+              
+              <div className="text-parchment/70 font-sans text-base leading-relaxed pl-2">
+                <strong className="text-parchment font-serif font-medium text-lg">Vidhan Law Chambers</strong><br />
+                New Emerald Building, Power House Road,<br />
+                Near High Court of Kerala,<br />
+                Kochi - 682018
               </div>
 
-              <div className="flex gap-4">
-                <Phone size={15} className="text-gold/50 mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-[9px] tracking-wide-2xl uppercase text-gold/40 mb-1">Phone</p>
-                  <p className="text-parchment/70 font-sans text-sm">+91 86067 23820</p>
-                </div>
+              <div className="w-full h-56 bg-ink/50 border border-gold/15 overflow-hidden rounded-sm">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  className="transition-all duration-700 ease-in-out"
+                  src="https://maps.google.com/maps?q=High%20Court%20of%20Kerala,%20Kochi&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                ></iframe>
+              </div>
+              <a
+                href="https://maps.google.com/?q=New+Emerald+Building,+Power+House+Road,+High+Court+of+Kerala,+Kochi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-full py-4 bg-gold hover:bg-gold/90 text-ink font-serif text-base transition-colors rounded-sm"
+              >
+                Get Directions to Ernakulam Office
+              </a>
+            </div>
+
+            {/* THRISSUR OFFICE SECTION */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 border-b border-gold/15 pb-4">
+                <MapPin size={22} className="text-gold" />
+                <h3 className="text-base tracking-wide-2xl uppercase text-gold/80 font-medium">Thrissur Office</h3>
+              </div>
+              
+              <div className="text-parchment/70 font-sans text-base leading-relaxed pl-2">
+                <strong className="text-parchment font-serif font-medium text-lg">Vidhan Law Chambers</strong><br />
+                S21, 1st Floor, Alukkas Castle,<br />
+                Ayyanthole P.O.,<br />
+                Thrissur - 680003
               </div>
 
-              <div className="flex gap-4">
-                <Mail size={15} className="text-gold/50 mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-[9px] tracking-wide-2xl uppercase text-gold/40 mb-1">Email</p>
-                  <p className="text-parchment/70 font-sans text-sm">ronesndasassociates@gmail.com</p>
+              <div className="w-full h-56 bg-ink/50 border border-gold/15 overflow-hidden rounded-sm">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  className="transition-all duration-700 ease-in-out"
+                  src="https://maps.google.com/maps?q=Alukkas%20Castle,%20Ayyanthole,%20Thrissur&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                ></iframe>
+              </div>
+              <a
+                href="https://maps.google.com/?q=Alukkas+Castle,+Civil+Lines+Road,+Ayyanthole,+Thrissur"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-full py-4 bg-gold hover:bg-gold/90 text-ink font-serif text-base transition-colors rounded-sm"
+              >
+                Get Directions to Thrissur Office
+              </a>
+            </div>
+
+            {/* DIRECT CONTACT SECTION */}
+            <div className="space-y-6 pt-4">
+              <div className="flex items-center gap-3 border-b border-gold/15 pb-4">
+                <Phone size={22} className="text-gold" />
+                <h3 className="text-base tracking-wide-2xl uppercase text-gold/80 font-medium">Direct Contact</h3>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-6 pl-2">
+                <div className="space-y-2">
+                  <p className="text-xs tracking-wide-2xl uppercase text-gold/40">Phones</p>
+                  <p className="text-parchment/80 font-sans text-base">+91 79071 39328</p>
+                  <p className="text-parchment/80 font-sans text-base">+91 96337 49958</p>
+                  <p className="text-parchment/80 font-sans text-base">+91 86067 23820</p>
+                  <p className="text-parchment/80 font-sans text-base">+91 78926 14468</p>
+                </div>
+                
+                <div className="space-y-2">
+                  <p className="text-xs tracking-wide-2xl uppercase text-gold/40">Email</p>
+                  <p className="text-parchment/80 font-sans text-base">consult@vidhan.test</p>
                 </div>
               </div>
             </div>
 
-            <a
-              href="https://maps.google.com/?q=Alukkas+Castle,+Civil+Lines+Road,+Ayyanthole,+Thrissur"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-full py-4 bg-gold hover:bg-gold/90 text-ink font-serif text-base transition-colors"
-            >
-              Get Directions on Google Maps
-            </a>
-
-            <div className="w-full h-64 bg-ink/50 border border-gold/15 overflow-hidden group">
-              <iframe
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                className="grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-in-out"
-                src="https://maps.google.com/maps?q=Alukkas%20Castle,%20Ayyanthole,%20Thrissur&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              ></iframe>
-            </div>
-
-            <div className="h-px bg-gold/15" />
-
-            <p className="text-[10px] tracking-wide text-parchment/25 leading-relaxed">
+            <p className="text-xs tracking-wide text-parchment/40 leading-relaxed pt-4">
               All consultations are strictly confidential. No information shared with us is disclosed to any third party without your explicit consent.
             </p>
           </aside>

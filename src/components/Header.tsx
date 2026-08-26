@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -32,8 +33,7 @@ export default function Header({ locale }: { locale: string }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
-    setQuoteIndex(dayOfYear % quotes.length);
+    setQuoteIndex(Math.floor(Math.random() * quotes.length));
     setIsMounted(true);
   }, [quotes.length]);
 
@@ -76,19 +76,26 @@ export default function Header({ locale }: { locale: string }) {
     >
       <div className="container mx-auto px-6 lg:px-12 py-5 grid grid-cols-3 items-center">
         {/* Left — Legal Quote */}
-        <div className="hidden lg:block max-w-xs transition-opacity duration-500" style={{ opacity: isMounted ? 1 : 0.4 }}>
-          <p className="text-sm lg:text-base text-parchment/60 italic font-serif leading-snug">
+        <div className="hidden lg:block max-w-sm transition-opacity duration-500" style={{ opacity: isMounted ? 1 : 0.4 }}>
+          <p className="text-base lg:text-lg text-parchment/60 italic font-serif leading-snug">
             &ldquo;{dailyQuote.text}&rdquo;
           </p>
-          <p className="text-xs text-parchment/40 mt-1">
+          <p className="text-sm text-parchment/40 mt-2">
             — {dailyQuote.author}
           </p>
         </div>
 
         {/* Center — Logo */}
         <div className="col-span-2 lg:col-span-1 flex justify-start lg:justify-center">
-          <Link href={`/${locale}`} className="text-2xl lg:text-3xl font-serif text-parchment tracking-tight">
-            Vidhan<span className="text-gold">.</span>
+          <Link href={`/${locale}`} className="flex items-center">
+            <Image
+              src="/logo.png.png"
+              alt="Vidhan Law Chambers Logo"
+              width={140}
+              height={50}
+              className="object-contain"
+              priority
+            />
           </Link>
         </div>
 

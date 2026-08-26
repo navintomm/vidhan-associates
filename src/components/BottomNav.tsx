@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowUp } from "lucide-react";
 
@@ -15,10 +16,31 @@ const navItems = [
 
 export default function BottomNav({ locale }: { locale: string }) {
   const t = useTranslations("nav");
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight > 0) {
+        setScrollProgress((scrollTop / scrollHeight) * 100);
+      }
+    };
+    
+    // Initial calculation
+    handleScroll();
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const radius = 20;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (scrollProgress / 100) * circumference;
 
   return (
     <nav className="fixed bottom-0 w-full z-40 bg-ink/90 backdrop-blur-sm border-t border-gold/10 hidden lg:block">
@@ -37,9 +59,34 @@ export default function BottomNav({ locale }: { locale: string }) {
 
         <button
           onClick={scrollToTop}
-          className="w-8 h-8 rounded-full border border-parchment/20 hover:border-gold/50 flex items-center justify-center text-parchment/50 hover:text-gold transition-colors"
+          className="relative w-12 h-12 rounded-full flex items-center justify-center text-parchment/70 hover:text-gold transition-colors group"
+          aria-label="Back to top"
         >
-          <ArrowUp size={14} />
+          <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 48 48">
+            {/* Background circle */}
+            <circle
+              cx="24"
+              cy="24"
+              r={radius}
+              stroke="currentColor"
+              strokeWidth="1.5"
+              fill="transparent"
+              className="text-parchment/20 group-hover:text-gold/30 transition-colors"
+            />
+            {/* Progress circle */}
+            <circle
+              cx="24"
+              cy="24"
+              r={radius}
+              stroke="#ffffff"
+              strokeWidth="2"
+              fill="transparent"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              strokeLinecap="round"
+            />
+          </svg>
+          <ArrowUp size={20} className="relative z-10" />
         </button>
       </div>
     </nav>

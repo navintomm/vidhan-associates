@@ -2,6 +2,7 @@
 
 import { ArrowUp } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer({ locale }: { locale: string }) {
   const scrollToTop = () => {
@@ -24,7 +25,7 @@ export default function Footer({ locale }: { locale: string }) {
                   item === 'HOME' ? `/${locale}` : 
                   `/${locale}/${item.toLowerCase().replace(' ', '-')}`
                 }
-                className="text-lg lg:text-xl tracking-[0.3em] font-serif hover:text-gold transition-colors w-fit"
+                className="text-xl lg:text-2xl tracking-[0.3em] font-serif hover:text-gold transition-colors w-fit"
               >
                 {item}
               </Link>
@@ -33,11 +34,11 @@ export default function Footer({ locale }: { locale: string }) {
 
           {/* Firm Info & Copyright */}
           <div className="mt-24 lg:mt-auto pb-8 max-w-xs">
-            <p className="text-xs text-parchment/60 font-sans leading-relaxed mb-8">
+            <p className="text-sm text-parchment/60 font-sans leading-relaxed mb-8">
               Law, strategy, and timing. An independent legal and advisory platform offering integrated, strategic counsel to our clients at their most critical decisions.
             </p>
-            <p className="text-[10px] text-parchment/40">
-              &copy; {new Date().getFullYear()} Vidhan Associates. All rights reserved.
+            <p className="text-xs text-parchment/40">
+              &copy; {new Date().getFullYear()} Vidhan Law Chambers. All rights reserved.
             </p>
           </div>
         </div>
@@ -49,14 +50,16 @@ export default function Footer({ locale }: { locale: string }) {
             className="flex flex-col items-center gap-4 hover:text-gold transition-colors group z-20 mb-12 lg:mt-32 lg:mb-0"
           >
             <ArrowUp size={24} strokeWidth={1} className="group-hover:-translate-y-2 transition-transform" />
-            <span className="text-xs tracking-[0.3em] uppercase">BACK TO TOP</span>
+            <span className="text-sm tracking-[0.3em] uppercase">BACK TO TOP</span>
           </button>
 
           {/* Massive Scale Image anchored to bottom */}
           <div className="relative lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 w-[70%] md:w-[60%] lg:w-[130%] pointer-events-none flex items-end justify-center">
-            <img 
+            <Image 
               src="/images/icons/scale-of-justice-transparent.png" 
               alt="Scale of Justice"
+              width={1000}
+              height={1000}
               className="w-full h-auto object-contain drop-shadow-2xl opacity-90 lg:translate-y-[5%]"
             />
           </div>
@@ -68,26 +71,28 @@ export default function Footer({ locale }: { locale: string }) {
           {/* Contact Details */}
           <div className="flex flex-col mt-8">
             <div className="border-t border-parchment/20 py-6">
-              <p className="text-[10px] tracking-widest uppercase text-parchment/50 mb-2">E-MAIL ADDRESS</p>
-              <a href="mailto:consult@vidhan.test" className="text-sm tracking-widest hover:text-gold transition-colors">CONSULT@VIDHAN.TEST</a>
+              <p className="text-xs tracking-widest uppercase text-parchment/50 mb-2">PHONE NUMBERS</p>
+              <p className="text-base tracking-widest mb-1">+91 7907139328 (Adv. Rohit)</p>
+              <p className="text-base tracking-widest mb-1">+91 9633749958 (Adv. Antony)</p>
+              <p className="text-base tracking-widest">+91 8606723820 (Adv. Rones)</p>
             </div>
             <div className="border-t border-parchment/20 py-6">
-              <p className="text-[10px] tracking-widest uppercase text-parchment/50 mb-2">PHONE NUMBER</p>
-              <p className="text-sm tracking-widest">+91 98765 43210</p>
+              <p className="text-xs tracking-widest uppercase text-parchment/50 mb-2">ERNAKULAM OFFICE</p>
+              <p className="text-base tracking-widest leading-relaxed">New Emerald Building, Power House Road, Near High Court of Kerala, Kochi - 682018</p>
             </div>
             <div className="border-t border-b border-parchment/20 py-6">
-              <p className="text-[10px] tracking-widest uppercase text-parchment/50 mb-2">LOCATION</p>
-              <p className="text-sm tracking-widest">KOCHI / KERALA</p>
+              <p className="text-xs tracking-widest uppercase text-parchment/50 mb-2">THRISSUR OFFICE</p>
+              <p className="text-base tracking-widest leading-relaxed">S21, 1st Floor, Alukkas Castle, Ayyanthole P.O., Thrissur - 680003</p>
             </div>
           </div>
 
           {/* Social Links */}
           <div className="flex flex-col mt-16 lg:mt-auto pb-4 lg:pb-12">
             <div className="border-t border-parchment/20 py-6">
-              <a href="#" className="text-sm tracking-widest uppercase hover:text-gold transition-colors">LINKEDIN</a>
+              <a href="#" className="text-base tracking-widest uppercase hover:text-gold transition-colors">LINKEDIN</a>
             </div>
             <div className="border-t border-b border-parchment/20 py-6">
-              <a href="#" className="text-sm tracking-widest uppercase hover:text-gold transition-colors">X.COM</a>
+              <a href="#" className="text-base tracking-widest uppercase hover:text-gold transition-colors">X.COM</a>
             </div>
           </div>
 

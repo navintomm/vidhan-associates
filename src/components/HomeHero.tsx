@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 /**
@@ -56,31 +57,45 @@ export default function HomeHero({ locale }: { locale: string }) {
 
       {/* ===== Content — Asymmetric Layout ===== */}
       <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full">
-        {/* Gold Hairline */}
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: "12rem" }}
-          transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-          className="h-px bg-gold/40 mb-10"
-        />
-
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
-          {/* Left — Title & Description (anchored left, ~55-60% width) */}
-          <div className="md:w-[58%] max-w-2xl">
-            <motion.h1
+          {/* Left — Logo, Title & Description (anchored left) */}
+          <div className="md:w-[65%] max-w-3xl">
+            {/* Firm Logo & Caption */}
+            <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
-              className="text-6xl md:text-7xl lg:text-8xl font-serif text-parchment leading-tight mb-6"
+              className="mb-14 -mt-[140px] md:-mt-[220px]"
+            >
+              <Image 
+                src="/logo.png.png" 
+                alt="Vidhan Law Chambers"
+                width={500}
+                height={200}
+                className="w-full max-w-[360px] md:max-w-[420px] h-auto object-contain drop-shadow-xl -ml-2"
+                priority
+              />
+              <p className="mt-4 text-gold/80 tracking-[0.2em] uppercase text-[10px] md:text-xs font-medium pl-1">
+                Advocates and Legal Consultants
+              </p>
+            </motion.div>
+
+            {/* Hero Title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: "easeOut", delay: 0.4 }}
+              className="text-5xl md:text-6xl lg:text-7xl font-serif text-parchment leading-tight mb-6"
             >
               {t("title")}
             </motion.h1>
 
+            {/* Description */}
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-              className="text-lg md:text-xl lg:text-2xl text-parchment/70 font-sans leading-relaxed max-w-lg"
+              className="text-lg md:text-xl lg:text-2xl text-parchment/70 font-sans leading-relaxed max-w-xl"
             >
               {t("description")}
             </motion.p>

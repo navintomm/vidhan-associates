@@ -31,7 +31,7 @@
         { "text": "Justice delayed is justice denied.", "author": "William E. Gladstone" }
       ],
       "heading": "Rooted in Kerala. Trusted Across India.",
-      "body1": "Vidhan Associates is an independent legal practice providing rigorous, principled representation across civil, criminal, family, and property matters. We bring the discipline of structured legal thinking to every case — no matter its size.",
+      "body1": "Vidhan Law Chambers is an independent legal practice providing rigorous, principled representation across civil, criminal, family, and property matters. We bring the discipline of structured legal thinking to every case — no matter its size.",
       "body2": "Our work is founded on three principles: excellence in counsel, integrity in conduct, and an unwavering commitment to the client's cause. We are not the biggest firm — we are the most invested.",
       "cta": "About the Firm"
     },
@@ -114,7 +114,7 @@
     "story": {
       "label": "Our Story",
       "heading": "Founded on Principle,\nBuilt on Trust.",
-      "body1": "Vidhan Associates was established with a singular conviction: that every individual deserves rigorous, principled legal representation — regardless of the complexity of their case or their position in society.",
+      "body1": "Vidhan Law Chambers was established with a singular conviction: that every individual deserves rigorous, principled legal representation — regardless of the complexity of their case or their position in society.",
       "body2": "Over more than a decade of practice in Kerala's courts, we have built a reputation not through volume, but through depth. Each client receives our full attention. Each case is prepared as if it will be argued before the highest court.",
       "body3": "Our name, Vidhan, is derived from the Sanskrit for 'rule of law' — a reminder that our practice exists to uphold the very architecture of justice."
     },
@@ -165,6 +165,6 @@
   },
   "whatsapp": {
     "tooltip": "Chat on WhatsApp",
-    "defaultMessage": "Hello, I would like to book a consultation with Vidhan Associates."
+    "defaultMessage": "Hello, I would like to book a consultation with Vidhan Law Chambers."
   }
 }
