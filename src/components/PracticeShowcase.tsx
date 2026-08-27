@@ -95,19 +95,19 @@ export default function PracticeShowcase() {
         {WORDS.map((item, i) => (
           <div 
             key={i} 
-            className={`absolute pillar-${i} bottom-[-10vh] md:bottom-[-5vh] h-[65vh] md:h-[70vh] lg:h-[80vh] flex flex-col justify-end items-center`}
+            className={`absolute pillar-${i} bottom-[-5vh] md:bottom-0 h-[45vh] md:h-[50vh] lg:h-[55vh] flex flex-col justify-end items-center`}
             style={{ left: '50%' }}
           >
-            {/* The Text hovering beside the pillar */}
-            <div className="absolute top-[35%] md:top-[40%] left-[100%] ml-6 md:ml-10 whitespace-nowrap z-40">
-              <h3 className="text-5xl md:text-6xl lg:text-8xl font-serif text-parchment drop-shadow-xl tracking-wider">
+            {/* The Text hovering exactly on top of everything */}
+            <div className="absolute bottom-[135%] md:bottom-[130%] left-1/2 -translate-x-1/2 whitespace-nowrap z-40 text-center">
+              <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif text-parchment drop-shadow-xl tracking-wider">
                 <span className="text-amber-500">{item.letter}</span>
                 {item.word}
               </h3>
             </div>
 
             {/* The Scale of Justice */}
-            <div className="absolute bottom-[96%] left-[71%] -translate-x-1/2 w-[80%] md:w-[85%] lg:w-[90%] z-30 flex flex-col items-center">
+            <div className="absolute bottom-[96%] left-[71%] -translate-x-1/2 w-[70%] md:w-[80%] lg:w-[90%] z-30 flex flex-col items-center">
               <Image
                 src="/images/icons/scale-of-justice-transparent.png"
                 alt="Scale of Justice"
