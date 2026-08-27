@@ -2,6 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { gsap } from "@/lib/gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const WORDS = [
   { letter: "V", word: "ision" },
@@ -12,75 +16,73 @@ const WORDS = [
   { letter: "N", word: "obility" }
 ];
 
-const STATE_STYLES = {
-  initial: {
-    transform: 'translateX(-50%) translateY(60px) scale(0.92) rotateY(-6deg)',
-    opacity: 0,
-    zIndex: 3,
-    transition: 'all 2.5s cubic-bezier(0.25, 1, 0.5, 1)'
-  },
-  center_intro: {
-    transform: 'translateX(-50%) translateY(0px) scale(1) rotateY(0deg)',
-    opacity: 1,
-    zIndex: 3,
-    transition: 'all 2.5s cubic-bezier(0.25, 1, 0.5, 1)' 
-  },
-  center: {
-    transform: 'translateX(-50%) translateY(0px) scale(1) rotateY(0deg)',
-    opacity: 1,
-    zIndex: 3,
-    transition: 'all 1.6s cubic-bezier(0.76, 0, 0.24, 1)'
-  },
-  right_teleport: {
-    transform: 'translateX(calc(-50% + 75vw)) translateY(0px) scale(0.65) rotateY(6deg)',
-    opacity: 0,
-    zIndex: 1,
-    transition: 'none'
-  },
-  left: {
-    transform: 'translateX(calc(-50% - 40vw)) translateY(0px) scale(0.78) rotateY(-5deg)',
-    opacity: 0.65,
-    zIndex: 2,
-    transition: 'all 1.6s cubic-bezier(0.76, 0, 0.24, 1)'
-  },
-  outside: {
-    transform: 'translateX(calc(-50% - 75vw)) translateY(0px) scale(0.6) rotateY(0deg)',
-    opacity: 0,
-    zIndex: 1,
-    transition: 'all 1.6s cubic-bezier(0.76, 0, 0.24, 1)'
-  }
-};
-
 export default function PracticeShowcase() {
-  const [step, setStep] = useState(-1);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
 
   useEffect(() => {
-    // Initial entrance delay
-    const introTimeout = setTimeout(() => {
-      setStep(0);
-    }, 100);
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setIsReducedMotion(mediaQuery.matches);
 
-    // Wait for entrance (2.5s) + hold (2.5s) = 5000ms
-    const firstTransitionTimeout = setTimeout(() => {
-      setStep(1);
-      
-      // Start loop: transition (1.6s) + hold (2.5s) = 4100ms
-      intervalRef.current = setInterval(() => {
-        setStep(prev => prev + 1);
-      }, 4100);
+    const handleMotionChange = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handleMotionChange);
 
-    }, 5000);
-
-    return () => {
-      clearTimeout(introTimeout);
-      clearTimeout(firstTransitionTimeout);
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    }
+    return () => mediaQuery.removeEventListener("change", handleMotionChange);
   }, []);
 
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("all", () => {
+      if (!sectionRef.current) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          pin: true,
+          scrub: 1,
+          start: "top top",
+          end: "+=600%", // 6 screens of scrolling duration for 6 pillars
+          anticipatePin: 1,
+        },
+      });
+
+      // Initial States
+      gsap.set(".pillar-0", { y: "40vh", opacity: 0 }); // First pillar starts low
+      
+      // All other pillars start off-screen to the right in the 3D depth
+      const otherPillars = WORDS.slice(1).map((_, i) => `.pillar-${i + 1}`).join(", ");
+      gsap.set(otherPillars, { x: "50vw", z: -600, rotationY: 45, opacity: 0 });
+
+      // Phase 1: Pillar 0 rises (entire group: base, scale, and text)
+      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
+
+      // Hold Phase 0
+      tl.to({}, { duration: 1 });
+
+      // Build the transitions dynamically for the 6 pillars
+      for (let i = 0; i < WORDS.length - 1; i++) {
+        const transLabel = `trans${i}`;
+        
+        // Current pillar arcs left and exits
+        tl.to(`.pillar-${i}`, { x: "-50vw", z: -600, rotationY: -45, opacity: 0, duration: 2, ease: "power2.inOut" }, transLabel)
+        // Next pillar arcs in from right to center
+          .to(`.pillar-${i+1}`, { x: 0, z: 0, rotationY: 0, opacity: 1, duration: 2, ease: "power2.inOut" }, transLabel);
+          
+        // Hold Phase
+        tl.to({}, { duration: 1 });
+      }
+
+      return () => {
+        tl.kill();
+      };
+    });
+
+    return () => mm.revert();
+  }, [isReducedMotion]);
+
   return (
-    <section className="relative bg-ink overflow-hidden h-[80vh] md:h-screen w-full flex items-center justify-center">
+    <section ref={sectionRef} className="relative bg-ink overflow-hidden h-screen w-full">
       
       {/* BACKGROUND WATERMARK */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
@@ -89,52 +91,44 @@ export default function PracticeShowcase() {
         </h2>
       </div>
 
-      {/* 3D PILLARS LAYER */}
+      {/* 3D PILLARS STAGE */}
       <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none" style={{ perspective: '1400px' }}>
-        {WORDS.map((item, i) => {
-          const activeIndex = step >= 0 ? step % 6 : 0;
-          let stateKey = 'right_teleport';
-          
-          if (step === -1) {
-            stateKey = i === 0 ? 'initial' : 'right_teleport';
-          } else if (i === activeIndex) {
-            stateKey = step === 0 ? 'center_intro' : 'center';
-          } else if (i === (activeIndex - 1 + 6) % 6) {
-            stateKey = 'left';
-          } else if (i === (activeIndex - 2 + 6) % 6) {
-            stateKey = 'outside';
-          }
-
-          const style = STATE_STYLES[stateKey as keyof typeof STATE_STYLES];
-          
-          return (
-            <div 
-              key={i} 
-              className="absolute bottom-[-10vh] md:bottom-[-5vh] h-[65vh] md:h-[70vh] lg:h-[80vh] flex flex-col justify-end items-center"
-              style={{
-                left: '50%',
-                ...style
-              }}
-            >
-              {/* Text hovering exactly on top of pillar, center aligned */}
-              <div className="absolute bottom-[100%] left-1/2 -translate-x-1/2 mb-4 whitespace-nowrap text-center z-40">
-                <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif text-parchment drop-shadow-xl tracking-wider">
-                  <span className="text-amber-500">{item.letter}</span>
-                  {item.word}
-                </h3>
-              </div>
-
-              {/* The Pillar Base */}
-              <Image
-                src="/images/icons/ashoka-pillar-transparent.png"
-                alt="Ashoka Pillar"
-                width={800}
-                height={1420}
-                className="w-auto h-full object-contain object-bottom relative z-10"
-              />
+        {WORDS.map((item, i) => (
+          <div 
+            key={i} 
+            className={`absolute pillar-${i} bottom-[-10vh] md:bottom-[-5vh] h-[65vh] md:h-[70vh] lg:h-[80vh] flex flex-col justify-end items-center`}
+            style={{ left: '50%', transform: 'translateX(-50%)' }}
+          >
+            {/* The Text hovering beside the pillar */}
+            <div className="absolute top-[35%] md:top-[40%] left-[80%] md:left-[75%] whitespace-nowrap z-40">
+              <h3 className="text-5xl md:text-6xl lg:text-8xl font-serif text-parchment drop-shadow-xl tracking-wider">
+                <span className="text-amber-500">{item.letter}</span>
+                {item.word}
+              </h3>
             </div>
-          )
-        })}
+
+            {/* The Scale of Justice */}
+            <div className="absolute bottom-[96%] left-[71%] -translate-x-1/2 w-[80%] md:w-[85%] lg:w-[90%] z-30 flex flex-col items-center">
+              <Image
+                src="/images/icons/scale-of-justice-transparent.png"
+                alt="Scale of Justice"
+                width={300}
+                height={300}
+                className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
+              />
+              <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[40%] h-[8px] bg-black/80 blur-[5px] rounded-[100%] z-0"></div>
+            </div>
+            
+            {/* The Pillar Base */}
+            <Image
+              src="/images/icons/ashoka-pillar-transparent.png"
+              alt="Ashoka Pillar"
+              width={800}
+              height={1420}
+              className="w-auto h-full object-contain object-bottom relative z-10"
+            />
+          </div>
+        ))}
       </div>
 
     </section>
