@@ -19,8 +19,25 @@ export default function PracticeShowcase() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const [step, setStep] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const areas = VALUES;
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    // 3s stationary + 1.6s transition = 4.6s loop
+    const interval = setInterval(() => {
+      setStep((prev) => prev + 1);
+    }, 4600);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -57,25 +74,6 @@ export default function PracticeShowcase() {
         ease: "none",
       });
 
-      // Add subtle parallax to elements inside the panels
-      (panels as HTMLElement[]).forEach((panel) => {
-        const pillar = panel.querySelector('.pillar-parallax');
-
-        // Make the pillar drift slightly opposite to scroll to create depth
-        if (pillar) {
-          gsap.to(pillar, {
-            x: 100, // moves right slightly as track moves left
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: () => `+=${trackRef.current?.offsetWidth || 0}`,
-              scrub: 1,
-            }
-          });
-        }
-      });
-
       return () => {
         tl.kill();
       };
@@ -83,6 +81,14 @@ export default function PracticeShowcase() {
 
     return () => mm.revert();
   }, [isReducedMotion]);
+
+  const positions = [
+    { transform: `translateX(0vw) scale(1) rotateY(0deg)`, opacity: 1, zIndex: 3 }, // 0: Center
+    { transform: `translateX(${isMobile ? '35vw' : '40vw'}) scale(0.78) rotateY(5deg)`, opacity: 0.65, zIndex: 2 }, // 1: Right
+    { transform: `translateX(${isMobile ? '65vw' : '75vw'}) scale(0.6) rotateY(0deg)`, opacity: 0, zIndex: 1 }, // 2: Far Right
+    { transform: `translateX(${isMobile ? '-65vw' : '-75vw'}) scale(0.6) rotateY(0deg)`, opacity: 0, zIndex: 1 }, // 3: Far Left
+    { transform: `translateX(${isMobile ? '-35vw' : '-40vw'}) scale(0.78) rotateY(-5deg)`, opacity: 0.65, zIndex: 2 }, // 4: Left
+  ];
 
   return (
     <section ref={sectionRef} className="relative bg-ink overflow-hidden">
@@ -129,13 +135,37 @@ export default function PracticeShowcase() {
                   </p>
                 </div>
 
-                {/* VISUAL STACK */}
-                <div className="flex-1 flex flex-col justify-end items-center relative z-10 w-full order-3 md:order-none mb-4 md:mb-0">
-                  
-                  {/* Unified Visual Object (Bounding box defined by pillar) */}
-                  <div className="relative inline-block h-[45vh] lg:h-[55vh]">
-                    
-                    {/* Scale of Justice centered on axis with relative visual correction for PNG asymmetry */}
+                {/* SPACER FOR CENTRAL FOCAL POINT */}
+                <div className="flex-1 w-full order-3 md:order-none min-h-[30vh]"></div>
+
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 3D Pillar Carousel - Fixed behind content */}
+      <div 
+        className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none" 
+        style={{ perspective: '1400px' }}
+      >
+        {[0, 1, 2, 3, 4].map((i) => {
+          const posIdx = (i - (step % 5) + 5) % 5;
+          const pos = positions[posIdx];
+          
+          return (
+             <div 
+               key={i}
+               className="absolute transition-all duration-[1600ms]"
+               style={{
+                 transform: pos.transform,
+                 opacity: pos.opacity,
+                 zIndex: pos.zIndex,
+                 // custom cubic bezier for the luxurious cinematic feel
+                 transitionTimingFunction: 'cubic-bezier(0.76, 0, 0.24, 1)'
+               }}
+             >
+                <div className="relative flex flex-col justify-end items-center h-[55vh] md:h-[65vh] lg:h-[75vh]">
                     <div className="absolute bottom-[96%] left-[71%] -translate-x-1/2 w-[80%] md:w-[85%] lg:w-[90%] z-30 flex flex-col items-center">
                       <Image
                         src="/images/icons/scale-of-justice-transparent.png"
@@ -144,27 +174,19 @@ export default function PracticeShowcase() {
                         height={300}
                         className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
                       />
-                      {/* Contact Shadow */}
                       <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[40%] h-[8px] bg-black/80 blur-[5px] rounded-[100%] z-0"></div>
                     </div>
-
-                    {/* Ashoka Pillar (Defines the width of the wrapper) */}
                     <Image
                       src="/images/icons/ashoka-pillar-transparent.png"
                       alt="Ashoka Pillar"
                       width={800}
                       height={1420}
                       className="w-auto h-full object-contain object-bottom relative z-10"
-                      priority={index === 0}
                     />
-
-                  </div>
                 </div>
-
-              </div>
-            </div>
-          ))}
-        </div>
+             </div>
+          )
+        })}
       </div>
 
     </section>
