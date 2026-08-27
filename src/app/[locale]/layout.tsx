@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import BottomNav from "@/components/BottomNav";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const fraunces = Fraunces({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-fraunces" });
 const ibmPlexSans = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-ibm-plex-sans" });
@@ -36,11 +37,12 @@ export default async function LocaleLayout({
   const bodyFont = isMalayalam ? notoSansMalayalam.variable : ibmPlexSans.variable;
 
   return (
-    <html lang={locale}>
-      <body className={`${headingFont} ${bodyFont} font-sans antialiased bg-parchment text-slate`}>
-        <NextIntlClientProvider messages={messages}>
-          <SmoothScrollProvider>
-            <Header locale={locale} />
+    <html lang={locale} suppressHydrationWarning>
+      <body className={`${headingFont} ${bodyFont} font-sans antialiased bg-parchment text-ink dark:bg-ink dark:text-parchment transition-colors duration-300`}>
+        <ThemeProvider>
+          <NextIntlClientProvider messages={messages}>
+            <SmoothScrollProvider>
+              <Header locale={locale} />
             <main className="min-h-screen">
               {children}
             </main>
@@ -49,6 +51,7 @@ export default async function LocaleLayout({
             <WhatsAppButton />
           </SmoothScrollProvider>
         </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

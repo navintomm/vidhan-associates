@@ -6,7 +6,8 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const navLinks = [
   { key: "home", href: "/" },
@@ -26,24 +27,21 @@ export default function Header({ locale }: { locale: string }) {
   const router = useRouter();
   const tNav = useTranslations("nav");
   const tHeader = useTranslations("header");
-  const tQuotes = useTranslations("home.firmIntro");
-
-  const quotes = tQuotes.raw("quotes") as Array<{ text: string; author: string }>;
-  const [quoteIndex, setQuoteIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    setQuoteIndex(Math.floor(Math.random() * quotes.length));
     setIsMounted(true);
-  }, [quotes.length]);
-
-  const dailyQuote = isMounted ? quotes[quoteIndex] : quotes[0];
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const isHome = pathname === "/" || pathname === "/en" || pathname === "/ml" || pathname === "/en/" || pathname === "/ml/";
 
   const toggleLanguage = () => {
     const nextLocale = locale === "en" ? "ml" : "en";
@@ -71,68 +69,73 @@ export default function Header({ locale }: { locale: string }) {
     <>
       <header
         className={`fixed top-0 w-full z-[9999] transition-all duration-500 ${
-        scrolled ? "bg-ink/80 backdrop-blur-md" : "bg-transparent"
+        scrolled ? "bg-parchment/80 dark:bg-ink/80 backdrop-blur-md" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 lg:px-12 py-5 grid grid-cols-3 items-center">
-        {/* Left — Legal Quote */}
-        <div className="hidden lg:block max-w-sm transition-opacity duration-500" style={{ opacity: isMounted ? 1 : 0.4 }}>
-          <p className="text-base lg:text-lg text-parchment/60 italic font-serif leading-snug">
-            &ldquo;{dailyQuote.text}&rdquo;
-          </p>
-          <p className="text-sm text-parchment/40 mt-2">
-            — {dailyQuote.author}
-          </p>
-        </div>
+      {/* Top row — Nav links centered across full width */}
+      <div className="hidden lg:flex items-center justify-center gap-10 xl:gap-14 px-6 pt-5 pb-3">
+        {navLinks.map((link) => (
+          <Link
+            key={link.key}
+            href={`/${locale}${link.href === "/" ? "" : link.href}`}
+            className="text-sm font-medium tracking-[0.2em] uppercase text-ink/80 dark:text-parchment/80 hover:text-gold transition-colors duration-300"
+          >
+            {tNav(link.key)}
+          </Link>
+        ))}
+      </div>
 
-        {/* Center — Logo */}
-        <div className="col-span-2 lg:col-span-1 flex justify-start lg:justify-center">
+      {/* Bottom row — Logo (hidden on home hero) + Actions */}
+      <div className="container mx-auto px-6 lg:px-12 pb-4 flex items-center justify-between">
+        {/* Logo */}
+        <div className={`flex items-center transition-opacity duration-500 ${isHome && !scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
           <Link href={`/${locale}`} className="flex items-center">
             <Image
               src="/logo.png.png"
               alt="Vidhan Law Chambers Logo"
-              width={140}
-              height={50}
+              width={130}
+              height={46}
               className="object-contain"
               priority
             />
           </Link>
         </div>
 
-        {/* Right — Actions */}
-        <div className="flex items-center justify-end gap-3">
+        {/* Actions */}
+        <div className="flex items-center gap-3 ml-auto">
+          {isMounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="text-ink/60 dark:text-parchment/60 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full p-2"
+              aria-label="Toggle Theme"
+            >
+              {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+            </button>
+          )}
+
           <button
             onClick={toggleLanguage}
-            className="text-xs font-medium tracking-wide-xl uppercase text-parchment/60 hover:text-gold transition-colors border border-parchment/20 hover:border-gold/50 rounded-full px-3 py-1.5"
+            className="text-xs font-medium tracking-widest uppercase text-ink/60 dark:text-parchment/60 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full px-4 py-1.5"
           >
             {locale === "en" ? "MAL" : "ENG"}
           </button>
 
           <Link
             href={`/${locale}/contact`}
-            className="hidden md:inline-block text-xs tracking-wide-xl uppercase text-parchment/80 hover:text-gold transition-colors border border-parchment/20 hover:border-gold/50 rounded-full px-5 py-2"
+            className="hidden md:inline-block text-xs tracking-widest uppercase text-ink/80 dark:text-parchment/80 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full px-5 py-1.5"
           >
             {tHeader("cta")}
           </Link>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="w-10 h-10 rounded-full border border-parchment/20 hover:border-gold/50 flex items-center justify-center text-parchment/70 hover:text-gold transition-colors"
+            className="lg:hidden w-10 h-10 rounded-full border border-ink/20 dark:border-parchment/20 hover:border-gold/50 flex items-center justify-center text-ink/70 dark:text-parchment/70 hover:text-gold transition-colors"
           >
             {isOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Quote — appears below the header when not scrolled */}
-      <div className={`lg:hidden absolute top-full left-0 w-full px-6 pt-2 pb-4 transition-all duration-500 pointer-events-none ${scrolled ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
-        <p className="text-sm text-parchment/60 italic font-serif leading-snug text-center">
-          &ldquo;{dailyQuote.text}&rdquo;
-        </p>
-        <p className="text-[10px] text-parchment/40 mt-1 uppercase tracking-widest text-center">
-          — {dailyQuote.author}
-        </p>
-      </div>
       </header>
 
       {/* Full-Screen Mobile Menu Overlay */}
@@ -143,12 +146,12 @@ export default function Header({ locale }: { locale: string }) {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 bg-ink z-[10000] flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-parchment dark:bg-ink z-[10000] flex flex-col items-center justify-center"
           >
             {/* Close Button (top-right) */}
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-6 right-6 w-10 h-10 rounded-full border border-parchment/20 flex items-center justify-center text-parchment/70 hover:text-gold transition-colors"
+              className="absolute top-6 right-6 w-10 h-10 rounded-full border border-ink/20 dark:border-parchment/20 flex items-center justify-center text-ink/70 dark:text-parchment/70 hover:text-gold transition-colors"
             >
               <X size={18} />
             </button>
@@ -158,7 +161,7 @@ export default function Header({ locale }: { locale: string }) {
                 <motion.div key={link.key} variants={linkVariants}>
                   <Link
                     href={`/${locale}${link.href === "/" ? "" : link.href}`}
-                    className="text-3xl md:text-4xl font-serif text-parchment hover:text-gold transition-colors tracking-wide"
+                    className="text-3xl md:text-4xl font-serif text-ink dark:text-parchment hover:text-gold dark:hover:text-gold transition-colors tracking-wide"
                     onClick={() => setIsOpen(false)}
                   >
                     {tNav(link.key)}
@@ -171,20 +174,12 @@ export default function Header({ locale }: { locale: string }) {
               <Link
                 href={`/${locale}/contact`}
                 onClick={() => setIsOpen(false)}
-                className="border border-gold text-gold hover:bg-gold hover:text-ink transition-colors px-8 py-4 tracking-wide-xl uppercase text-sm inline-block"
+                className="border border-gold text-gold hover:bg-gold hover:text-parchment dark:hover:text-ink transition-colors px-8 py-4 tracking-wide-xl uppercase text-sm inline-block"
               >
                 {tHeader("cta")}
               </Link>
             </motion.div>
 
-            <motion.div variants={linkVariants} className="mt-12 text-center max-w-xs px-4">
-              <p className="text-sm text-parchment/60 italic font-serif leading-snug">
-                &ldquo;{dailyQuote.text}&rdquo;
-              </p>
-              <p className="text-[10px] text-parchment/40 mt-2 uppercase tracking-widest">
-                — {dailyQuote.author}
-              </p>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

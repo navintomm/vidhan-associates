@@ -13,19 +13,19 @@ gsap.registerPlugin(ScrollTrigger);
 // Extended mock data with Unsplash images matching the Momento aesthetic
 const CAROUSEL_DATA = [
   {
-    image: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?q=80&w=2000",
+    image: "/images/insights/insight_property_v2.jpg",
     description: "Property disputes often involve complex historical claims and fragmented titles. A thorough understanding of local tenancy laws and inheritance frameworks is required to secure a clear title.",
   },
   {
-    image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2000",
+    image: "/images/insights/insight_liberty.jpg",
     description: "Personal liberty is a fundamental right. Bail conditions must balance the state's interest with the presumption of innocence. Understanding these nuances is critical for any accused.",
   },
   {
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000",
+    image: "/images/insights/insight_divorce.jpg",
     description: "Divorce proceedings under the Hindu Marriage Act require navigating emotional turbulence alongside rigid legal requirements regarding alimony, maintenance, and child custody.",
   },
   {
-    image: "https://images.unsplash.com/photo-1505664177941-be9eb38c6239?q=80&w=2000",
+    image: "/images/insights/insight_real_estate.jpg",
     description: "Real estate transactions are fraught with risk. Title verification ensures that buyers do not inherit encumbrances, litigation, or defective ownership from previous sellers.",
   },
 ];
@@ -100,20 +100,26 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
       updateCoverflow();
       window.addEventListener("scroll", updateCoverflow);
       
+      const getScrollAmount = () => {
+        if (!trackRef.current) return 0;
+        return -(trackRef.current.scrollWidth - window.innerWidth);
+      };
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
           scrub: 1,
           start: "top top",
-          end: () => `+=${trackRef.current?.offsetWidth || 0}`,
+          end: () => `+=${trackRef.current ? trackRef.current.scrollWidth - window.innerWidth : 0}`,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
           onUpdate: updateCoverflow,
         },
       });
 
       tl.to(trackRef.current, {
-        xPercent: -100 * (cards.length - 1) / cards.length,
+        x: getScrollAmount,
         ease: "none",
       });
 
@@ -154,7 +160,7 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         <div className="relative w-full h-[60vh] flex-shrink-0 overflow-hidden">
           <div 
             ref={trackRef} 
-            className="flex h-full px-6 md:px-12 gap-6 md:gap-8 items-center w-max"
+            className="flex h-full px-[7.5vw] lg:px-[30vw] gap-6 md:gap-8 items-center w-max"
           >
             {mergedPosts.map((post, i) => (
               <div 

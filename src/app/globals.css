@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-ink text-slate;
+    /* Background and text colors are handled in layout.tsx using tailwind classes */
   }
 
   /* Hide scrollbar globally for horizontal strips */

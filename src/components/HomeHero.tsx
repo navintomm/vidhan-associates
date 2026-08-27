@@ -56,57 +56,37 @@ export default function HomeHero({ locale }: { locale: string }) {
       />
 
       {/* ===== Content — Asymmetric Layout ===== */}
-      <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
-          {/* Left — Logo, Title & Description (anchored left) */}
-          <div className="md:w-[65%] max-w-3xl">
-            {/* Firm Logo & Caption */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
-              className="mb-14 -mt-[140px] md:-mt-[220px]"
-            >
-              <Image 
-                src="/logo.png.png" 
-                alt="Vidhan Law Chambers"
-                width={500}
-                height={200}
-                className="w-full max-w-[360px] md:max-w-[420px] h-auto object-contain drop-shadow-xl -ml-2"
-                priority
-              />
-              <p className="mt-4 text-gold/80 tracking-[0.2em] uppercase text-[10px] md:text-xs font-medium pl-1">
-                Advocates and Legal Consultants
-              </p>
-            </motion.div>
+      <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full h-full flex flex-col pt-32 pb-24 md:pb-32">
+        
+        {/* Center — Logo */}
+        <div className="flex-grow flex flex-col justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
+            className="w-full flex flex-col justify-start"
+          >
+            <Image 
+              src="/logo.png.png" 
+              alt="Vidhan Law Chambers"
+              width={600}
+              height={240}
+              className="w-full max-w-[400px] md:max-w-[500px] h-auto object-contain drop-shadow-xl -ml-2"
+              priority
+            />
+            <p className="mt-4 text-gold/80 tracking-[0.2em] uppercase text-[10px] md:text-xs font-medium pl-1">
+              Advocates and Legal Consultants
+            </p>
+          </motion.div>
+        </div>
 
-            {/* Hero Title */}
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: "easeOut", delay: 0.4 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-serif text-parchment leading-tight mb-6"
-            >
-              {t("title")}
-            </motion.h1>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-              className="text-lg md:text-xl lg:text-2xl text-parchment/70 font-sans leading-relaxed max-w-xl"
-            >
-              {t("description")}
-            </motion.p>
-          </div>
-
-          {/* Right — CTA */}
+        {/* Bottom — CTA */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-end gap-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.7 }}
-            className="flex-shrink-0 pb-16 md:pb-0"
+            className="flex-shrink-0 pb-8 md:pb-0"
           >
             <Link
               href={`/${locale}/contact`}
