@@ -47,14 +47,13 @@ export default function PracticeShowcase() {
         },
       });
 
-      // Initial States
-      gsap.set(".pillar-0", { y: "40vh", opacity: 0 }); // First pillar starts low
+      // Initial States - explicitly setting xPercent to -50 so GSAP preserves true centering!
+      gsap.set(".pillar-0", { y: "40vh", opacity: 0, xPercent: -50, x: 0 });
       
-      // All other pillars start off-screen to the right in the 3D depth
       const otherPillars = WORDS.slice(1).map((_, i) => `.pillar-${i + 1}`).join(", ");
-      gsap.set(otherPillars, { x: "50vw", z: -600, rotationY: 45, opacity: 0 });
+      gsap.set(otherPillars, { x: "50vw", xPercent: -50, z: -600, rotationY: 45, opacity: 0 });
 
-      // Phase 1: Pillar 0 rises (entire group: base, scale, and text)
+      // Phase 1: Pillar 0 rises
       tl.to(".pillar-0", { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
 
       // Hold Phase 0
@@ -97,10 +96,10 @@ export default function PracticeShowcase() {
           <div 
             key={i} 
             className={`absolute pillar-${i} bottom-[-10vh] md:bottom-[-5vh] h-[65vh] md:h-[70vh] lg:h-[80vh] flex flex-col justify-end items-center`}
-            style={{ left: '50%', transform: 'translateX(-50%)' }}
+            style={{ left: '50%' }}
           >
             {/* The Text hovering beside the pillar */}
-            <div className="absolute top-[35%] md:top-[40%] left-[80%] md:left-[75%] whitespace-nowrap z-40">
+            <div className="absolute top-[35%] md:top-[40%] left-[100%] ml-6 md:ml-10 whitespace-nowrap z-40">
               <h3 className="text-5xl md:text-6xl lg:text-8xl font-serif text-parchment drop-shadow-xl tracking-wider">
                 <span className="text-amber-500">{item.letter}</span>
                 {item.word}
