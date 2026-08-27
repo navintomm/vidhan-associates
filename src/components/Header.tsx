@@ -69,16 +69,16 @@ export default function Header({ locale }: { locale: string }) {
     <>
       <header
         className={`fixed top-0 w-full z-[9999] transition-all duration-500 ${
-        scrolled ? "bg-parchment/80 dark:bg-ink/80 backdrop-blur-md" : "bg-transparent"
+        scrolled ? "bg-parchment/80 dark:bg-ink/80 backdrop-blur-md shadow-sm" : "bg-transparent"
       }`}
     >
       {/* Top row — Nav links centered across full width */}
-      <div className="hidden lg:flex items-center justify-center gap-10 xl:gap-14 px-6 pt-5 pb-3">
+      <div className={`hidden lg:flex items-center justify-center gap-6 xl:gap-10 px-6 transition-all duration-500 ${scrolled ? 'pt-2 pb-1' : 'pt-5 pb-3'}`}>
         {navLinks.map((link) => (
           <Link
             key={link.key}
             href={`/${locale}${link.href === "/" ? "" : link.href}`}
-            className="text-sm font-medium tracking-[0.2em] uppercase text-ink/80 dark:text-parchment/80 hover:text-gold transition-colors duration-300"
+            className="text-xs xl:text-sm font-medium tracking-[0.2em] uppercase text-ink/80 dark:text-parchment/80 hover:text-gold transition-colors duration-300"
           >
             {tNav(link.key)}
           </Link>
@@ -86,16 +86,16 @@ export default function Header({ locale }: { locale: string }) {
       </div>
 
       {/* Bottom row — Logo (hidden on home hero) + Actions */}
-      <div className="container mx-auto px-6 lg:px-12 pb-4 flex items-center justify-between">
+      <div className={`container mx-auto px-6 lg:px-12 flex items-center justify-between transition-all duration-500 ${scrolled ? 'pb-2' : 'pb-4'}`}>
         {/* Logo */}
         <div className={`flex items-center transition-opacity duration-500 ${isHome && !scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
           <Link href={`/${locale}`} className="flex items-center">
             <Image
               src="/logo.png.png"
               alt="Vidhan Law Chambers Logo"
-              width={130}
-              height={46}
-              className="object-contain"
+              width={scrolled ? 100 : 130}
+              height={scrolled ? 35 : 46}
+              className="object-contain transition-all duration-500"
               priority
             />
           </Link>
@@ -106,7 +106,7 @@ export default function Header({ locale }: { locale: string }) {
           {isMounted && (
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="text-ink/60 dark:text-parchment/60 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full p-2"
+              className={`text-ink/60 dark:text-parchment/60 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full ${scrolled ? 'p-1.5' : 'p-2'}`}
               aria-label="Toggle Theme"
             >
               {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
@@ -115,23 +115,23 @@ export default function Header({ locale }: { locale: string }) {
 
           <button
             onClick={toggleLanguage}
-            className="text-xs font-medium tracking-widest uppercase text-ink/60 dark:text-parchment/60 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full px-4 py-1.5"
+            className={`text-[10px] md:text-xs font-medium tracking-widest uppercase text-ink/60 dark:text-parchment/60 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-3 py-1' : 'px-4 py-1.5'}`}
           >
             {locale === "en" ? "MAL" : "ENG"}
           </button>
 
           <Link
             href={`/${locale}/contact`}
-            className="hidden md:inline-block text-xs tracking-widest uppercase text-ink/80 dark:text-parchment/80 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full px-5 py-1.5"
+            className={`hidden md:inline-block text-[10px] md:text-xs tracking-widest uppercase text-ink/80 dark:text-parchment/80 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-4 py-1' : 'px-5 py-1.5'}`}
           >
             {tHeader("cta")}
           </Link>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden w-10 h-10 rounded-full border border-ink/20 dark:border-parchment/20 hover:border-gold/50 flex items-center justify-center text-ink/70 dark:text-parchment/70 hover:text-gold transition-colors"
+            className={`lg:hidden rounded-full border border-ink/20 dark:border-parchment/20 hover:border-gold/50 flex items-center justify-center text-ink/70 dark:text-parchment/70 hover:text-gold transition-colors ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
           >
-            {isOpen ? <X size={18} /> : <Menu size={18} />}
+            {isOpen ? <X size={16} /> : <Menu size={16} />}
           </button>
         </div>
       </div>
