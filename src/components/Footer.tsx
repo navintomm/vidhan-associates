@@ -33,7 +33,7 @@ export default function Footer({ locale }: { locale: string }) {
           </nav>
 
           {/* Firm Info & Copyright */}
-          <div className="mt-24 lg:mt-auto pb-8 max-w-xs">
+          <div className="mt-24 lg:mt-auto pb-8 lg:pb-32 max-w-xs">
             <p className="text-sm text-parchment/60 font-sans leading-relaxed mb-8">
               Law, strategy, and timing. An independent legal and advisory platform offering integrated, strategic counsel to our clients at their most critical decisions.
             </p>
@@ -87,7 +87,7 @@ export default function Footer({ locale }: { locale: string }) {
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-col mt-16 lg:mt-auto pb-4 lg:pb-12">
+          <div className="flex flex-col mt-16 lg:mt-auto pb-4 lg:pb-32">
             <div className="border-t border-parchment/20 py-6">
               <a href="#" className="text-base tracking-widest uppercase hover:text-gold transition-colors">LINKEDIN</a>
             </div>
