@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowUp } from "lucide-react";
 
-export default function BottomNav(_props: { locale: string }) {
+export default function BottomNav({}: { locale: string }) {
   const tQuotes = useTranslations("home.firmIntro");
   const [scrollProgress, setScrollProgress] = useState(0);
 
