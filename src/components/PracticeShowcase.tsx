@@ -54,12 +54,12 @@ export default function PracticeShowcase() {
       gsap.set(".pillar-1, .pillar-2, .pillar-3", { x: "50vw", z: -600, rotationY: 45, opacity: 0 });
       gsap.set(".text-1, .text-2, .text-3", { opacity: 0, y: 30 });
 
-      // Phase 1: Pillar 0 rises & Text 0 appears
-      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" })
-        .to(".text-0", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "<0.5");
+      // Phase 1: Pillar 0 rises (no text yet)
+      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
 
-      // Phase 2: Scale 0 drops on Pillar 0
-      tl.to(".scale-0", { y: 0, opacity: 1, duration: 1.5, ease: "bounce.out" });
+      // Phase 2: Scale 0 drops on Pillar 0 & Text 0 appears
+      tl.to(".scale-0", { y: 0, opacity: 1, duration: 1.5, ease: "bounce.out" }, "phase2")
+        .to(".text-0", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "phase2");
 
       // Hold Phase 0
       tl.to({}, { duration: 1 });
