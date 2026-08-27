@@ -40,7 +40,7 @@ export default function PracticeShowcase() {
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
-          scrub: 1,
+          scrub: 1.5, // Increased from 1 to 1.5 for extra cinematic smoothness
           start: "top top",
           end: "+=600%", // 6 screens of scrolling duration for 6 pillars
           anticipatePin: 1,
