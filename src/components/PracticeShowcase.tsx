@@ -47,11 +47,12 @@ export default function PracticeShowcase() {
         },
       });
 
-      // Initial States - explicitly setting xPercent to -50 so GSAP preserves true centering!
-      gsap.set(".pillar-0", { y: "40vh", opacity: 0, xPercent: -50, x: 0 });
+      // Initial States - explicitly setting xPercent to -71 so GSAP preserves visual centering 
+      // because the pillar image's visual center is at 71% of its width.
+      gsap.set(".pillar-0", { y: "40vh", opacity: 0, xPercent: -71, x: 0 });
       
       const otherPillars = WORDS.slice(1).map((_, i) => `.pillar-${i + 1}`).join(", ");
-      gsap.set(otherPillars, { x: "50vw", xPercent: -50, z: -600, rotationY: 45, opacity: 0 });
+      gsap.set(otherPillars, { x: "50vw", xPercent: -71, z: -600, rotationY: 45, opacity: 0 });
 
       // Phase 1: Pillar 0 rises
       tl.to(".pillar-0", { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
@@ -95,25 +96,25 @@ export default function PracticeShowcase() {
         {WORDS.map((item, i) => (
           <div 
             key={i} 
-            className={`absolute pillar-${i} bottom-[-5vh] md:bottom-0 h-[45vh] md:h-[50vh] lg:h-[55vh] flex flex-col justify-end items-center`}
+            className={`absolute pillar-${i} bottom-[2vh] md:bottom-[5vh] h-[35vh] md:h-[40vh] lg:h-[45vh] flex flex-col justify-end items-center`}
             style={{ left: '50%' }}
           >
             {/* The Text hovering exactly on top of everything */}
-            <div className="absolute bottom-[135%] md:bottom-[130%] left-1/2 -translate-x-1/2 whitespace-nowrap z-40 text-center">
-              <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif text-parchment drop-shadow-xl tracking-wider">
+            <div className="absolute bottom-[100%] left-[71%] -translate-x-1/2 mb-[22vh] md:mb-[26vh] lg:mb-[30vh] whitespace-nowrap z-40 text-center">
+              <h3 className="text-5xl md:text-6xl lg:text-7xl font-serif text-parchment drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] tracking-wider">
                 <span className="text-amber-500">{item.letter}</span>
                 {item.word}
               </h3>
             </div>
 
             {/* The Scale of Justice */}
-            <div className="absolute bottom-[96%] left-[71%] -translate-x-1/2 w-[70%] md:w-[80%] lg:w-[90%] z-30 flex flex-col items-center">
+            <div className="absolute bottom-[96%] left-[71%] -translate-x-1/2 w-[110%] md:w-[120%] lg:w-[130%] z-30 flex flex-col items-center">
               <Image
                 src="/images/icons/scale-of-justice-transparent.png"
                 alt="Scale of Justice"
                 width={300}
                 height={300}
-                className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
+                className="w-full h-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)] relative z-10 pointer-events-none"
               />
               <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[40%] h-[8px] bg-black/80 blur-[5px] rounded-[100%] z-0"></div>
             </div>
@@ -124,7 +125,7 @@ export default function PracticeShowcase() {
               alt="Ashoka Pillar"
               width={800}
               height={1420}
-              className="w-auto h-full object-contain object-bottom relative z-10"
+              className="w-auto h-full object-contain object-bottom relative z-10 drop-shadow-[0_10px_25px_rgba(0,0,0,0.9)] pointer-events-none"
             />
           </div>
         ))}
