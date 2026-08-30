@@ -192,19 +192,19 @@ export default function PracticeAreasStack() {
                   <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-transparent" />
                   
                   {/* Card Content */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
-                    <div className="w-12 h-12 rounded-full bg-gold/10 backdrop-blur-md flex items-center justify-center border border-gold/30 text-gold mb-6 group-hover:scale-110 transition-transform duration-500">
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10">
+                    <div className="w-12 h-12 rounded-full bg-gold/10 backdrop-blur-md flex items-center justify-center border border-gold/30 text-gold mb-4 group-hover:scale-110 transition-transform duration-500">
                       <Icon size={24} />
                     </div>
                     <p className="text-sm tracking-[0.2em] uppercase text-gold mb-2">{item.category}</p>
-                    <h3 className={`${locale === "ml" ? "text-xl md:text-2xl leading-snug" : "text-2xl md:text-3xl leading-snug"} font-serif text-parchment mb-4 break-words`}>
+                    <h3 className={`${locale === "ml" ? "text-xl md:text-2xl leading-snug mb-2 md:mb-4" : "text-2xl md:text-3xl leading-snug mb-4"} font-serif text-parchment break-words`}>
                       {item.title}
                     </h3>
                     <p className="text-parchment/70 font-sans line-clamp-2 md:line-clamp-3">
                       {item.description}
                     </p>
                     
-                    <div className="mt-8 flex items-center gap-2 text-xs uppercase tracking-widest text-parchment group-hover:text-gold transition-colors">
+                    <div className="mt-6 flex items-center gap-2 text-xs uppercase tracking-widest text-parchment group-hover:text-gold transition-colors">
                       <span>{t("viewDetails")}</span>
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -256,7 +256,7 @@ export default function PracticeAreasStack() {
               </div>
 
               {/* Right Content Pane */}
-              <div className="w-full md:w-1/2 h-full flex flex-col justify-center p-8 md:p-16 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className="w-full md:w-1/2 h-full flex flex-col justify-start py-8 px-6 md:py-16 md:px-12 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <div className="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center border border-gold/30 text-gold mb-8 flex-shrink-0">
                   <activeData.icon size={32} />
                 </div>

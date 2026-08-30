@@ -58,6 +58,20 @@ export default function HomeHero({ locale }: { locale: string }) {
       {/* ===== Content — Asymmetric Layout ===== */}
       <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full h-full flex flex-col pt-32 pb-24 md:pb-32">
         
+        {/* Top — Motto */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="w-full flex flex-col items-center justify-center text-center"
+        >
+          <span className="text-gold/40 tracking-[0.4em] uppercase text-xs md:text-sm font-sans mb-1">
+            The
+          </span>
+          <p className="text-gold/60 tracking-[0.4em] uppercase text-xl md:text-3xl font-sans font-light">
+            Pursuit of Justice
+          </p>
+        </motion.div>
         {/* Center — Logo */}
         <div className="flex-grow flex flex-col justify-center">
           <motion.div
@@ -66,22 +80,24 @@ export default function HomeHero({ locale }: { locale: string }) {
             transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
             className="w-full flex flex-col justify-start"
           >
-            <Image 
-              src="/logo.png.png" 
-              alt="Vidhan Law Chambers"
-              width={600}
-              height={240}
-              className="w-full max-w-[400px] md:max-w-[500px] h-auto object-contain drop-shadow-xl -ml-2"
-              priority
-            />
-            <p className="mt-4 text-gold/80 tracking-[0.2em] uppercase text-[10px] md:text-xs font-medium pl-1">
-              Advocates and Legal Consultants
-            </p>
+            <div className="w-full max-w-[400px] md:max-w-[500px] -ml-2 flex flex-col items-center">
+              <Image 
+                src="/logo.png.png" 
+                alt="Vidhan Law Chambers"
+                width={600}
+                height={240}
+                className="w-full h-auto object-contain drop-shadow-xl"
+                priority
+              />
+              <p className="mt-4 text-gold/80 tracking-[0.2em] uppercase text-[10px] md:text-xs font-medium text-center">
+                Advocates and Legal Consultants
+              </p>
+            </div>
           </motion.div>
         </div>
 
-        {/* Bottom — CTA */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-end gap-10">
+        {/* Bottom */}
+        <div className="flex flex-col md:flex-row md:items-end justify-end gap-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
