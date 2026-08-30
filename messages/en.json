@@ -111,6 +111,18 @@
       "title": "Principled Counsel.\nUnwavering Advocacy.",
       "scrollDown": "SCROLL DOWN"
     },
+    "legacy": {
+      "heading": "Our Legacy & Vision",
+      "body1": "Vidhan Law Chambers was founded with a singular purpose: to provide accessible, high-quality legal representation grounded in the principles of integrity and justice. With years of combined experience in the Indian legal system, our firm has established itself as a trusted name in litigation and corporate advisory.",
+      "body2": "We believe in a client-centric approach, understanding that every case is unique and requires a tailored strategy. Our commitment extends beyond the courtroom; we strive to be long-term partners in our clients' success and well-being.",
+      "courtsLabel": "Courts of Practice",
+      "courts": [
+        "High Court of Kerala at Ernakulam",
+        "District Courts (Thrissur, Ernakulam)",
+        "Debt Recovery Tribunal",
+        "National Company Law Tribunal (NCLT)"
+      ]
+    },
     "story": {
       "label": "Our Story",
       "heading": "Founded on Principle,\nBuilt on Trust.",
@@ -161,6 +173,311 @@
           "bio": "A compassionate and strategic family law practitioner, [Name] guides clients through divorce, custody, and domestic matters with sensitivity and resolve, ensuring their interests are protected at every stage."
         }
       ]
+    }
+  },
+  "experience": {
+    "hero": {
+      "label": "Case Experience",
+      "title": "Proven Track Record",
+      "intro": "Our legal practice is grounded in meticulous preparation, strategic clarity, and principled advocacy. Every matter is handled with discretion, diligence, and a results-oriented approach, ensuring that clients receive effective and ethical representation."
+    },
+    "methodology": {
+      "heading": "Our Methodology",
+      "description": "At Vidhan Law Chambers, we approach each matter as a unique legal challenge requiring a tailored strategy. Our methodology includes:",
+      "steps": [
+        {
+          "title": "Client Consultation",
+          "description": "Understanding the factual background, legal issues, and objectives of the client."
+        },
+        {
+          "title": "Factual & Documentary Analysis",
+          "description": "Detailed scrutiny of records, evidence, statutory documents, and procedural compliance."
+        },
+        {
+          "title": "Legal Research & Precedent Analysis",
+          "description": "Identification of applicable statutes, judicial precedents, and constitutional principles."
+        },
+        {
+          "title": "Strategic Planning",
+          "description": "Formulation of litigation or remedial strategy with a focus on timely and effective relief."
+        },
+        {
+          "title": "Courtroom & Procedural Execution",
+          "description": "Precise drafting, structured arguments, and effective representation before courts and authorities."
+        }
+      ]
+    },
+    "matters": {
+      "heading": "Representative Matters",
+      "confidentialityNote": "(Client identities and sensitive details are strictly confidential.)",
+      "items": [
+        {
+          "title": "Civil & Property Litigation",
+          "description": "Handled complex civil disputes involving ownership rights, apartment association governance, mandatory injunctions, and protection of property interests. Represented clients before civil courts seeking restoration of lawful rights and prevention of arbitrary actions."
+        },
+        {
+          "title": "Criminal Defense & Bail Matters",
+          "description": "Represented accused persons in serious criminal matters, including cases under special statutes. Successfully pursued regular bail applications by highlighting procedural violations, absence of prima facie evidence, and constitutional safeguards."
+        },
+        {
+          "title": "Family & Matrimonial Matters",
+          "description": "Acted in maintenance proceedings and related family disputes before the Family Court, addressing financial neglect, dependency, and protection of dignity and livelihood of the affected parties."
+        },
+        {
+          "title": "Constitutional & Writ Jurisdiction",
+          "description": "Filed and argued writ petitions before the High Court challenging arbitrary actions of statutory authorities, including:\n• Illegal freezing of bank accounts without notice or proportionality\n• Violation of fundamental rights and binding judicial precedents\nSecured judicial intervention to restore legality and procedural fairness."
+        },
+        {
+          "title": "Taxation & Commercial Writs",
+          "description": "Represented corporate entities before the High Court in income tax matters involving:\n• Arbitrary assessments\n• Improper application of accounting standards\n• Non-speaking appellate orders\nChallenged violations of statutory provisions and principles of natural justice."
+        },
+        {
+          "title": "Child Welfare & Custody Matters",
+          "description": "Handled sensitive child welfare cases involving unlawful institutional custody. Invoked provisions of the Juvenile Justice Act and constitutional remedies to protect the best interests, dignity, and rights of minors and natural guardians."
+        }
+      ]
+    }
+  },
+  "careers": {
+    "hero": {
+      "title": "Join Our Team",
+      "description": "At Vidhan Law Chambers, we believe in nurturing legal talent and building a team of dedicated professionals. We are always looking for passionate individuals who share our commitment to justice, integrity, and excellence."
+    },
+    "opportunities": {
+      "heading": "Current Opportunities",
+      "roles": [
+        {
+          "title": "Junior Advocate",
+          "location": "Both Offices",
+          "description": "We are looking for qualified advocates or law graduates aspiring to build a career in litigation. Junior Advocates will work closely with senior advocates on case preparation, drafting, research, and court appearances.",
+          "requirementsTitle": "Requirements",
+          "requirements": [
+            "LLB degree from a recognized university",
+            "Enrolled or eligible for enrollment with the Bar Council",
+            "0-3 years of experience in litigation (freshers may apply)",
+            "Strong legal research, drafting, and analytical skills"
+          ],
+          "offerTitle": "What We Offer",
+          "offers": [
+            "Hands-on litigation experience across multiple forums",
+            "Mentorship and professional development",
+            "Competitive remuneration package",
+            "Opportunity to handle independent cases under supervision"
+          ]
+        },
+        {
+          "title": "Clerk",
+          "location": "Ernakulam Office",
+          "description": "We are seeking a dedicated and organized clerk to manage administrative and clerical duties at our Ernakulam office.",
+          "requirementsTitle": "Requirements",
+          "requirements": [
+            "Minimum 12th pass or graduation",
+            "Good typing speed (Malayalam & English)",
+            "Prior clerical or administrative experience preferred",
+            "Basic computer knowledge (MS Office, emails)"
+          ],
+          "offerTitle": "What We Offer",
+          "offers": [
+            "Stable work environment",
+            "Regular office hours",
+            "Competitive salary based on experience",
+            "Supportive team culture"
+          ]
+        }
+      ]
+    },
+    "apply": {
+      "heading": "How to Apply",
+      "description": "If you are interested in any of the above positions, please send your resume along with a cover letter to our email address. Clearly mention the position you are applying for in the subject line.",
+      "email": "careers@vidhanlaw.com",
+      "subjectFormat": "Subject Line Format: \"Application for [Position Name] - [Your Name]\"",
+      "instructions": [
+        "For internships or advocate positions, attach your resume, academic certificates, and Bar Council enrollment details (if applicable).",
+        "For clerk positions, include your typing speed (Malayalam & English) and relevant experience."
+      ],
+      "note": "We review all applications carefully and will contact shortlisted candidates for further discussion. Only serious applicants need apply.",
+      "cta": "Contact Us for More Information"
+    }
+  },
+  "practiceAreasPage": {
+    "header": {
+      "subtitle": "Our Expertise",
+      "title": "Practice\nAreas",
+      "scroll": "Scroll"
+    },
+    "viewDetails": "View Details",
+    "overview": "Overview",
+    "areas": [
+      {
+        "id": "pa-01",
+        "category": "Practice Area",
+        "title": "Civil Litigation",
+        "description": "Resolving property disputes, recovery suits, injunctions, and succession matters.",
+        "detailedBrief": "We offer comprehensive representation in civil courts for property disputes, recovery suits, injunctions, and succession matters. Our approach combines rigorous legal analysis with practical solutions to resolve conflicts efficiently and protect our clients' interests in complex civil litigation."
+      },
+      {
+        "id": "pa-02",
+        "category": "Practice Area",
+        "title": "Criminal Defense",
+        "description": "Representation in bail hearings, criminal trials, appeals, and quashing petitions.",
+        "detailedBrief": "Our criminal defense practice provides robust representation in bail hearings, criminal trials, appeals, and quashing petitions. We are committed to protecting our clients' rights at every stage of the criminal justice process, ensuring a fair trial and rigorous defense."
+      },
+      {
+        "id": "pa-03",
+        "category": "Practice Area",
+        "title": "Corporate Law",
+        "description": "Mergers & acquisitions, contract drafting, insolvency proceedings, and compliance.",
+        "detailedBrief": "Our corporate practice advises businesses on mergers & acquisitions, contract drafting, insolvency proceedings, and regulatory compliance. We help enterprises navigate complex corporate landscapes with confidence, minimizing risk and facilitating strategic growth."
+      },
+      {
+        "id": "pa-04",
+        "category": "Practice Area",
+        "title": "Family Law",
+        "description": "Divorce proceedings, child custody, alimony, and domestic violence cases.",
+        "detailedBrief": "We handle sensitive family matters with compassion and discretion, including divorce proceedings, child custody, alimony, and domestic violence cases. Our priority is to protect our clients' interests and well-being while minimizing emotional distress during challenging times."
+      },
+      {
+        "id": "pa-05",
+        "category": "Practice Area",
+        "title": "Real Estate & Property",
+        "description": "Due diligence, registration, landlord-tenant disputes, and RERA matters.",
+        "detailedBrief": "From due diligence and property registration to landlord-tenant disputes and RERA matters, our real estate team provides comprehensive legal support. We ensure that property transactions are secure and property-related disputes are resolved effectively."
+      },
+      {
+        "id": "pa-06",
+        "category": "Practice Area",
+        "title": "Contract & Commercial",
+        "description": "Drafting agreements, negotiating terms, and handling breach of contract disputes.",
+        "detailedBrief": "We assist clients in drafting agreements, negotiating terms, and handling breach of contract disputes. Our commercial law expertise ensures that your business agreements are legally sound, enforceable, and aligned with your commercial objectives."
+      },
+      {
+        "id": "pa-07",
+        "category": "Practice Area",
+        "title": "Document Registration",
+        "description": "Assistance with property registration, marriage registration, and other statutory document filings.",
+        "detailedBrief": "Our firm provides meticulous assistance with property registration, marriage registration, and other statutory document filings. We guide clients through complex bureaucratic procedures, ensuring full compliance with legal requirements and preventing future complications."
+      },
+      {
+        "id": "pa-08",
+        "category": "Practice Area",
+        "title": "Legal Opinion",
+        "description": "Expert legal opinions on complex matters, regulatory compliance, and potential disputes.",
+        "detailedBrief": "We provide expert, well-researched legal opinions on complex matters, regulatory compliance, and potential disputes. Our clear and actionable advice helps clients make informed decisions, mitigate legal risks, and plan their strategies effectively."
+      },
+      {
+        "id": "pa-09",
+        "category": "Practice Area",
+        "title": "Writs",
+        "description": "Constitutional remedies before the High Court challenging illegal actions of authorities.",
+        "detailedBrief": "Our constitutional law practice specializes in filing writs before the High Court, challenging illegal or arbitrary actions of government authorities, resolving service law disputes, and aggressively protecting our clients' fundamental rights against state overreach."
+      }
+    ]
+  },
+  "teamGallery": {
+    "members": [
+      {
+        "id": "rohit-s-madasseril",
+        "name": "Adv. Rohit S. Madasseril",
+        "role": "Advocate",
+        "bio": "Adv. Rohit S. Madasseril is a dedicated legal professional at Vidhan Law Chambers, committed to upholding the values of law with integrity and making justice accessible to those who seek it. (+91 7907139328)"
+      },
+      {
+        "id": "antony-george-mavumkal",
+        "name": "Adv. Antony George Mavumkal",
+        "role": "Advocate",
+        "bio": "Adv. Antony George Mavumkal brings strategic insight and unwavering dedication to his practice at Vidhan Law Chambers, ensuring comprehensive legal counsel for our clients. (+91 9633749958)"
+      },
+      {
+        "id": "rones-v-anil",
+        "name": "Adv. Rones V. Anil",
+        "role": "Advocate",
+        "bio": "Adv. Rones V. Anil combines rigorous analytical skills with a passionate approach to justice, providing clients with steadfast representation in complex matters. (+91 8606723820)"
+      }
+    ]
+  },
+  "contactPage": {
+    "hero": {
+      "subtitle": "Get in Touch",
+      "title": "Book a Consultation.",
+      "description": "Tell us about your matter. We respond within one business day. All enquiries are treated with complete confidentiality."
+    },
+    "form": {
+      "successTitle": "Your enquiry has been received.",
+      "successDesc": "We will review your matter and get back to you within one business day. For urgent matters, please use the WhatsApp button below.",
+      "submitAnother": "Submit another enquiry →",
+      "fields": {
+        "fullName": "Full Name *",
+        "phone": "Phone *",
+        "email": "Email",
+        "matter": "Nature of Matter *",
+        "date": "Preferred Date",
+        "time": "Preferred Time",
+        "message": "Brief Description *"
+      },
+      "placeholders": {
+        "fullName": "Your full name",
+        "phone": "+91 98765 43210",
+        "email": "you@example.com",
+        "message": "Briefly describe your legal matter…"
+      },
+      "buttons": {
+        "whatsapp": "Send via WhatsApp",
+        "email": "Send by Email",
+        "sending": "Sending…"
+      },
+      "errorMsg": "Something went wrong. Please try WhatsApp instead."
+    },
+    "info": {
+      "ernakulamTitle": "Ernakulam Office",
+      "ernakulamAddress": "New Emerald Building, Power House Road,<br />Near High Court of Kerala,<br />Kochi - 682018",
+      "ernakulamBtn": "Get Directions to Ernakulam Office",
+      "thrissurTitle": "Thrissur Office",
+      "thrissurAddress": "S21, 1st Floor, Alukkas Castle,<br />Ayyanthole P.O.,<br />Thrissur - 680003",
+      "thrissurBtn": "Get Directions to Thrissur Office",
+      "directTitle": "Direct Contact",
+      "phonesLabel": "Phones",
+      "emailLabel": "Email",
+      "confidentiality": "All consultations are strictly confidential. No information shared with us is disclosed to any third party without your explicit consent."
+    },
+    "matters": [
+      "Civil Litigation",
+      "Criminal Defence",
+      "Family & Matrimonial",
+      "Property & Real Estate",
+      "Labour & Employment",
+      "Corporate & Business",
+      "Other"
+    ]
+  },
+  "footer": {
+    "nav": {
+      "HOME": "HOME",
+      "ABOUT": "ABOUT",
+      "PRACTICE AREAS": "PRACTICE AREAS",
+      "CASE EXPERIENCE": "CASE EXPERIENCE",
+      "INSIGHTS": "INSIGHTS",
+      "TEAM": "TEAM",
+      "CAREERS": "CAREERS",
+      "CONTACT": "CONTACT"
+    },
+    "info": {
+      "description": "Law, strategy, and timing. An independent legal and advisory platform offering integrated, strategic counsel to our clients at their most critical decisions.",
+      "copyright": "© {year} Vidhan Law Chambers. All rights reserved."
+    },
+    "backToTop": "BACK TO TOP",
+    "contact": {
+      "phoneTitle": "PHONE NUMBERS",
+      "phone1": "+91 7907139328 (Adv. Rohit)",
+      "phone2": "+91 9633749958 (Adv. Antony)",
+      "phone3": "+91 8606723820 (Adv. Rones)",
+      "ernakulamTitle": "ERNAKULAM OFFICE",
+      "ernakulamAddress": "New Emerald Building, Power House Road, Near High Court of Kerala, Kochi - 682018",
+      "thrissurTitle": "THRISSUR OFFICE",
+      "thrissurAddress": "S21, 1st Floor, Alukkas Castle, Ayyanthole P.O., Thrissur - 680003"
+    },
+    "social": {
+      "linkedin": "LINKEDIN",
+      "x": "X.COM"
     }
   },
   "whatsapp": {

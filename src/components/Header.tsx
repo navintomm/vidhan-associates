@@ -113,12 +113,37 @@ export default function Header({ locale }: { locale: string }) {
             </button>
           )}
 
-          <button
-            onClick={toggleLanguage}
-            className={`text-[10px] md:text-xs font-medium tracking-widest uppercase text-ink/60 dark:text-parchment/60 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-3 py-1' : 'px-4 py-1.5'}`}
-          >
-            {locale === "en" ? "MAL" : "ENG"}
-          </button>
+          {/* Language Switcher */}
+          <div className="relative flex items-center justify-center">
+            <button
+              onClick={toggleLanguage}
+              className={`text-[10px] md:text-xs font-medium tracking-widest uppercase text-ink/60 dark:text-parchment/60 hover:text-gold dark:hover:text-gold transition-colors border border-ink/20 dark:border-parchment/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-3 py-1' : 'px-4 py-1.5'}`}
+            >
+              {locale === "en" ? "MAL" : "ENG"}
+            </button>
+            
+            <AnimatePresence>
+              {locale === "en" && isMounted && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ delay: 1 }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-4 pointer-events-none drop-shadow-md z-[10001]"
+                >
+                  <motion.div
+                    animate={{ y: [0, 4, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="relative bg-white text-ink text-[11px] font-medium whitespace-nowrap px-3 py-1.5 rounded-[4px]"
+                  >
+                    {/* Tooltip triangle */}
+                    <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-white"></div>
+                    മലയാളത്തിൽ വായിക്കുക
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           <Link
             href={`/${locale}/contact`}

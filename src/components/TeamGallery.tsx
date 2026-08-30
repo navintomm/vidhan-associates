@@ -4,36 +4,31 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Link as LinkIcon, Mail } from "lucide-react";
 import Image from "next/image";
+import { useTranslations, useLocale } from "next-intl";
 
-// Fallback Team Data
-const FALLBACK_TEAM_MEMBERS = [
-  {
-    id: "rohit-s-madasseril",
-    name: "Adv. Rohit S. Madasseril",
-    role: "Advocate",
-    bio: "Adv. Rohit S. Madasseril is a dedicated legal professional at Vidhan Law Chambers, committed to upholding the values of law with integrity and making justice accessible to those who seek it. (+91 7907139328)",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000",
-  },
-  {
-    id: "antony-george-mavumkal",
-    name: "Adv. Antony George Mavumkal",
-    role: "Advocate",
-    bio: "Adv. Antony George Mavumkal brings strategic insight and unwavering dedication to his practice at Vidhan Law Chambers, ensuring comprehensive legal counsel for our clients. (+91 9633749958)",
-    image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1000",
-  },
-  {
-    id: "rones-v-anil",
-    name: "Adv. Rones V. Anil",
-    role: "Advocate",
-    bio: "Adv. Rones V. Anil combines rigorous analytical skills with a passionate approach to justice, providing clients with steadfast representation in complex matters. (+91 8606723820)",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1000",
-  },
-];
+const IMAGES: Record<string, string> = {
+  "rohit-s-madasseril": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000",
+  "antony-george-mavumkal": "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1000",
+  "rones-v-anil": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1000",
+};
 
 export default function TeamGallery() {
   const [activeMember, setActiveMember] = useState<string | null>(null);
-
-  const members = FALLBACK_TEAM_MEMBERS;
+  
+  const t = useTranslations("teamGallery");
+  const locale = useLocale();
+  type TeamMember = {
+    id: string;
+    name: string;
+    role: string;
+    bio: string;
+  };
+  const rawMembers = t.raw("members") as Array<TeamMember>;
+  
+  const members = rawMembers.map((m) => ({
+    ...m,
+    image: IMAGES[m.id],
+  }));
 
   // Lock body scroll when modal is active
   useEffect(() => {
@@ -82,7 +77,7 @@ export default function TeamGallery() {
 
               {/* Text Information */}
               <motion.div layoutId={`text-${member.id}`} className="flex flex-col">
-                <h3 className="text-sm md:text-2xl font-serif text-parchment group-hover:text-gold transition-colors truncate">
+                <h3 className={`${locale === "ml" ? "text-xs md:text-xl" : "text-sm md:text-2xl"} font-serif text-parchment group-hover:text-gold transition-colors truncate break-words whitespace-normal`}>
                   {member.name}
                 </h3>
                 <p className="text-[0.6rem] md:text-sm tracking-wider md:tracking-widest uppercase text-parchment/50 mt-1 md:mt-2 truncate">
@@ -143,7 +138,7 @@ export default function TeamGallery() {
                 layoutId={`text-${activeData.id}`}
                 className="w-full md:w-1/2 flex flex-col justify-center p-8 md:p-0 pb-24 md:pb-0"
               >
-                <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif text-parchment leading-tight mb-2">
+                <h2 className={`${locale === "ml" ? "text-2xl md:text-4xl lg:text-5xl" : "text-4xl md:text-5xl lg:text-7xl"} font-serif text-parchment leading-tight mb-2 break-words`}>
                   {activeData.name}
                 </h2>
                 <p className="text-sm md:text-base tracking-[0.2em] uppercase text-gold mb-8">

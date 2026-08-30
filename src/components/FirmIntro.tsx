@@ -40,7 +40,10 @@ export default function FirmIntro({ locale }: { locale: string }) {
               <p className="text-xs md:text-sm tracking-wide-2xl uppercase text-gold/60 mb-6">
                 Guiding Principle
               </p>
-              <blockquote className="text-5xl md:text-6xl lg:text-7xl font-serif text-ink leading-tight italic mb-6 transition-opacity duration-500" style={{ opacity: isMounted ? 1 : 0.4 }}>
+              <blockquote 
+                className={`${locale === "ml" ? "text-3xl md:text-4xl lg:text-5xl leading-relaxed" : "text-5xl md:text-6xl lg:text-7xl leading-tight"} font-serif text-ink italic mb-6 transition-opacity duration-500 break-words`} 
+                style={{ opacity: isMounted ? 1 : 0.4 }}
+              >
                 &ldquo;{dailyQuote.text}&rdquo;
               </blockquote>
               <p className="text-sm tracking-wide-xl uppercase text-mist transition-opacity duration-500" style={{ opacity: isMounted ? 1 : 0.4 }}>
@@ -59,7 +62,7 @@ export default function FirmIntro({ locale }: { locale: string }) {
             <p className="text-xs md:text-sm tracking-wide-2xl uppercase text-gold/60 mb-6">
               The Firm
             </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-ink leading-tight mb-8">
+            <h2 className={`${locale === "ml" ? "text-2xl md:text-3xl lg:text-4xl leading-relaxed" : "text-3xl md:text-4xl lg:text-5xl leading-tight"} font-serif text-ink mb-8 break-words`}>
               {t("heading")}
             </h2>
             <p className="text-slate/70 font-sans leading-relaxed mb-5 text-lg">

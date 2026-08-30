@@ -3,8 +3,11 @@
 import { ArrowUp } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function Footer({ locale }: { locale: string }) {
+  const t = useTranslations("footer");
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -25,20 +28,20 @@ export default function Footer({ locale }: { locale: string }) {
                   item === 'HOME' ? `/${locale}` : 
                   `/${locale}/${item.toLowerCase().replace(' ', '-')}`
                 }
-                className="text-xl lg:text-2xl tracking-[0.3em] font-serif hover:text-gold transition-colors w-fit"
+                className={`${locale === "ml" ? "text-lg lg:text-xl break-words whitespace-normal" : "text-xl lg:text-2xl"} tracking-[0.3em] font-serif hover:text-gold transition-colors w-fit max-w-[200px] md:max-w-none`}
               >
-                {item}
+                {t(`nav.${item}`)}
               </Link>
             ))}
           </nav>
 
           {/* Firm Info & Copyright */}
-          <div className="mt-24 lg:mt-auto pb-8 lg:pb-32 max-w-xs">
+          <div className="mt-24 lg:mt-auto pb-8 lg:pb-32 max-w-xs md:max-w-sm">
             <p className="text-sm text-parchment/60 font-sans leading-relaxed mb-8">
-              Law, strategy, and timing. An independent legal and advisory platform offering integrated, strategic counsel to our clients at their most critical decisions.
+              {t("info.description")}
             </p>
             <div className="flex items-center gap-3 text-xs text-parchment/40">
-              <p>&copy; {new Date().getFullYear()} Vidhan Law Chambers. All rights reserved.</p>
+              <p>{t("info.copyright", { year: new Date().getFullYear() })}</p>
             </div>
           </div>
         </div>
@@ -50,7 +53,7 @@ export default function Footer({ locale }: { locale: string }) {
             className="flex flex-col items-center gap-4 hover:text-gold transition-colors group z-20 mb-12 lg:mt-32 lg:mb-0"
           >
             <ArrowUp size={24} strokeWidth={1} className="group-hover:-translate-y-2 transition-transform" />
-            <span className="text-sm tracking-[0.3em] uppercase">BACK TO TOP</span>
+            <span className="text-sm tracking-[0.3em] uppercase">{t("backToTop")}</span>
           </button>
 
           {/* Massive Scale Image anchored to bottom */}
@@ -71,28 +74,28 @@ export default function Footer({ locale }: { locale: string }) {
           {/* Contact Details */}
           <div className="flex flex-col mt-8">
             <div className="border-t border-parchment/20 py-6">
-              <p className="text-xs tracking-widest uppercase text-parchment/50 mb-2">PHONE NUMBERS</p>
-              <p className="text-base tracking-widest mb-1">+91 7907139328 (Adv. Rohit)</p>
-              <p className="text-base tracking-widest mb-1">+91 9633749958 (Adv. Antony)</p>
-              <p className="text-base tracking-widest">+91 8606723820 (Adv. Rones)</p>
+              <p className="text-xs tracking-widest uppercase text-parchment/50 mb-2 break-words">{t("contact.phoneTitle")}</p>
+              <p className="text-base tracking-widest mb-1 break-words">{t("contact.phone1")}</p>
+              <p className="text-base tracking-widest mb-1 break-words">{t("contact.phone2")}</p>
+              <p className="text-base tracking-widest break-words">{t("contact.phone3")}</p>
             </div>
             <div className="border-t border-parchment/20 py-6">
-              <p className="text-xs tracking-widest uppercase text-parchment/50 mb-2">ERNAKULAM OFFICE</p>
-              <p className="text-base tracking-widest leading-relaxed">New Emerald Building, Power House Road, Near High Court of Kerala, Kochi - 682018</p>
+              <p className="text-xs tracking-widest uppercase text-parchment/50 mb-2 break-words">{t("contact.ernakulamTitle")}</p>
+              <p className="text-base tracking-widest leading-relaxed break-words">{t("contact.ernakulamAddress")}</p>
             </div>
             <div className="border-t border-b border-parchment/20 py-6">
-              <p className="text-xs tracking-widest uppercase text-parchment/50 mb-2">THRISSUR OFFICE</p>
-              <p className="text-base tracking-widest leading-relaxed">S21, 1st Floor, Alukkas Castle, Ayyanthole P.O., Thrissur - 680003</p>
+              <p className="text-xs tracking-widest uppercase text-parchment/50 mb-2 break-words">{t("contact.thrissurTitle")}</p>
+              <p className="text-base tracking-widest leading-relaxed break-words">{t("contact.thrissurAddress")}</p>
             </div>
           </div>
 
           {/* Social Links */}
           <div className="flex flex-col mt-16 lg:mt-auto pb-4 lg:pb-32">
             <div className="border-t border-parchment/20 py-6">
-              <a href="#" className="text-base tracking-widest uppercase hover:text-gold transition-colors">LINKEDIN</a>
+              <a href="#" className="text-base tracking-widest uppercase hover:text-gold transition-colors">{t("social.linkedin")}</a>
             </div>
             <div className="border-t border-b border-parchment/20 py-6">
-              <a href="#" className="text-base tracking-widest uppercase hover:text-gold transition-colors">X.COM</a>
+              <a href="#" className="text-base tracking-widest uppercase hover:text-gold transition-colors">{t("social.x")}</a>
             </div>
           </div>
 
