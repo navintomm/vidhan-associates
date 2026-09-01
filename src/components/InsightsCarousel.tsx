@@ -169,14 +169,21 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
     <>
       <section 
         ref={sectionRef} 
-        className="relative w-full h-screen bg-[#040814] text-white flex flex-col justify-between py-12 md:py-16 overflow-hidden select-none z-10"
+        className="relative w-full h-screen bg-parchment text-ink flex flex-col justify-between py-12 md:py-16 overflow-hidden select-none z-10 border-t border-gold/10"
       >
         {/* Top Header */}
         <div className="container mx-auto px-6 text-center flex-shrink-0 z-20">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-serif tracking-[0.45em] uppercase text-white/90 mb-3 pl-[0.45em]">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <span className="w-8 h-0.5 bg-gold" />
+            <span className="text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-gold">
+              Legal Perspectives
+            </span>
+            <span className="w-8 h-0.5 bg-gold" />
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif tracking-[0.35em] uppercase text-ink mb-3 pl-[0.35em]">
             I N S I G H T S
           </h2>
-          <p className="text-sm md:text-base font-sans text-white/50 tracking-wide max-w-lg mx-auto">
+          <p className="text-base md:text-lg font-sans text-ink/70 tracking-wide max-w-lg mx-auto">
             {t("sublabel") || "Insight turns complexity into clarity at the right Momento."}
           </p>
         </div>
@@ -197,7 +204,7 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
                   onClick={() => setActiveModalIndex(index)}
                 >
                   {/* Image Container with Dynamic Curved / Warped Edge */}
-                  <div className="curved-img-box relative w-full h-[240px] sm:h-[280px] md:h-[320px] lg:h-[350px] overflow-hidden bg-slate-900 group shadow-2xl transition-all duration-300">
+                  <div className="curved-img-box relative w-full h-[240px] sm:h-[280px] md:h-[320px] lg:h-[350px] overflow-hidden bg-white group shadow-xl border border-gold/15 transition-all duration-300">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -206,13 +213,13 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       priority={index < 3}
                     />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                    <div className="absolute inset-0 bg-parchment/15 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
 
                   {/* Title underneath (moves together as one single unit) */}
                   <div className="pt-6 md:pt-8 text-center px-4 max-w-sm">
                     <h3 className={`font-serif text-lg md:text-xl lg:text-2xl leading-snug transition-colors duration-300 ${
-                      isActive ? "text-white font-medium drop-shadow-md" : "text-white/60 font-normal"
+                      isActive ? "text-ink font-semibold drop-shadow-sm" : "text-ink/60 font-normal"
                     }`}>
                       {item.title}
                     </h3>
@@ -227,10 +234,10 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         <div className="container mx-auto px-6 text-center flex-shrink-0 z-20 flex flex-col items-center">
           <button
             onClick={() => setActiveModalIndex(activeCenterIndex)}
-            className="group inline-flex items-center gap-3 text-xs md:text-sm font-sans tracking-widest uppercase text-white/70 hover:text-gold transition-colors py-2"
+            className="group inline-flex items-center gap-3 text-xs md:text-sm font-sans tracking-widest uppercase text-ink/80 hover:text-gold transition-colors py-2"
           >
-            <span>See Details</span>
-            <span className="w-8 h-8 rounded-full border border-white/20 group-hover:border-gold flex items-center justify-center transition-colors">
+            <span className="font-bold">See Details</span>
+            <span className="w-8 h-8 rounded-full border border-ink/20 group-hover:border-gold group-hover:text-gold flex items-center justify-center transition-colors bg-white/60">
               <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </span>
           </button>
@@ -247,7 +254,7 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              className="absolute inset-0 bg-ink/70 backdrop-blur-md"
               onClick={() => setActiveModalIndex(null)}
             />
 
@@ -257,14 +264,14 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
-              className="relative z-10 w-full max-w-5xl max-h-[90vh] bg-[#060c1c] text-white rounded-2xl shadow-2xl border border-gold/30 overflow-hidden flex flex-col md:flex-row my-auto"
+              className="relative z-10 w-full max-w-5xl max-h-[90vh] bg-parchment text-ink rounded-2xl shadow-2xl border border-gold/30 overflow-hidden flex flex-col md:flex-row my-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={() => setActiveModalIndex(null)}
                 aria-label="Close modal"
-                className="absolute top-4 right-4 md:top-6 md:right-6 z-30 w-10 h-10 rounded-full bg-white/10 border border-white/20 text-white hover:text-gold hover:border-gold flex items-center justify-center transition-colors backdrop-blur-md"
+                className="absolute top-4 right-4 md:top-6 md:right-6 z-30 w-10 h-10 rounded-full bg-white/90 border border-ink/15 text-ink hover:text-gold hover:border-gold flex items-center justify-center transition-colors shadow-md"
               >
                 <X size={20} />
               </button>
@@ -285,19 +292,19 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
                   <span className="text-xs font-bold tracking-widest uppercase text-gold">
                     {CAROUSEL_DATA[activeModalIndex].category}
                   </span>
-                  <span className="text-white/30">•</span>
-                  <span className="text-xs font-medium tracking-wider uppercase text-white/50">
+                  <span className="text-ink/30">•</span>
+                  <span className="text-xs font-medium tracking-wider uppercase text-ink/50">
                     {CAROUSEL_DATA[activeModalIndex].date}
                   </span>
                 </div>
 
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-white leading-tight mb-6">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-ink leading-tight mb-6">
                   {CAROUSEL_DATA[activeModalIndex].title}
                 </h2>
 
                 <div className="w-12 h-0.5 bg-gold mb-6" />
 
-                <p className="text-base md:text-lg text-white/70 font-sans leading-relaxed mb-8">
+                <p className="text-base md:text-lg text-ink/75 font-sans leading-relaxed mb-8">
                   {CAROUSEL_DATA[activeModalIndex].description}
                 </p>
 
