@@ -41,9 +41,9 @@ export default function PracticeShowcase() {
           trigger: sectionRef.current,
           pin: true,
           pinSpacing: true,
-          scrub: 1.2,
+          scrub: 1.8, // Smooth cinematic dampening
           start: "top top",
-          end: "+=600vh", // 6 full screen lengths of scrolling to complete all 6 pillars
+          end: "+=900vh", // Generous 9 screens of scroll distance for relaxed pacing
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
@@ -57,31 +57,31 @@ export default function PracticeShowcase() {
       gsap.set(otherPillars, { x: "50vw", xPercent: -71, z: -600, rotationY: 45, opacity: 0 });
 
       // Phase 1: Pillar 0 rises
-      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
+      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 2, ease: "power2.out" });
 
-      // Hold Phase 0
-      tl.to({}, { duration: 1 });
+      // Hold Phase 0 (Vision)
+      tl.to({}, { duration: 2.5 });
 
       // Build the transitions dynamically for the 6 pillars (V - I - D - H - A - N)
       for (let i = 0; i < WORDS.length - 1; i++) {
         const transLabel = `trans${i}`;
         
         // Current pillar arcs left and exits
-        tl.to(`.pillar-${i}`, { x: "-50vw", z: -600, rotationY: -45, opacity: 0, duration: 2, ease: "power2.inOut" }, transLabel)
+        tl.to(`.pillar-${i}`, { x: "-50vw", z: -600, rotationY: -45, opacity: 0, duration: 2.5, ease: "power2.inOut" }, transLabel)
         // Next pillar arcs in from right to center
-        .to(`.pillar-${i+1}`, { x: 0, z: 0, rotationY: 0, opacity: 1, duration: 2, ease: "power2.inOut" }, transLabel);
+        .to(`.pillar-${i+1}`, { x: 0, z: 0, rotationY: 0, opacity: 1, duration: 2.5, ease: "power2.inOut" }, transLabel);
         
-        // Hold Phase for each pillar
-        tl.to({}, { duration: 1 });
+        // Hold Phase for each pillar so user can read comfortably
+        tl.to({}, { duration: 2.5 });
       }
 
-      // Final Hold for Nobility
-      tl.to({}, { duration: 1 });
+      // Final Hold for Nobility (N)
+      tl.to({}, { duration: 2.5 });
 
       setTimeout(() => {
         ScrollTrigger.sort();
         ScrollTrigger.refresh();
-      }, 100);
+      }, 150);
 
       return () => {
         tl.kill();
