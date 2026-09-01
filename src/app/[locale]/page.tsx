@@ -8,34 +8,34 @@ import LandingSplash from "@/components/LandingSplash";
 
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
 
-  return (
-    <div>
-      <LandingSplash />
+ return (
+ <div>
+ <LandingSplash />
 
-      {/* 1. Dark cinematic hero */}
-      <div className="bg-ink">
-        <HomeHero locale={locale} />
-      </div>
+ {/* 1. Dark cinematic hero */}
+ <div className="bg-parchment">
+ <HomeHero locale={locale} />
+ </div>
 
-      {/* 2. Firm intro — parchment break */}
-      <FirmIntro locale={locale} />
+ {/* 2. Firm intro — parchment break */}
+ <FirmIntro locale={locale} />
 
-      {/* 3. Gold divider */}
-      <div className="bg-ink">
-        <SectionDivider />
+ {/* 3. Gold divider */}
+ <div className="bg-parchment">
+ <SectionDivider />
 
-        {/* 4. Practice areas — pinned scrollytelling */}
-        <PracticeShowcase />
+ {/* 4. Practice areas — pinned scrollytelling */}
+ <PracticeShowcase />
 
-        {/* 5. Stats counters */}
-        <FirmNumbers />
+ {/* 5. Stats counters */}
+ <FirmNumbers />
 
-        {/* 6. Blog / perspectives strip */}
-        <InsightsCarousel locale={locale} />
+ {/* 6. Blog / perspectives strip */}
+ <InsightsCarousel locale={locale} />
 
-        {/* Bottom padding for BottomNav */}
-        <div className="pb-14 lg:pb-20" />
-      </div>
-    </div>
-  );
+ {/* Bottom padding for BottomNav */}
+ <div className="pb-14 lg:pb-20" />
+ </div>
+ </div>
+ );
 }

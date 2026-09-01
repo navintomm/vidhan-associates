@@ -18,41 +18,41 @@ const notoSerifMalayalam = Noto_Serif_Malayalam({ subsets: ["malayalam"], weight
 const notoSansMalayalam = Noto_Sans_Malayalam({ subsets: ["malayalam"], weight: ["400", "500", "600", "700"], variable: "--font-noto-sans-malayalam" });
 
 export const metadata: Metadata = {
-  title: "Vidhan Associates — Advocates",
-  description: "An independent legal practice providing strategic counsel across Kerala and beyond.",
+ title: "Vidhan Associates — Advocates",
+ description: "An independent legal practice providing strategic counsel across Kerala and beyond.",
 };
 
 export default async function LocaleLayout({
-  children,
-  params: { locale }
+ children,
+ params: { locale }
 }: Readonly<{
-  children: React.ReactNode;
-  params: { locale: string };
+ children: React.ReactNode;
+ params: { locale: string };
 }>) {
-  const messages = await getMessages();
+ const messages = await getMessages();
 
-  const isMalayalam = locale === 'ml';
+ const isMalayalam = locale === 'ml';
 
-  const headingFont = isMalayalam ? notoSerifMalayalam.variable : fraunces.variable;
-  const bodyFont = isMalayalam ? notoSansMalayalam.variable : poppins.variable;
+ const headingFont = isMalayalam ? notoSerifMalayalam.variable : fraunces.variable;
+ const bodyFont = isMalayalam ? notoSansMalayalam.variable : poppins.variable;
 
-  return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className={`${headingFont} ${bodyFont} font-sans antialiased bg-parchment text-ink dark:bg-ink dark:text-parchment transition-colors duration-300`}>
-        <ThemeProvider>
-          <NextIntlClientProvider messages={messages}>
-            <SmoothScrollProvider>
-              <Header locale={locale} />
-            <main className="min-h-screen">
-              {children}
-            </main>
-            <Footer locale={locale} />
-            <BottomNav locale={locale} />
-            <WhatsAppButton />
-          </SmoothScrollProvider>
-        </NextIntlClientProvider>
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+ return (
+ <html lang={locale} suppressHydrationWarning>
+ <body className={`${headingFont} ${bodyFont} font-sans antialiased bg-parchment text-ink transition-colors duration-300`}>
+ <ThemeProvider>
+ <NextIntlClientProvider messages={messages}>
+ <SmoothScrollProvider>
+ <Header locale={locale} />
+ <main className="min-h-screen">
+ {children}
+ </main>
+ <Footer locale={locale} />
+ <BottomNav locale={locale} />
+ <WhatsAppButton />
+ </SmoothScrollProvider>
+ </NextIntlClientProvider>
+ </ThemeProvider>
+ </body>
+ </html>
+ );
 }
