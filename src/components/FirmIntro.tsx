@@ -37,16 +37,16 @@ export default function FirmIntro({ locale }: { locale: string }) {
  {/* Vertical gold rule */}
  <div className="absolute left-0 top-0 bottom-0 w-px bg-gold/40" />
  <div className="pl-8">
- <p className="text-xs md:text-sm tracking-wide-2xl uppercase text-gold/60 mb-6">
+ <p className="text-sm md:text-base tracking-widest uppercase font-bold text-gold/80 mb-6">
  Guiding Principle
  </p>
  <blockquote 
- className={`${locale === "ml" ? "text-3xl md:text-4xl lg:text-5xl leading-relaxed" : "text-5xl md:text-6xl lg:text-7xl leading-tight"} font-serif text-ink italic mb-6 transition-opacity duration-500 break-words`} 
+ className={`${locale === "ml" ? "text-3xl md:text-5xl lg:text-6xl leading-relaxed" : "text-5xl md:text-6xl lg:text-7xl leading-tight"} font-serif text-ink italic mb-6 transition-opacity duration-500 break-words`} 
  style={{ opacity: isMounted ? 1 : 0.4 }}
  >
  &ldquo;{dailyQuote.text}&rdquo;
  </blockquote>
- <p className="text-sm tracking-wide-xl uppercase text-mist transition-opacity duration-500" style={{ opacity: isMounted ? 1 : 0.4 }}>
+ <p className="text-base font-semibold tracking-wide-xl uppercase text-mist transition-opacity duration-500" style={{ opacity: isMounted ? 1 : 0.4 }}>
  — {dailyQuote.author}
  </p>
  </div>
@@ -59,26 +59,26 @@ export default function FirmIntro({ locale }: { locale: string }) {
  viewport={{ once: true, margin: "-100px" }}
  transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
  >
- <p className="text-xs md:text-sm tracking-wide-2xl uppercase text-gold/60 mb-6">
+ <p className="text-sm md:text-base tracking-widest uppercase font-bold text-gold/80 mb-6">
  The Firm
  </p>
- <h2 className={`${locale === "ml" ? "text-2xl md:text-3xl lg:text-4xl leading-relaxed" : "text-3xl md:text-4xl lg:text-5xl leading-tight"} font-serif text-ink mb-8 break-words`}>
+ <h2 className={`${locale === "ml" ? "text-3xl md:text-4xl lg:text-5xl leading-relaxed" : "text-4xl md:text-5xl lg:text-6xl leading-tight"} font-serif text-ink mb-8 break-words`}>
  {t("heading")}
  </h2>
- <p className="text-slate/70 font-sans leading-relaxed mb-5 text-lg">
+ <p className="text-slate/85 font-sans leading-relaxed mb-6 text-xl md:text-2xl">
  {t("body1")}
  </p>
- <p className="text-slate/70 font-sans leading-relaxed mb-10 text-lg">
+ <p className="text-slate/85 font-sans leading-relaxed mb-10 text-xl md:text-2xl">
  {t("body2")}
  </p>
 
  <a
  href={`/${locale}/about`}
- className="group inline-flex items-center gap-3 text-sm tracking-wide-xl uppercase text-ink hover:text-gold transition-colors"
+ className="group inline-flex items-center gap-4 text-base md:text-lg font-bold tracking-widest uppercase text-ink hover:text-gold transition-colors"
  >
  <span>{t("cta")}</span>
- <span className="w-10 h-10 rounded-full border border-ink/20 group-hover:border-gold/50 flex items-center justify-center transition-colors">
- <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+ <span className="w-12 h-12 rounded-full border border-ink/20 group-hover:border-gold/50 flex items-center justify-center transition-colors">
+ <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
  </span>
  </a>
  </motion.div>

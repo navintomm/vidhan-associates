@@ -28,7 +28,7 @@ export default function Footer({ locale }: { locale: string }) {
  item === 'HOME' ? `/${locale}` : 
  `/${locale}/${item.toLowerCase().replace(' ', '-')}`
  }
- className={`${locale === "ml" ? "text-lg lg:text-xl break-words whitespace-normal" : "text-xl lg:text-2xl"} tracking-[0.3em] font-serif hover:text-gold transition-colors w-fit max-w-[200px] md:max-w-none`}
+ className={`${locale === "ml" ? "text-xl lg:text-2xl break-words whitespace-normal" : "text-2xl lg:text-3xl"} tracking-[0.25em] font-serif hover:text-gold transition-colors w-fit max-w-[240px] md:max-w-none font-medium`}
  >
  {t(`nav.${item}`)}
  </Link>
@@ -36,11 +36,11 @@ export default function Footer({ locale }: { locale: string }) {
  </nav>
 
  {/* Firm Info & Copyright */}
- <div className="mt-24 lg:mt-auto pb-8 lg:pb-32 max-w-xs md:max-w-sm">
- <p className="text-sm text-ink/60 font-sans leading-relaxed mb-8">
+ <div className="mt-24 lg:mt-auto pb-8 lg:pb-32 max-w-sm md:max-w-md">
+ <p className="text-base md:text-lg text-ink/75 font-sans leading-relaxed mb-8">
  {t("info.description")}
  </p>
- <div className="flex items-center gap-3 text-xs text-ink/40">
+ <div className="flex items-center gap-3 text-sm text-ink/50 font-sans">
  <p>{t("info.copyright", { year: new Date().getFullYear() })}</p>
  </div>
  </div>
@@ -52,8 +52,8 @@ export default function Footer({ locale }: { locale: string }) {
  onClick={scrollToTop}
  className="flex flex-col items-center gap-4 hover:text-gold transition-colors group z-20 mb-12 lg:mt-32 lg:mb-0"
  >
- <ArrowUp size={24} strokeWidth={1} className="group-hover:-translate-y-2 transition-transform" />
- <span className="text-sm tracking-[0.3em] uppercase">{t("backToTop")}</span>
+ <ArrowUp size={28} strokeWidth={1.5} className="group-hover:-translate-y-2 transition-transform" />
+ <span className="text-sm md:text-base font-bold tracking-[0.25em] uppercase">{t("backToTop")}</span>
  </button>
 
  {/* Massive Scale Image anchored to bottom */}
@@ -74,28 +74,28 @@ export default function Footer({ locale }: { locale: string }) {
  {/* Contact Details */}
  <div className="flex flex-col mt-8">
  <div className="border-t border-ink/20 py-6">
- <p className="text-xs tracking-widest uppercase text-ink/50 mb-2 break-words">{t("contact.phoneTitle")}</p>
- <p className="text-base tracking-widest mb-1 break-words">{t("contact.phone1")}</p>
- <p className="text-base tracking-widest mb-1 break-words">{t("contact.phone2")}</p>
- <p className="text-base tracking-widest break-words">{t("contact.phone3")}</p>
+ <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold mb-2 break-words">{t("contact.phoneTitle")}</p>
+ <p className="text-lg md:text-xl font-sans tracking-wide mb-1 break-words">{t("contact.phone1")}</p>
+ <p className="text-lg md:text-xl font-sans tracking-wide mb-1 break-words">{t("contact.phone2")}</p>
+ <p className="text-lg md:text-xl font-sans tracking-wide break-words">{t("contact.phone3")}</p>
  </div>
  <div className="border-t border-ink/20 py-6">
- <p className="text-xs tracking-widest uppercase text-ink/50 mb-2 break-words">{t("contact.ernakulamTitle")}</p>
- <p className="text-base tracking-widest leading-relaxed break-words">{t("contact.ernakulamAddress")}</p>
+ <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold mb-2 break-words">{t("contact.ernakulamTitle")}</p>
+ <p className="text-base md:text-lg font-sans leading-relaxed break-words">{t("contact.ernakulamAddress")}</p>
  </div>
  <div className="border-t border-b border-ink/20 py-6">
- <p className="text-xs tracking-widest uppercase text-ink/50 mb-2 break-words">{t("contact.thrissurTitle")}</p>
- <p className="text-base tracking-widest leading-relaxed break-words">{t("contact.thrissurAddress")}</p>
+ <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold mb-2 break-words">{t("contact.thrissurTitle")}</p>
+ <p className="text-base md:text-lg font-sans leading-relaxed break-words">{t("contact.thrissurAddress")}</p>
  </div>
  </div>
 
  {/* Social Links */}
  <div className="flex flex-col mt-16 lg:mt-auto pb-4 lg:pb-32">
  <div className="border-t border-ink/20 py-6">
- <a href="#" className="text-base tracking-widest uppercase hover:text-gold transition-colors">{t("social.linkedin")}</a>
+ <a href="#" className="text-lg md:text-xl font-serif tracking-widest uppercase hover:text-gold transition-colors font-medium">{t("social.linkedin")}</a>
  </div>
  <div className="border-t border-b border-ink/20 py-6">
- <a href="#" className="text-base tracking-widest uppercase hover:text-gold transition-colors">{t("social.x")}</a>
+ <a href="#" className="text-lg md:text-xl font-serif tracking-widest uppercase hover:text-gold transition-colors font-medium">{t("social.x")}</a>
  </div>
  </div>
 

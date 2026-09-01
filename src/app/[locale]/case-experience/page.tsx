@@ -24,13 +24,13 @@ export default function CaseExperiencePage() {
  transition={{ duration: 0.8 }}
  className="text-center"
  >
- <p className="text-xs md:text-sm tracking-wide-2xl uppercase text-gold/70 mb-6">
+ <p className="text-sm md:text-base font-bold tracking-widest uppercase text-gold/80 mb-6">
  {tHero("label")}
  </p>
- <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-ink mb-8">
+ <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-ink mb-8">
  {tHero("title")}
  </h1>
- <p className="text-lg md:text-xl font-serif text-ink/70 leading-relaxed max-w-3xl mx-auto">
+ <p className="text-xl md:text-2xl font-sans text-ink/75 leading-relaxed max-w-3xl mx-auto">
  {tHero("intro")}
  </p>
  </motion.div>
@@ -48,10 +48,10 @@ export default function CaseExperiencePage() {
  className="mb-16 md:mb-24"
  >
  <div className="flex items-center gap-4 mb-6">
- <FileText className="text-gold w-8 h-8" />
- <h2 className="text-3xl md:text-5xl font-serif text-ink">{tMethodology("heading")}</h2>
+ <FileText className="text-gold w-9 h-9" />
+ <h2 className="text-4xl md:text-6xl font-serif text-ink">{tMethodology("heading")}</h2>
  </div>
- <p className="text-lg md:text-xl font-serif text-slate/80 leading-relaxed max-w-3xl">
+ <p className="text-xl md:text-2xl font-sans text-slate/85 leading-relaxed max-w-3xl">
  {tMethodology("description")}
  </p>
  </motion.div>
@@ -66,13 +66,13 @@ export default function CaseExperiencePage() {
  transition={{ duration: 0.5, delay: index * 0.1 }}
  className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
  >
- <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-ink bg-gold text-ink shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 font-serif font-bold text-sm">
+ <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-ink bg-gold text-ink shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 font-serif font-bold text-base">
  {index + 1}
  </div>
  
- <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 md:p-8 rounded-xl bg-white shadow-sm border border-gold/10 hover:shadow-md transition-shadow">
- <h3 className="font-serif text-xl md:text-2xl text-ink mb-3">{step.title}</h3>
- <p className="font-serif text-slate/70 leading-relaxed text-sm md:text-base">
+ <div className="w-[calc(100%-4.5rem)] md:w-[calc(50%-3rem)] p-8 md:p-10 rounded-xl bg-white shadow-sm border border-gold/10 hover:shadow-md transition-shadow">
+ <h3 className="font-serif text-2xl md:text-3xl text-ink mb-3">{step.title}</h3>
+ <p className="font-sans text-slate/85 leading-relaxed text-base md:text-lg">
  {step.description}
  </p>
  </div>
@@ -94,9 +94,9 @@ export default function CaseExperiencePage() {
  transition={{ duration: 0.8 }}
  className="text-center mb-16 md:mb-20"
  >
- <Briefcase className="text-gold w-10 h-10 mx-auto mb-6" />
- <h2 className="text-3xl md:text-5xl font-serif text-ink mb-6">{tMatters("heading")}</h2>
- <p className="text-sm md:text-base font-serif text-ink/50 italic">
+ <Briefcase className="text-gold w-12 h-12 mx-auto mb-6" />
+ <h2 className="text-4xl md:text-6xl font-serif text-ink mb-6">{tMatters("heading")}</h2>
+ <p className="text-base md:text-lg font-sans text-ink/60 italic">
  {tMatters("confidentialityNote")}
  </p>
  </motion.div>
@@ -112,13 +112,13 @@ export default function CaseExperiencePage() {
  className="p-8 md:p-10 rounded-xl bg-white shadow-sm border border-gold/10 hover:shadow-md transition-shadow"
  >
  <div className="flex items-start gap-4 mb-4">
- <ChevronRight className="text-gold w-6 h-6 shrink-0 mt-1" />
- <h3 className="font-serif text-xl md:text-2xl text-gold/90 leading-snug">
+ <ChevronRight className="text-gold w-7 h-7 shrink-0 mt-1" />
+ <h3 className="font-serif text-2xl md:text-3xl text-gold/90 leading-snug">
  {matter.title}
  </h3>
  </div>
- <div className="pl-10">
- <p className="font-serif text-ink/70 leading-relaxed whitespace-pre-line text-sm md:text-base">
+ <div className="pl-11">
+ <p className="font-sans text-ink/80 leading-relaxed whitespace-pre-line text-base md:text-lg">
  {matter.description}
  </p>
  </div>

@@ -49,10 +49,10 @@ export default function BottomNav({}: { locale: string }) {
  className="flex-1 max-w-2xl transition-opacity duration-700"
  style={{ opacity: isMounted ? 1 : 0 }}
  >
- <p className="text-base lg:text-lg text-ink/70 italic font-serif leading-snug">
+ <p className="text-lg lg:text-xl text-ink/80 italic font-serif leading-snug">
  &ldquo;{dailyQuote.text}&rdquo;
  </p>
- <p className="text-xs text-gold/60 mt-1.5 tracking-widest uppercase">
+ <p className="text-sm text-gold mt-1.5 tracking-widest uppercase font-semibold">
  — {dailyQuote.author}
  </p>
  </div>

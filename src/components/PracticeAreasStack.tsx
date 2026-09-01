@@ -156,64 +156,63 @@ export default function PracticeAreasStack() {
 
  {/* Header Text */}
  <div className="absolute top-32 left-8 md:left-16 z-20 pointer-events-none">
- <p className="text-gold tracking-[0.3em] uppercase text-sm mb-4">{t("header.subtitle")}</p>
- <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif text-ink leading-tight break-words whitespace-pre-line">
- {t("header.title")}
- </h1>
+   <p className="text-gold tracking-[0.3em] uppercase text-sm md:text-base font-bold mb-4">{t("header.subtitle")}</p>
+   <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-ink leading-tight break-words whitespace-pre-line">
+     {t("header.title")}
+   </h1>
  </div>
 
  {/* Scroll Indicator */}
  <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 z-20 flex flex-col items-center pointer-events-none opacity-80">
- <span className="text-[10px] tracking-widest uppercase text-ink mb-2">Scroll</span>
- <div className="w-px h-16 bg-gradient-to-b from-ink to-transparent" />
+   <span className="text-xs font-bold tracking-widest uppercase text-ink mb-2">Scroll</span>
+   <div className="w-px h-16 bg-gradient-to-b from-ink to-transparent" />
  </div>
 
  {/* The Card Stack */}
  <div className="relative w-full max-w-md md:max-w-2xl h-[60vh] md:h-[70vh] z-10 flex items-center justify-center perspective-[1000px]">
- {practiceAreas.map((item) => {
- const Icon = item.icon;
- return (
- <div 
- key={item.id} 
- className="case-card absolute inset-0 w-full h-full flex items-center justify-center p-4 cursor-pointer"
- onClick={() => setActiveCase(item.id)}
- >
- {/* Framer Motion Shared Element Wrapper */}
- <motion.div 
- layoutId={`case-${item.id}`}
- className="w-full h-full relative rounded-2xl overflow-hidden border border-gold/20 shadow-2xl bg-parchment group"
- >
- <Image 
- src={item.image} 
- alt={item.title}
- fill
- className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
- />
- {/* Dark gradient so text stays readable on photos */}
- <div className="absolute inset-0" style={{background: 'linear-gradient(to top, rgba(1,1,1,0.80) 0%, rgba(1,1,1,0.40) 50%, rgba(1,1,1,0.10) 100%)'}} />
- 
- {/* Card Content */}
- <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10">
- <div className="w-12 h-12 rounded-full bg-gold/10 backdrop-blur-md flex items-center justify-center border border-gold/30 text-gold mb-4 group-hover:scale-110 transition-transform duration-500">
- <Icon size={24} />
- </div>
- <p className="text-sm tracking-[0.2em] uppercase text-gold mb-2">{item.category}</p>
- <h3 className={`${locale === "ml" ? "text-xl md:text-2xl leading-snug mb-2 md:mb-4" : "text-2xl md:text-3xl leading-snug mb-4"} font-serif text-parchment break-words`}>
- {item.title}
- </h3>
- <p className="text-parchment/70 font-sans line-clamp-2 md:line-clamp-3">
- {item.description}
- </p>
- 
- <div className="mt-6 flex items-center gap-2 text-xs uppercase tracking-widest text-parchment/60 group-hover:text-gold transition-colors">
- <span>{t("viewDetails")}</span>
- <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
- </div>
- </div>
- </motion.div>
- </div>
- );
- })}
+   {practiceAreas.map((item) => {
+     const Icon = item.icon;
+     return (
+       <div 
+         key={item.id} 
+         className="case-card absolute inset-0 w-full h-full flex items-center justify-center p-4 cursor-pointer"
+         onClick={() => setActiveCase(item.id)}
+       >
+         {/* Framer Motion Shared Element Wrapper */}
+         <motion.div 
+           layoutId={`case-${item.id}`}
+           className="w-full h-full relative rounded-2xl overflow-hidden border border-gold/20 shadow-2xl bg-parchment group"
+         >
+           <Image 
+             src={item.image} 
+             alt={item.title}
+             fill
+             className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+           />
+           {/* Dark gradient so text stays readable on photos */}
+           <div className="absolute inset-0" style={{background: 'linear-gradient(to top, rgba(1,1,1,0.85) 0%, rgba(1,1,1,0.45) 50%, rgba(1,1,1,0.15) 100%)'}} />
+           
+           {/* Card Content */}
+           <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10">
+             <div className="w-14 h-14 rounded-full bg-gold/10 backdrop-blur-md flex items-center justify-center border border-gold/30 text-gold mb-4 group-hover:scale-110 transition-transform duration-500">
+               <Icon size={26} />
+             </div>
+             <p className="text-sm md:text-base font-bold tracking-[0.2em] uppercase text-gold mb-2">{item.category}</p>
+             <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif text-parchment leading-tight mb-3">
+               {item.title}
+             </h3>
+             <p className="text-base md:text-lg text-parchment/80 font-sans line-clamp-2 max-w-lg mb-6 leading-relaxed">
+               {item.description}
+             </p>
+             <div className="flex items-center gap-3 text-sm md:text-base font-bold tracking-widest uppercase text-gold">
+               <span>View Details</span>
+               <ArrowRight size={16} />
+             </div>
+           </div>
+         </motion.div>
+       </div>
+     );
+   })}
  </div>
 
  </div>

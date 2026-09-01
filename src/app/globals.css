@@ -3,13 +3,20 @@
 @tailwind utilities;
 
 @layer base {
- body {
- /* Background and text colors are handled in layout.tsx using tailwind classes */
- }
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    font-size: 1.0625rem; /* 17px base for standard luxury/editorial legibility */
+    line-height: 1.7;
+    /* Background and text colors are handled in layout.tsx using tailwind classes */
+  }
 
- /* Hide scrollbar globally for horizontal strips */
- .scrollbar-hide::-webkit-scrollbar { display: none; }
- .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  /* Hide scrollbar globally for horizontal strips */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 }
 
 @layer utilities {

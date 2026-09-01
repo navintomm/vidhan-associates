@@ -84,12 +84,12 @@ export default function Header({ locale }: { locale: string }) {
  </Link>
 
  {/* 2. Center — Nav links in same parallel line */}
- <nav className="hidden lg:flex items-center gap-4 xl:gap-7 2xl:gap-9 mx-2">
+ <nav className="hidden lg:flex items-center gap-5 xl:gap-7 2xl:gap-9 mx-2">
  {navLinks.map((link) => (
  <Link
  key={link.key}
  href={`/${locale}${link.href === "/" ? "" : link.href}`}
- className="text-[11px] xl:text-xs 2xl:text-sm font-bold tracking-[0.16em] xl:tracking-[0.2em] uppercase text-ink hover:text-gold transition-colors duration-300 whitespace-nowrap"
+ className="text-xs xl:text-sm 2xl:text-base font-bold tracking-[0.14em] xl:tracking-[0.18em] uppercase text-ink hover:text-gold transition-colors duration-300 whitespace-nowrap"
  >
  {tNav(link.key)}
  </Link>
@@ -97,15 +97,15 @@ export default function Header({ locale }: { locale: string }) {
  </nav>
 
  {/* 3. Right — Actions (Consult + MAL + Mobile Menu) */}
- <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+ <div className="flex items-center gap-3 sm:gap-4 shrink-0">
  <Link
  href={`/${locale}/contact`}
- className={`hidden md:inline-flex group items-center gap-2 text-[11px] md:text-xs font-bold tracking-widest uppercase text-ink hover:text-gold transition-all border border-ink/30 hover:border-gold bg-white/70 backdrop-blur-sm rounded-full ${scrolled ? 'px-4 py-1.5' : 'px-5 py-2'} shadow-sm`}
+ className={`hidden md:inline-flex group items-center gap-2.5 text-xs sm:text-sm font-bold tracking-widest uppercase text-ink hover:text-gold transition-all border border-ink/30 hover:border-gold bg-white/70 backdrop-blur-sm rounded-full ${scrolled ? 'px-4 py-1.5' : 'px-6 py-2.5'} shadow-sm`}
  >
  <span>Consult</span>
  <span className="relative w-4 h-4 overflow-hidden flex items-center justify-center">
- <ArrowRight size={12} className="absolute transition-transform duration-500 ease-in-out group-hover:translate-x-6 group-active:translate-x-6" />
- <ArrowRight size={12} className="absolute -translate-x-6 transition-transform duration-500 ease-in-out group-hover:translate-x-0 group-active:translate-x-0" />
+ <ArrowRight size={13} className="absolute transition-transform duration-500 ease-in-out group-hover:translate-x-6 group-active:translate-x-6" />
+ <ArrowRight size={13} className="absolute -translate-x-6 transition-transform duration-500 ease-in-out group-hover:translate-x-0 group-active:translate-x-0" />
  </span>
  </Link>
 
@@ -113,7 +113,7 @@ export default function Header({ locale }: { locale: string }) {
  <div className="relative inline-block w-max shrink-0">
  <button
  onClick={toggleLanguage}
- className={`text-[11px] md:text-xs font-bold tracking-widest uppercase text-ink hover:text-gold transition-all border border-ink/30 hover:border-gold bg-white/70 backdrop-blur-sm rounded-full ${scrolled ? 'px-3.5 py-1.5' : 'px-4 py-2'} shadow-sm`}
+ className={`text-xs sm:text-sm font-bold tracking-widest uppercase text-ink hover:text-gold transition-all border border-ink/30 hover:border-gold bg-white/70 backdrop-blur-sm rounded-full ${scrolled ? 'px-4 py-1.5' : 'px-5 py-2.5'} shadow-sm`}
  >
  {locale === "en" ? "MAL" : "ENG"}
  </button>
@@ -130,7 +130,7 @@ export default function Header({ locale }: { locale: string }) {
  <motion.div
  animate={{ y: [0, 4, 0] }}
  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
- className="relative bg-gold text-ink text-[11px] font-bold whitespace-nowrap px-3 py-1.5 rounded-[4px] shadow-sm"
+ className="relative bg-gold text-ink text-xs font-bold whitespace-nowrap px-3.5 py-2 rounded-[4px] shadow-sm"
  >
  {/* Tooltip triangle — gold */}
  <div className="absolute -top-1.5 right-4 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-gold"></div>

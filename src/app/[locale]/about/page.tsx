@@ -29,10 +29,10 @@ export default function AboutPage() {
  animate={{ opacity: 1, y: 0 }}
  transition={{ duration: 0.8 }}
  >
- <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-ink leading-tight mb-8" style={{ whiteSpace: "pre-line" }}>
+ <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-ink leading-tight mb-8" style={{ whiteSpace: "pre-line" }}>
  {tLegacy("heading")}
  </h1>
- <div className="space-y-6 text-slate/80 font-sans leading-relaxed text-lg md:text-xl">
+ <div className="space-y-6 text-slate/85 font-sans leading-relaxed text-xl md:text-2xl">
  <p>{tLegacy("body1")}</p>
  <p>{tLegacy("body2")}</p>
  </div>
@@ -45,12 +45,12 @@ export default function AboutPage() {
  className="bg-white rounded-xl p-8 md:p-12 shadow-md border border-gold/10"
  >
  <div className="flex items-center gap-3 mb-8">
- <Landmark className="text-gold w-7 h-7" />
- <h2 className="text-2xl md:text-3xl font-serif text-gold">{tLegacy("courtsLabel")}</h2>
+ <Landmark className="text-gold w-8 h-8" />
+ <h2 className="text-3xl md:text-4xl font-serif text-gold">{tLegacy("courtsLabel")}</h2>
  </div>
  <ul className="space-y-5">
  {courts.map((court, i) => (
- <li key={i} className="text-ink/90 font-sans text-base md:text-lg leading-relaxed">
+ <li key={i} className="text-ink/90 font-sans text-lg md:text-xl leading-relaxed">
  {court}
  </li>
  ))}
@@ -71,7 +71,7 @@ export default function AboutPage() {
  whileInView={{ opacity: 1 }}
  viewport={{ once: true }}
  transition={{ duration: 0.6 }}
- className="text-xs md:text-sm tracking-wide-2xl uppercase text-gold/60 mb-8"
+ className="text-sm md:text-base tracking-widest uppercase font-bold text-gold/80 mb-8"
  >
  {tStory("label")}
  </motion.p>
@@ -82,7 +82,7 @@ export default function AboutPage() {
  whileInView={{ opacity: 1, y: 0 }}
  viewport={{ once: true }}
  transition={{ duration: 0.8 }}
- className="text-4xl md:text-5xl lg:text-6xl font-serif text-ink leading-tight"
+ className="text-5xl md:text-6xl lg:text-7xl font-serif text-ink leading-tight"
  style={{ whiteSpace: "pre-line" }}
  >
  {tStory("heading")}
@@ -93,11 +93,11 @@ export default function AboutPage() {
  whileInView={{ opacity: 1, y: 0 }}
  viewport={{ once: true }}
  transition={{ duration: 0.8, delay: 0.15 }}
- className="space-y-6 text-slate/70 font-sans leading-relaxed text-lg md:text-xl"
+ className="space-y-6 text-slate/85 font-sans leading-relaxed text-xl md:text-2xl"
  >
  <p>{tStory("body1")}</p>
  <p>{tStory("body2")}</p>
- <p className="italic text-slate/50 font-serif text-xl md:text-2xl border-l-2 border-gold/30 pl-6">
+ <p className="italic text-slate/70 font-serif text-2xl md:text-3xl border-l-2 border-gold/30 pl-6">
  {tStory("body3")}
  </p>
  </motion.div>
@@ -108,7 +108,7 @@ export default function AboutPage() {
  {/* ===== 3. VALUES ===== */}
  <section className="bg-parchment py-24 md:py-32 px-6 lg:px-12 border-t border-gold/10">
  <div className="container mx-auto max-w-6xl">
- <p className="text-xs md:text-sm tracking-wide-2xl uppercase text-gold/70 mb-20 text-center">
+ <p className="text-sm md:text-base tracking-widest uppercase font-bold text-gold/80 mb-20 text-center">
  {tValues("label")}
  </p>
 
@@ -123,11 +123,11 @@ export default function AboutPage() {
  className="bg-white p-8 md:p-10 rounded-xl shadow-sm border border-gold/10 flex flex-col h-full"
  >
  {/* Number indicator */}
- <p className="text-lg md:text-xl font-serif tracking-widest text-gold/80 mb-6">
+ <p className="text-xl md:text-2xl font-serif tracking-widest text-gold/80 mb-6 font-bold">
  {String(i + 1).padStart(2, "0")}
  </p>
- <h3 className="text-2xl md:text-3xl font-serif text-ink mb-5">{v.title}</h3>
- <p className="text-sm md:text-base text-ink/60 font-serif leading-relaxed md:leading-loose">
+ <h3 className="text-3xl md:text-4xl font-serif text-ink mb-5">{v.title}</h3>
+ <p className="text-base md:text-lg text-ink/75 font-sans leading-relaxed">
  {v.description}
  </p>
  </motion.div>
