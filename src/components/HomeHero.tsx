@@ -43,9 +43,9 @@ export default function HomeHero({ locale }: { locale: string }) {
               </span>
             </div>
             
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-ink leading-[1.06] tracking-tight mb-6">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-bold text-ink leading-[1.06] tracking-tight mb-6">
               The Pursuit <br />
-              <span className="italic font-normal text-gold">of Justice</span>
+              <span className="font-normal text-gold">of Justice</span>
             </h1>
 
             <p className="text-lg md:text-xl font-sans text-slate/80 leading-relaxed max-w-lg mb-8 md:mb-10">
