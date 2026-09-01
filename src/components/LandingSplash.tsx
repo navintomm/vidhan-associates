@@ -118,11 +118,11 @@ export default function LandingSplash() {
  initial={{ x: "-100%", opacity: 0 }}
  animate={{ x: "200%", opacity: [0, 1, 1, 0] }}
  transition={{ duration: 2, ease: "linear", delay: 0.2 }}
- className="absolute inset-0 w-[50%] bg-gradient-to-r from-transparent via-amber-100/15 to-transparent mix-blend-overlay z-40 pointer-events-none"
+ className="absolute inset-0 w-[50%] bg-gradient-to-r from-transparent via-gold/30 to-transparent z-40 pointer-events-none"
  style={{ transform: "skewX(-30deg)" }}
  />
 
- {/* Scale of Justice (Normal size) */}
+ {/* Scale of Justice */}
  <div className="relative z-30 flex items-center justify-center h-full w-[160px] lg:w-[320px] mx-auto">
  <Image
  src="/images/icons/scale-of-justice-transparent.png"

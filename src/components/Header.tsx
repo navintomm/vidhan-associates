@@ -102,7 +102,7 @@ export default function Header({ locale }: { locale: string }) {
  {/* Actions */}
  <div className="flex items-center gap-3 ml-auto">
  {/* Language Switcher */}
- <div className="relative inline-flex items-center justify-center shrink-0">
+ <div className="relative inline-block w-max shrink-0">
  <button
  onClick={toggleLanguage}
  className={`text-[10px] md:text-xs font-medium tracking-widest uppercase text-ink/60 hover:text-gold transition-colors border border-ink/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-3 py-1' : 'px-4 py-1.5'}`}
