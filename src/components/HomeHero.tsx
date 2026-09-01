@@ -54,7 +54,7 @@ export default function HomeHero({ locale }: { locale: string }) {
 
             <Link
               href={`/${locale}/contact`}
-              className="group inline-flex items-center gap-4 bg-white/95 hover:bg-gold text-ink transition-all duration-300 pl-7 md:pl-9 pr-3 md:pr-3.5 py-3 md:py-3.5 rounded-full border-2 border-gold/50 hover:border-gold shadow-lg hover:shadow-2xl hover:scale-[1.02] backdrop-blur-sm"
+              className="mt-[30px] group inline-flex items-center gap-4 bg-white/95 hover:bg-gold text-ink transition-all duration-300 pl-7 md:pl-9 pr-3 md:pr-3.5 py-3 md:py-3.5 rounded-full border-2 border-gold/50 hover:border-gold shadow-lg hover:shadow-2xl hover:scale-[1.02] backdrop-blur-sm"
             >
               <span className="text-sm md:text-base lg:text-lg tracking-[0.18em] uppercase font-black">
                 Schedule a Consultation
