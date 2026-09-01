@@ -54,14 +54,14 @@ export default function HomeHero({ locale }: { locale: string }) {
 
             <Link
               href={`/${locale}/contact`}
-              className="mt-[30px] -translate-x-[5px] group inline-flex items-center gap-4 bg-white/95 hover:bg-gold text-ink transition-all duration-300 pl-7 md:pl-9 pr-3 md:pr-3.5 py-3 md:py-3.5 rounded-full border-2 border-gold/50 hover:border-gold shadow-lg hover:shadow-2xl hover:scale-[1.02] backdrop-blur-sm"
+              className="mt-[30px] -translate-x-[5px] group inline-flex items-center gap-3.5 bg-white/95 hover:bg-gold text-ink transition-all duration-300 pl-5 md:pl-6 pr-2 py-2 rounded-full border border-gold/60 hover:border-gold shadow-md hover:shadow-xl hover:scale-[1.02] backdrop-blur-sm"
             >
-              <span className="text-sm md:text-base lg:text-lg tracking-[0.18em] uppercase font-black">
+              <span className="text-xs md:text-sm tracking-[0.16em] uppercase font-bold">
                 Schedule a Consultation
               </span>
-              <span className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-ink text-gold flex items-center justify-center transition-colors relative overflow-hidden shrink-0 shadow-md">
-                <ArrowRight size={20} className="absolute transition-transform duration-500 ease-in-out group-hover:translate-x-12 group-active:translate-x-12 text-gold" />
-                <ArrowRight size={20} className="absolute -translate-x-12 transition-transform duration-500 ease-in-out group-hover:translate-x-0 group-active:translate-x-0 text-gold" />
+              <span className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-ink text-gold flex items-center justify-center transition-colors relative overflow-hidden shrink-0 shadow-sm">
+                <ArrowRight size={15} className="absolute transition-transform duration-500 ease-in-out group-hover:translate-x-8 group-active:translate-x-8 text-gold" />
+                <ArrowRight size={15} className="absolute -translate-x-8 transition-transform duration-500 ease-in-out group-hover:translate-x-0 group-active:translate-x-0 text-gold" />
               </span>
             </Link>
           </motion.div>
