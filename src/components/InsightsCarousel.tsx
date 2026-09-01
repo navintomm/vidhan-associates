@@ -1,284 +1,368 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
-import { gsap } from "@/lib/gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
 
-gsap.registerPlugin(ScrollTrigger);
-
-// Extended mock data with Unsplash images matching the Momento aesthetic
+// Extended mock data with curated legal editorial imagery
 const CAROUSEL_DATA = [
- {
- image: "/images/insights/insight_property_v2.jpg",
- description: "Property disputes often involve complex historical claims and fragmented titles. A thorough understanding of local tenancy laws and inheritance frameworks is required to secure a clear title.",
- },
- {
- image: "/images/insights/insight_liberty.jpg",
- description: "Personal liberty is a fundamental right. Bail conditions must balance the state's interest with the presumption of innocence. Understanding these nuances is critical for any accused.",
- },
- {
- image: "/images/insights/insight_divorce.jpg",
- description: "Divorce proceedings under the Hindu Marriage Act require navigating emotional turbulence alongside rigid legal requirements regarding alimony, maintenance, and child custody.",
- },
- {
- image: "/images/insights/insight_real_estate.jpg",
- description: "Real estate transactions are fraught with risk. Title verification ensures that buyers do not inherit encumbrances, litigation, or defective ownership from previous sellers.",
- },
+  {
+    image: "/images/insights/insight_property_v2.jpg",
+    description: "Property disputes often involve complex historical claims and fragmented titles. A thorough understanding of local tenancy laws and inheritance frameworks is required to secure a clear title.",
+  },
+  {
+    image: "/images/insights/insight_liberty.jpg",
+    description: "Personal liberty is a fundamental constitutional right. Bail conditions must balance the state's interest with the presumption of innocence. Understanding these nuances is critical for any accused.",
+  },
+  {
+    image: "/images/insights/insight_divorce.jpg",
+    description: "Divorce proceedings under the Hindu Marriage Act require navigating emotional turbulence alongside rigid statutory requirements regarding alimony, maintenance, and child custody.",
+  },
+  {
+    image: "/images/insights/insight_real_estate.jpg",
+    description: "Real estate transactions are fraught with risk. Due diligence and title verification ensure that buyers do not inherit encumbrances, litigation, or defective ownership from previous sellers.",
+  },
 ];
 
+const TRANSITION_CONFIG = {
+  duration: 1.3,
+  ease: [0.76, 0, 0.24, 1], // Smooth editorial luxury easing
+};
+
 export default function InsightsCarousel({ locale }: { locale: string }) {
- const t = useTranslations("home.perspectives");
- const posts = t.raw("posts") as Array<{
- category: string;
- title: string;
- date: string;
- }>;
- const sectionRef = useRef<HTMLElement>(null);
- const trackRef = useRef<HTMLDivElement>(null);
- 
- const [activeCard, setActiveCard] = useState<number | null>(null);
- const [isReducedMotion, setIsReducedMotion] = useState(false);
- const [isDesktop, setIsDesktop] = useState(true);
+  const t = useTranslations("home.perspectives");
+  const posts = t.raw("posts") as Array<{
+    category: string;
+    title: string;
+    date: string;
+  }>;
 
- const mergedPosts = posts.map((post, i) => ({
- ...post,
- ...CAROUSEL_DATA[i % CAROUSEL_DATA.length]
- }));
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
- // Handle system preference and screen size
- useEffect(() => {
- setIsDesktop(window.innerWidth >= 1024);
- const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
- window.addEventListener("resize", handleResize);
+  const total = posts.length;
 
- const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
- setIsReducedMotion(mediaQuery.matches);
- const handleMotionChange = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
- mediaQuery.addEventListener("change", handleMotionChange);
+  const mergedPosts = posts.map((post, i) => ({
+    ...post,
+    ...CAROUSEL_DATA[i % CAROUSEL_DATA.length],
+  }));
 
- return () => {
- window.removeEventListener("resize", handleResize);
- mediaQuery.removeEventListener("change", handleMotionChange);
- };
- }, []);
+  // Detect mobile / screen resizing
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
- // GSAP Horizontal Scroll Logic with Coverflow
- useEffect(() => {
- const mm = gsap.matchMedia();
+  // Next / Prev navigation
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % total);
+  }, [total]);
 
- mm.add("all", () => {
- if (!sectionRef.current || !trackRef.current) return;
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + total) % total);
+  }, [total]);
 
- const cards = gsap.utils.toArray<HTMLElement>(".insight-card");
+  // Auto-advance every 3.8 seconds when not hovered and modal not open
+  useEffect(() => {
+    if (isHovered || activeModalIndex !== null) return;
+    const interval = setInterval(nextSlide, 3800);
+    return () => clearInterval(interval);
+  }, [nextSlide, isHovered, activeModalIndex]);
 
- const updateCoverflow = () => {
- cards.forEach((card) => {
- const rect = card.getBoundingClientRect();
- const cardCenter = rect.left + rect.width / 2;
- const viewportCenter = window.innerWidth / 2;
- 
- // Distance from center (-1 to 1)
- const ratio = (cardCenter - viewportCenter) / (window.innerWidth / 2);
- const clampedRatio = Math.max(-1, Math.min(1, ratio));
- 
- // Apply dramatic Scale, Opacity, and 3D Rotation
- gsap.set(card, {
- scale: 1 - Math.abs(clampedRatio) * 0.4, // 1 -> 0.6
- opacity: 1 - Math.abs(clampedRatio) * 0.8, // 1 -> 0.2
- rotationY: -clampedRatio * 45, // Dramatic 3D curve
- transformPerspective: 800,
- transformOrigin: "center center"
- });
- });
- };
+  // Lock body scroll when modal is active
+  useEffect(() => {
+    if (activeModalIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeModalIndex]);
 
- // Run once to set initial state
- updateCoverflow();
- window.addEventListener("scroll", updateCoverflow);
- 
- const getScrollAmount = () => {
- if (!trackRef.current) return 0;
- return -(trackRef.current.scrollWidth - window.innerWidth);
- };
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (activeModalIndex !== null) {
+        if (e.key === "Escape") setActiveModalIndex(null);
+        return;
+      }
+      if (e.key === "ArrowRight") nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [nextSlide, prevSlide, activeModalIndex]);
 
- const tl = gsap.timeline({
- scrollTrigger: {
- trigger: sectionRef.current,
- pin: true,
- scrub: 1,
- start: "top top",
- end: () => `+=${trackRef.current ? trackRef.current.scrollWidth - window.innerWidth : 0}`,
- anticipatePin: 1,
- invalidateOnRefresh: true,
- onUpdate: updateCoverflow,
- },
- });
+  // Helper to calculate circular relative offset (-1: Left, 0: Center, 1: Right, etc.)
+  const getOffset = (index: number) => {
+    let diff = (index - currentIndex) % total;
+    if (diff < -Math.floor(total / 2)) diff += total;
+    if (diff > Math.floor(total / 2)) diff -= total;
+    return diff;
+  };
 
- tl.to(trackRef.current, {
- x: getScrollAmount,
- ease: "none",
- });
+  return (
+    <>
+      <section 
+        className="bg-parchment py-28 md:py-36 overflow-hidden border-t border-gold/10 relative z-10 select-none"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Section Header */}
+        <div className="container mx-auto px-6 lg:px-12 mb-16 md:mb-20 flex flex-col items-center justify-center text-center">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-0.5 bg-gold" />
+            <span className="text-gold tracking-[0.3em] uppercase text-xs md:text-sm font-bold">
+              Legal Perspectives
+            </span>
+            <span className="w-8 h-0.5 bg-gold" />
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-ink tracking-tight mb-4">
+            Insights
+          </h2>
+          <p className="text-base md:text-lg lg:text-xl font-sans text-ink/70 max-w-xl leading-relaxed">
+            {t("sublabel")}
+          </p>
+        </div>
 
- return () => {
- tl.kill();
- window.removeEventListener("scroll", updateCoverflow);
- };
- });
+        {/* 3-Item Horizontal Editorial Filmstrip Carousel Container */}
+        <div className="relative w-full h-[460px] md:h-[520px] flex items-center justify-center overflow-visible">
+          <div className="relative w-full h-full flex items-center justify-center">
+            {mergedPosts.map((post, index) => {
+              const offset = getOffset(index);
+              const isCenter = offset === 0;
+              const isLeft = offset === -1;
+              const isRight = offset === 1;
+              const isVisible = Math.abs(offset) <= 1;
 
- return () => mm.revert();
- }, [isReducedMotion]);
+              // Responsive horizontal translation offsets
+              const xOffsetDesktop = offset * 33.5; // percentage in vw
+              const xOffsetMobile = offset * 76;
 
- // Lock body scroll when modal is active
- useEffect(() => {
- if (activeCard !== null) {
- document.body.style.overflow = "hidden";
- } else {
- document.body.style.overflow = "";
- }
- return () => { document.body.style.overflow = ""; };
- }, [activeCard]);
+              // Curved / Warped Edge Clip-Path based on physical position
+              let clipPathStyle = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
+              if (isLeft) {
+                // Left card curves outward on the left edge
+                clipPathStyle = "polygon(0% 4%, 100% 0%, 100% 100%, 0% 96%)";
+              } else if (isRight) {
+                // Right card curves outward on the right edge
+                clipPathStyle = "polygon(0% 0%, 100% 4%, 100% 96%, 0% 100%)";
+              } else if (isCenter) {
+                // Center card has a balanced subtle barrel contour
+                clipPathStyle = "polygon(0% 0.5%, 100% 0.5%, 100% 99.5%, 0% 99.5%)";
+              }
 
- return (
- <>
- <section ref={sectionRef} className="bg-parchment py-24 md:py-0 md:h-screen flex flex-col justify-center overflow-hidden border-t border-gold/10 relative z-10">
- 
- {/* Section Header */}
- <div className="container mx-auto px-6 lg:px-12 mb-16 flex flex-col items-center justify-center text-center flex-shrink-0">
- <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif tracking-[0.5em] uppercase text-ink mb-6 drop-shadow-md pl-[0.5em]">
- INSIGHTS
- </h2>
- <p className="text-base md:text-lg lg:text-xl font-serif text-ink/80 max-w-lg">
- {t("sublabel")}
- </p>
- </div>
+              return (
+                <motion.div
+                  key={index}
+                  className="absolute top-0 flex flex-col items-center cursor-pointer"
+                  style={{
+                    width: isMobile ? "74vw" : "31.5vw",
+                    pointerEvents: isVisible ? "auto" : "none",
+                  }}
+                  initial={false}
+                  animate={{
+                    x: isMobile ? `${xOffsetMobile}vw` : `${xOffsetDesktop}vw`,
+                    scale: isCenter ? 1 : 0.96,
+                    opacity: isCenter ? 1 : isVisible ? 0.82 : 0,
+                    rotate: isCenter ? 0 : isLeft ? -1.8 : isRight ? 1.8 : 0,
+                    zIndex: isCenter ? 30 : isVisible ? 20 : 10,
+                  }}
+                  transition={TRANSITION_CONFIG}
+                  onClick={() => {
+                    if (isLeft) prevSlide();
+                    else if (isRight) nextSlide();
+                    else if (isCenter) setActiveModalIndex(index);
+                  }}
+                >
+                  {/* Image Container with Distinctive Warped Editorial Edges */}
+                  <div
+                    className="relative w-full h-[250px] sm:h-[280px] md:h-[330px] lg:h-[350px] rounded-2xl overflow-hidden shadow-sm transition-all duration-700 bg-slate/5 group"
+                    style={{
+                      clipPath: clipPathStyle,
+                      transition: "clip-path 1.3s cubic-bezier(0.76, 0, 0.24, 1)",
+                    }}
+                  >
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 80vw, 33vw"
+                      className={`object-cover transition-transform duration-700 ${
+                        isCenter ? "group-hover:scale-105" : ""
+                      }`}
+                      priority={isVisible}
+                    />
 
- {/* Universal Carousel */}
- <div className="relative w-full h-[60vh] flex-shrink-0 overflow-hidden">
- <div 
- ref={trackRef} 
- className="flex h-full px-[7.5vw] lg:px-[30vw] gap-6 md:gap-8 items-center w-max"
- >
- {mergedPosts.map((post, i) => (
- <div 
- key={`carousel-${i}`} 
- className="insight-card relative w-[85vw] lg:w-[40vw] flex flex-col group cursor-pointer"
- onClick={() => setActiveCard(i)}
- >
- <motion.div 
- layoutId={isDesktop ? `image-container-${i}` : `image-container-mobile-${i}`}
- className="relative w-full aspect-video overflow-hidden border border-gold/10"
- >
- <motion.div 
- layoutId={isDesktop ? `image-${i}` : `image-mobile-${i}`}
- className="absolute inset-0"
- >
- <Image
- src={post.image}
- alt={post.title}
- fill
- className="object-cover transition-transform duration-700 group-hover:scale-105"
- />
- </motion.div>
- <div className="absolute inset-0 bg-parchment/40 group-hover:bg-transparent transition-colors duration-500" />
- 
- {/* Click affordance */}
- <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 w-10 h-10 md:w-12 md:h-12 rounded-full border border-gold/30 bg-parchment/80 backdrop-blur-sm flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 transform lg:translate-y-4 lg:group-hover:translate-y-0">
- <ArrowRight size={18} className="text-gold" />
- </div>
- </motion.div>
+                    {/* Subtle Overlay to enhance center prominence */}
+                    <div
+                      className={`absolute inset-0 transition-colors duration-700 ${
+                        isCenter
+                          ? "bg-transparent group-hover:bg-ink/5"
+                          : "bg-parchment/30"
+                      }`}
+                    />
 
- <div className="pt-6 md:pt-8 text-center px-4">
- <h3 className="text-lg md:text-xl lg:text-2xl font-serif text-ink/90 leading-snug group-hover:text-gold transition-colors">
- {post.title}
- </h3>
- </div>
- </div>
- ))}
- </div>
- </div>
- </section>
+                    {/* Category pill on center card */}
+                    {isCenter && (
+                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-gold/30 text-[11px] font-bold tracking-widest uppercase text-gold shadow-sm">
+                        {post.category}
+                      </div>
+                    )}
 
- {/* EXPANDED MODAL OVERLAY */}
- <AnimatePresence>
- {activeCard !== null && (
- <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12 lg:p-24 pointer-events-none">
- {/* Backdrop */}
- <motion.div
- initial={{ opacity: 0 }}
- animate={{ opacity: 1 }}
- exit={{ opacity: 0 }}
- className="absolute inset-0 bg-parchment/95 backdrop-blur-md pointer-events-auto"
- onClick={() => setActiveCard(null)}
- />
+                    {/* Active center hover badge */}
+                    {isCenter && (
+                      <div className="absolute bottom-4 right-4 bg-ink/90 text-gold rounded-full w-10 h-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md">
+                        <ArrowRight size={16} />
+                      </div>
+                    )}
+                  </div>
 
- {/* Expanded Content Modal */}
- <div className="relative z-10 w-full max-w-6xl h-full flex flex-col lg:flex-row bg-parchment border border-gold/20 shadow-2xl overflow-hidden pointer-events-auto">
- 
- {/* Close Button */}
- <button 
- onClick={() => setActiveCard(null)}
- className="absolute top-4 right-4 lg:top-6 lg:right-6 z-20 text-ink/50 hover:text-gold transition-colors bg-parchment/50 backdrop-blur-md p-2 rounded-full"
- >
- <X size={24} />
- </button>
+                  {/* Title & Date (Moving as ONE Single Unit with Image) */}
+                  <div className="w-full pt-5 md:pt-7 text-center px-3">
+                    <p className={`text-xs font-sans tracking-widest uppercase mb-1.5 transition-colors duration-500 ${
+                      isCenter ? "text-gold font-bold" : "text-gold/50 font-medium"
+                    }`}>
+                      {post.date}
+                    </p>
+                    <h3
+                      className={`font-serif leading-snug transition-all duration-500 line-clamp-2 ${
+                        isCenter
+                          ? "text-xl sm:text-2xl md:text-3xl text-ink font-semibold"
+                          : "text-lg sm:text-xl md:text-2xl text-ink/65 font-normal"
+                      }`}
+                    >
+                      {post.title}
+                    </h3>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
 
- {/* Left: Expanded Image (Framer Motion Morph) */}
- <motion.div 
- layoutId={isDesktop ? `image-container-${activeCard}` : `image-container-mobile-${activeCard}`}
- className="relative w-full lg:w-1/2 h-[40vh] lg:h-full"
- >
- <motion.div 
- layoutId={isDesktop ? `image-${activeCard}` : `image-mobile-${activeCard}`}
- className="absolute inset-0"
- >
- <Image
- src={mergedPosts[activeCard].image}
- alt={mergedPosts[activeCard].title}
- fill
- className="object-cover"
- />
- </motion.div>
- {/* Gradient overlay to ensure text contrast if we had overlaid text, but we don't. Just adding a vignette */}
- <div className="absolute inset-0 bg-gradient-to-r from-transparent to-parchment/20 pointer-events-none" />
- </motion.div>
+        {/* Carousel Controls & Pagination */}
+        <div className="container mx-auto px-6 mt-12 md:mt-16 flex items-center justify-between max-w-xs md:max-w-sm mx-auto">
+          {/* Prev Button */}
+          <button
+            onClick={prevSlide}
+            aria-label="Previous Insight"
+            className="w-11 h-11 rounded-full border border-ink/20 hover:border-gold hover:text-gold flex items-center justify-center text-ink transition-colors bg-white/80 shadow-sm group"
+          >
+            <ArrowLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
+          </button>
 
- {/* Right: Detailed Description */}
- <motion.div 
- initial={{ opacity: 0, x: 20 }}
- animate={{ opacity: 1, x: 0, transition: { delay: 0.2, duration: 0.5 } }}
- exit={{ opacity: 0, transition: { duration: 0.2 } }}
- className="w-full lg:w-1/2 h-full p-8 lg:p-16 flex flex-col justify-center overflow-y-auto"
- >
- <p className="text-[10px] tracking-wide-2xl uppercase text-gold/70 mb-4">
- {mergedPosts[activeCard].category} • {mergedPosts[activeCard].date}
- </p>
- <h2 className="text-3xl lg:text-4xl font-serif text-ink mb-8 leading-tight">
- {mergedPosts[activeCard].title}
- </h2>
- 
- <div className="h-px w-12 bg-gold/50 mb-8" />
- 
- <p className="text-base lg:text-lg text-ink/70 font-sans leading-relaxed mb-6">
- {mergedPosts[activeCard].description}
- </p>
- 
- <a
- href={`/${locale}/blog`}
- className="mt-8 group inline-flex items-center gap-3 text-xs tracking-wide-xl uppercase text-gold hover:text-ink transition-colors w-fit"
- >
- <span>Read Full Article</span>
- <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
- </a>
- </motion.div>
+          {/* Indicator Counter & Dots */}
+          <div className="flex items-center gap-2">
+            {mergedPosts.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`transition-all duration-500 rounded-full ${
+                  currentIndex === i
+                    ? "w-8 h-2 bg-gold"
+                    : "w-2 h-2 bg-ink/20 hover:bg-ink/40"
+                }`}
+              />
+            ))}
+          </div>
 
- </div>
- </div>
- )}
- </AnimatePresence>
- </>
- );
+          {/* Next Button */}
+          <button
+            onClick={nextSlide}
+            aria-label="Next Insight"
+            className="w-11 h-11 rounded-full border border-ink/20 hover:border-gold hover:text-gold flex items-center justify-center text-ink transition-colors bg-white/80 shadow-sm group"
+          >
+            <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
+          </button>
+        </div>
+      </section>
+
+      {/* EXPANDED EDITORIAL DETAIL MODAL */}
+      <AnimatePresence>
+        {activeModalIndex !== null && (
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6 md:p-12 lg:p-20">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0 bg-ink/70 backdrop-blur-md"
+              onClick={() => setActiveModalIndex(null)}
+            />
+
+            {/* Modal Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+              className="relative z-10 w-full max-w-5xl max-h-[90vh] bg-parchment rounded-2xl shadow-2xl border border-gold/30 overflow-hidden flex flex-col md:flex-row my-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setActiveModalIndex(null)}
+                aria-label="Close modal"
+                className="absolute top-4 right-4 md:top-6 md:right-6 z-30 w-10 h-10 rounded-full bg-white/90 border border-ink/20 text-ink hover:text-gold hover:border-gold flex items-center justify-center transition-colors shadow-md"
+              >
+                <X size={20} />
+              </button>
+
+              {/* Modal Left: Image */}
+              <div className="relative w-full md:w-1/2 h-[260px] sm:h-[320px] md:h-auto min-h-[300px]">
+                <Image
+                  src={mergedPosts[activeModalIndex].image}
+                  alt={mergedPosts[activeModalIndex].title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Modal Right: Article Description */}
+              <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-14 flex flex-col justify-center overflow-y-auto">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-xs font-bold tracking-widest uppercase text-gold">
+                    {mergedPosts[activeModalIndex].category}
+                  </span>
+                  <span className="text-ink/30">•</span>
+                  <span className="text-xs font-medium tracking-wider uppercase text-ink/50">
+                    {mergedPosts[activeModalIndex].date}
+                  </span>
+                </div>
+
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-ink leading-tight mb-6">
+                  {mergedPosts[activeModalIndex].title}
+                </h2>
+
+                <div className="w-12 h-0.5 bg-gold mb-6" />
+
+                <p className="text-base md:text-lg text-ink/75 font-sans leading-relaxed mb-8">
+                  {mergedPosts[activeModalIndex].description}
+                </p>
+
+                <a
+                  href={`/${locale}/blog`}
+                  className="group inline-flex items-center gap-3 bg-gold hover:bg-gold/90 text-ink font-bold font-sans uppercase tracking-widest px-8 py-3.5 rounded-full text-xs md:text-sm transition-all shadow-md w-fit"
+                >
+                  <span>Read Full Article</span>
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }
