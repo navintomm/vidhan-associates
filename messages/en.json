@@ -382,16 +382,17 @@
         "bio": "Adv. Rohit S. Madasseril is a dedicated legal professional at Vidhan Law Chambers, committed to upholding the values of law with integrity and making justice accessible to those who seek it. (+91 7907139328)"
       },
       {
-        "id": "antony-george-mavumkal",
-        "name": "Adv. Antony George Mavumkal",
-        "role": "Advocate",
-        "bio": "Adv. Antony George Mavumkal brings strategic insight and unwavering dedication to his practice at Vidhan Law Chambers, ensuring comprehensive legal counsel for our clients. (+91 9633749958)"
-      },
-      {
         "id": "rones-v-anil",
         "name": "Adv. Rones V. Anil",
         "role": "Advocate",
         "bio": "Adv. Rones V. Anil combines rigorous analytical skills with a passionate approach to justice, providing clients with steadfast representation in complex matters. (+91 8606723820)"
+      },
+      {
+        "id": "sreejith-vk",
+        "name": "Adv. Sreejith VK",
+        "role": "Advocate",
+        "email": "Sreejithvk3@gmail.com",
+        "bio": "Adv. Sreejith VK brings strategic insight and unwavering dedication to his practice at Vidhan Law Chambers, ensuring comprehensive legal counsel for our clients."
       }
     ]
   },

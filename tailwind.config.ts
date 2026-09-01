@@ -11,14 +11,14 @@ const config: Config = {
     extend: {
       fontFamily: {
         serif: ["var(--font-fraunces)", "var(--font-noto-serif-malayalam)", "serif"],
-        sans: ["var(--font-ibm-plex-sans)", "var(--font-noto-sans-malayalam)", "sans-serif"],
+        sans: ["var(--font-poppins)", "var(--font-noto-sans-malayalam)", "sans-serif"],
       },
       colors: {
-        ink: "#12141A",
-        parchment: "#F6F1E4",
+        ink: "#010101",
+        parchment: "#FEFEFE",
         gold: {
-          DEFAULT: "#A9812D",
-          soft: "#D8C48A",
+          DEFAULT: "#E6AF2E",
+          soft: "#F0CF7A",
         },
         seal: "#6B0F1A",
         slate: "#3B3F4A",

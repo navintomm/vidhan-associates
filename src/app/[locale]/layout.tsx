@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Noto_Serif_Malayalam, IBM_Plex_Sans, Noto_Sans_Malayalam } from "next/font/google";
+import { Fraunces, Noto_Serif_Malayalam, Poppins, Noto_Sans_Malayalam } from "next/font/google";
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import "../globals.css";
@@ -12,7 +12,7 @@ import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const fraunces = Fraunces({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-fraunces" });
-const ibmPlexSans = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-ibm-plex-sans" });
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-poppins" });
 
 const notoSerifMalayalam = Noto_Serif_Malayalam({ subsets: ["malayalam"], weight: ["400", "600"], variable: "--font-noto-serif-malayalam" });
 const notoSansMalayalam = Noto_Sans_Malayalam({ subsets: ["malayalam"], weight: ["400", "500", "600", "700"], variable: "--font-noto-sans-malayalam" });
@@ -34,7 +34,7 @@ export default async function LocaleLayout({
   const isMalayalam = locale === 'ml';
 
   const headingFont = isMalayalam ? notoSerifMalayalam.variable : fraunces.variable;
-  const bodyFont = isMalayalam ? notoSansMalayalam.variable : ibmPlexSans.variable;
+  const bodyFont = isMalayalam ? notoSansMalayalam.variable : poppins.variable;
 
   return (
     <html lang={locale} suppressHydrationWarning>

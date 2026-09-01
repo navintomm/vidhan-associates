@@ -7,9 +7,9 @@ import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 
 const IMAGES: Record<string, string> = {
-  "rohit-s-madasseril": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000",
-  "antony-george-mavumkal": "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1000",
-  "rones-v-anil": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1000",
+  "rohit-s-madasseril": "/images/team/rohit.jpg",
+  "rones-v-anil": "/images/team/rones.png",
+  "sreejith-vk": "/images/team/sreejith.png",
 };
 
 export default function TeamGallery() {
@@ -22,6 +22,7 @@ export default function TeamGallery() {
     name: string;
     role: string;
     bio: string;
+    email?: string;
   };
   const rawMembers = t.raw("members") as Array<TeamMember>;
   
@@ -154,12 +155,11 @@ export default function TeamGallery() {
 
                 {/* Contact Links */}
                 <div className="flex gap-6">
-                  <a href="#" className="w-12 h-12 rounded-full border border-parchment/20 flex items-center justify-center text-parchment hover:text-gold hover:border-gold/50 transition-colors">
-                    <LinkIcon size={20} />
-                  </a>
-                  <a href="#" className="w-12 h-12 rounded-full border border-parchment/20 flex items-center justify-center text-parchment hover:text-gold hover:border-gold/50 transition-colors">
-                    <Mail size={20} />
-                  </a>
+                  {activeData.email && (
+                    <a href={`mailto:${activeData.email}`} className="w-12 h-12 rounded-full border border-parchment/20 flex items-center justify-center text-parchment hover:text-gold hover:border-gold/50 transition-colors" title={`Email ${activeData.name}`}>
+                      <Mail size={20} />
+                    </a>
+                  )}
                 </div>
               </motion.div>
             </motion.div>
