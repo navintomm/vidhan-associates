@@ -67,43 +67,40 @@ export default function Header({ locale }: { locale: string }) {
  <>
  <header
  className={`fixed top-0 w-full z-[9999] transition-all duration-500 ${
- scrolled ? "bg-parchment/80 backdrop-blur-md shadow-sm" : "bg-transparent"
+ scrolled ? "bg-parchment/95 backdrop-blur-md shadow-sm" : "bg-transparent"
  }`}
  >
- {/* Top row — Nav links centered across full width */}
- <div className={`hidden lg:flex items-center justify-center gap-6 xl:gap-10 px-6 transition-all duration-500 ${scrolled ? 'pt-2 pb-1' : 'pt-5 pb-3'}`}>
- {navLinks.map((link) => (
- <Link
- key={link.key}
- href={`/${locale}${link.href === "/" ? "" : link.href}`}
- className="text-xs xl:text-sm font-medium tracking-[0.2em] uppercase text-ink/80 hover:text-gold transition-colors duration-300"
- >
- {tNav(link.key)}
- </Link>
- ))}
- </div>
-
- {/* Bottom row — Logo (hidden on home hero) + Actions */}
- <div className={`container mx-auto px-6 lg:px-12 flex items-center justify-between transition-all duration-500 ${scrolled ? 'pb-2' : 'pb-4'}`}>
- {/* Logo */}
- <div className={`flex items-center transition-opacity duration-500 ${isHome && !scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
- <Link href={`/${locale}`} className="flex items-center">
+ <div className={`container mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between transition-all duration-500 ${scrolled ? 'py-2.5' : 'py-4 lg:py-5'}`}>
+ {/* 1. Left — Logo */}
+ <Link href={`/${locale}`} className="flex items-center shrink-0">
  <Image
  src="/logo.png.png"
  alt="Vidhan Law Chambers Logo"
- width={scrolled ? 100 : 130}
- height={scrolled ? 35 : 46}
+ width={scrolled ? 110 : 135}
+ height={scrolled ? 38 : 48}
  className="object-contain transition-all duration-500"
  priority
  />
  </Link>
- </div>
 
- {/* Actions */}
- <div className="flex items-center gap-3 ml-auto">
+ {/* 2. Center — Nav links in same parallel line */}
+ <nav className="hidden lg:flex items-center gap-4 xl:gap-7 2xl:gap-9 mx-2">
+ {navLinks.map((link) => (
+ <Link
+ key={link.key}
+ href={`/${locale}${link.href === "/" ? "" : link.href}`}
+ className="text-[11px] xl:text-xs 2xl:text-sm font-bold tracking-[0.16em] xl:tracking-[0.2em] uppercase text-ink hover:text-gold transition-colors duration-300 whitespace-nowrap"
+ >
+ {tNav(link.key)}
+ </Link>
+ ))}
+ </nav>
+
+ {/* 3. Right — Actions (Consult + MAL + Mobile Menu) */}
+ <div className="flex items-center gap-2 sm:gap-3 shrink-0">
  <Link
  href={`/${locale}/contact`}
- className={`hidden md:inline-flex group items-center gap-2 text-[10px] md:text-xs tracking-widest uppercase text-ink/80 hover:text-gold transition-colors border border-ink/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-4 py-1' : 'px-5 py-1.5'}`}
+ className={`hidden md:inline-flex group items-center gap-2 text-[11px] md:text-xs font-bold tracking-widest uppercase text-ink hover:text-gold transition-all border border-ink/30 hover:border-gold bg-white/70 backdrop-blur-sm rounded-full ${scrolled ? 'px-4 py-1.5' : 'px-5 py-2'} shadow-sm`}
  >
  <span>Consult</span>
  <span className="relative w-4 h-4 overflow-hidden flex items-center justify-center">
@@ -116,7 +113,7 @@ export default function Header({ locale }: { locale: string }) {
  <div className="relative inline-block w-max shrink-0">
  <button
  onClick={toggleLanguage}
- className={`text-[10px] md:text-xs font-medium tracking-widest uppercase text-ink/60 hover:text-gold transition-colors border border-ink/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-3 py-1' : 'px-4 py-1.5'}`}
+ className={`text-[11px] md:text-xs font-bold tracking-widest uppercase text-ink hover:text-gold transition-all border border-ink/30 hover:border-gold bg-white/70 backdrop-blur-sm rounded-full ${scrolled ? 'px-3.5 py-1.5' : 'px-4 py-2'} shadow-sm`}
  >
  {locale === "en" ? "MAL" : "ENG"}
  </button>
@@ -128,15 +125,15 @@ export default function Header({ locale }: { locale: string }) {
  animate={{ opacity: 1, y: 0 }}
  exit={{ opacity: 0, y: -5 }}
  transition={{ delay: 1 }}
- className="absolute top-full left-1/2 -translate-x-1/2 mt-2 pointer-events-none drop-shadow-md z-[10001]"
+ className="absolute top-full right-0 mt-2 pointer-events-none drop-shadow-md z-[10001]"
  >
  <motion.div
  animate={{ y: [0, 4, 0] }}
  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
- className="relative bg-gold text-ink text-[11px] font-semibold whitespace-nowrap px-3 py-1.5 rounded-[4px]"
+ className="relative bg-gold text-ink text-[11px] font-bold whitespace-nowrap px-3 py-1.5 rounded-[4px] shadow-sm"
  >
  {/* Tooltip triangle — gold */}
- <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-gold"></div>
+ <div className="absolute -top-1.5 right-4 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-gold"></div>
  മലയാളത്തിൽ വായിക്കുക
  </motion.div>
  </motion.div>
@@ -146,13 +143,13 @@ export default function Header({ locale }: { locale: string }) {
 
  <button
  onClick={() => setIsOpen(!isOpen)}
- className={`lg:hidden rounded-full border border-ink/20 hover:border-gold/50 flex items-center justify-center text-ink/70 hover:text-gold transition-colors ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
+ className={`lg:hidden rounded-full border border-ink/30 hover:border-gold flex items-center justify-center text-ink hover:text-gold transition-colors ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
+ aria-label="Toggle Menu"
  >
  {isOpen ? <X size={16} /> : <Menu size={16} />}
  </button>
  </div>
  </div>
-
  </header>
 
  {/* Full-Screen Mobile Menu Overlay */}
