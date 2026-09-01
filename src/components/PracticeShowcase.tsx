@@ -30,56 +30,66 @@ export default function PracticeShowcase() {
  return () => mediaQuery.removeEventListener("change", handleMotionChange);
  }, []);
 
- useEffect(() => {
- const mm = gsap.matchMedia();
+  useEffect(() => {
+    const mm = gsap.matchMedia();
 
- mm.add("all", () => {
- if (!sectionRef.current) return;
+    mm.add("all", () => {
+      if (!sectionRef.current) return;
 
- const tl = gsap.timeline({
- scrollTrigger: {
- trigger: sectionRef.current,
- pin: true,
- scrub: 1.5, // Increased from 1 to 1.5 for extra cinematic smoothness
- start: "top top",
- end: "+=600%", // 6 screens of scrolling duration for 6 pillars
- anticipatePin: 1,
- },
- });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          pin: true,
+          pinSpacing: true,
+          scrub: 1.2,
+          start: "top top",
+          end: "+=600vh", // 6 full screen lengths of scrolling to complete all 6 pillars
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
 
- // Initial States - explicitly setting xPercent to -71 so GSAP preserves visual centering 
- // because the pillar image's visual center is at 71% of its width.
- gsap.set(".pillar-0", { y: "40vh", opacity: 0, xPercent: -71, x: 0 });
- 
- const otherPillars = WORDS.slice(1).map((_, i) => `.pillar-${i + 1}`).join(", ");
- gsap.set(otherPillars, { x: "50vw", xPercent: -71, z: -600, rotationY: 45, opacity: 0 });
+      // Initial States - explicitly setting xPercent to -71 so GSAP preserves visual centering 
+      // because the pillar image's visual center is at 71% of its width.
+      gsap.set(".pillar-0", { y: "40vh", opacity: 0, xPercent: -71, x: 0, z: 0, rotationY: 0 });
+      
+      const otherPillars = WORDS.slice(1).map((_, i) => `.pillar-${i + 1}`).join(", ");
+      gsap.set(otherPillars, { x: "50vw", xPercent: -71, z: -600, rotationY: 45, opacity: 0 });
 
- // Phase 1: Pillar 0 rises
- tl.to(".pillar-0", { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
+      // Phase 1: Pillar 0 rises
+      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
 
- // Hold Phase 0
- tl.to({}, { duration: 1 });
+      // Hold Phase 0
+      tl.to({}, { duration: 1 });
 
- // Build the transitions dynamically for the 6 pillars
- for (let i = 0; i < WORDS.length - 1; i++) {
- const transLabel = `trans${i}`;
- 
- // Current pillar arcs left and exits
- tl.to(`.pillar-${i}`, { x: "-50vw", z: -600, rotationY: -45, opacity: 0, duration: 2, ease: "power2.inOut" }, transLabel)
- // Next pillar arcs in from right to center
- .to(`.pillar-${i+1}`, { x: 0, z: 0, rotationY: 0, opacity: 1, duration: 2, ease: "power2.inOut" }, transLabel);
- 
- // Hold Phase
- tl.to({}, { duration: 1 });
- }
+      // Build the transitions dynamically for the 6 pillars (V - I - D - H - A - N)
+      for (let i = 0; i < WORDS.length - 1; i++) {
+        const transLabel = `trans${i}`;
+        
+        // Current pillar arcs left and exits
+        tl.to(`.pillar-${i}`, { x: "-50vw", z: -600, rotationY: -45, opacity: 0, duration: 2, ease: "power2.inOut" }, transLabel)
+        // Next pillar arcs in from right to center
+        .to(`.pillar-${i+1}`, { x: 0, z: 0, rotationY: 0, opacity: 1, duration: 2, ease: "power2.inOut" }, transLabel);
+        
+        // Hold Phase for each pillar
+        tl.to({}, { duration: 1 });
+      }
 
- return () => {
- tl.kill();
- };
- });
+      // Final Hold for Nobility
+      tl.to({}, { duration: 1 });
 
- return () => mm.revert();
- }, [isReducedMotion]);
+      setTimeout(() => {
+        ScrollTrigger.sort();
+        ScrollTrigger.refresh();
+      }, 100);
+
+      return () => {
+        tl.kill();
+      };
+    });
+
+    return () => mm.revert();
+  }, [isReducedMotion]);
 
  return (
  <section ref={sectionRef} className="relative bg-parchment overflow-hidden h-screen w-full">

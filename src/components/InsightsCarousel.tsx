@@ -129,6 +129,7 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
           scrub: 1.2,
           start: "top top",
           end: () => `+=${getScrollDistance() + window.innerHeight * 0.8}`,
+          pinSpacing: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: updateCardCurvature,
@@ -140,6 +141,11 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         x: () => -getScrollDistance(),
         ease: "none",
       });
+
+      setTimeout(() => {
+        ScrollTrigger.sort();
+        ScrollTrigger.refresh();
+      }, 150);
     }, sectionRef);
 
     return () => ctx.revert();
