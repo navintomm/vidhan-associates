@@ -101,6 +101,17 @@ export default function Header({ locale }: { locale: string }) {
 
  {/* Actions */}
  <div className="flex items-center gap-3 ml-auto">
+ <Link
+ href={`/${locale}/contact`}
+ className={`hidden md:inline-flex group items-center gap-2 text-[10px] md:text-xs tracking-widest uppercase text-ink/80 hover:text-gold transition-colors border border-ink/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-4 py-1' : 'px-5 py-1.5'}`}
+ >
+ <span>Consult</span>
+ <div className="relative w-4 h-4 overflow-hidden flex items-center justify-center">
+ <ArrowRight size={12} className="absolute transition-transform duration-500 ease-in-out group-hover:translate-x-6 group-active:translate-x-6" />
+ <ArrowRight size={12} className="absolute -translate-x-6 transition-transform duration-500 ease-in-out group-hover:translate-x-0 group-active:translate-x-0" />
+ </div>
+ </Link>
+
  {/* Language Switcher */}
  <div className="relative inline-block w-max shrink-0">
  <button
@@ -132,17 +143,6 @@ export default function Header({ locale }: { locale: string }) {
  )}
  </AnimatePresence>
  </div>
-
- <Link
- href={`/${locale}/contact`}
- className={`hidden md:inline-flex group items-center gap-2 text-[10px] md:text-xs tracking-widest uppercase text-ink/80 hover:text-gold transition-colors border border-ink/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-4 py-1' : 'px-5 py-1.5'}`}
- >
- <span>Consult</span>
- <div className="relative w-4 h-4 overflow-hidden flex items-center justify-center">
- <ArrowRight size={12} className="absolute transition-transform duration-500 ease-in-out group-hover:translate-x-6 group-active:translate-x-6" />
- <ArrowRight size={12} className="absolute -translate-x-6 transition-transform duration-500 ease-in-out group-hover:translate-x-0 group-active:translate-x-0" />
- </div>
- </Link>
 
  <button
  onClick={() => setIsOpen(!isOpen)}

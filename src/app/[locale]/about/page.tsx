@@ -42,7 +42,7 @@ export default function AboutPage() {
  initial={{ opacity: 0, y: 20 }}
  animate={{ opacity: 1, y: 0 }}
  transition={{ duration: 0.8, delay: 0.15 }}
- className="bg-parchment rounded-xl p-8 md:p-12 shadow-xl border border-gold/10"
+ className="bg-white rounded-xl p-8 md:p-12 shadow-md border border-gold/10"
  >
  <div className="flex items-center gap-3 mb-8">
  <Landmark className="text-gold w-7 h-7" />
@@ -112,7 +112,7 @@ export default function AboutPage() {
  {tValues("label")}
  </p>
 
- <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
  {values.map((v, i) => (
  <motion.div
  key={i}
@@ -120,7 +120,7 @@ export default function AboutPage() {
  whileInView={{ opacity: 1, y: 0 }}
  viewport={{ once: true }}
  transition={{ duration: 0.7, delay: i * 0.12 }}
- className={`py-8 px-6 md:px-10 ${i < values.length - 1 ? "md:border-r border-gold/10" : ""} border-b md:border-b-0 border-gold/10 last:border-b-0`}
+ className="bg-white p-8 md:p-10 rounded-xl shadow-sm border border-gold/10 flex flex-col h-full"
  >
  {/* Number indicator */}
  <p className="text-lg md:text-xl font-serif tracking-widest text-gold/80 mb-6">
