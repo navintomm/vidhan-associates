@@ -38,7 +38,7 @@ export default async function LocaleLayout({
 
  return (
  <html lang={locale} suppressHydrationWarning>
- <body className={`${headingFont} ${bodyFont} font-sans antialiased bg-parchment text-ink transition-colors duration-300`}>
+ <body className={`${headingFont} ${bodyFont} font-sans antialiased bg-parchment text-ink transition-colors duration-300`} suppressHydrationWarning>
  <ThemeProvider>
  <NextIntlClientProvider messages={messages}>
  <SmoothScrollProvider>

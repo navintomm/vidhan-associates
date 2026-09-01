@@ -109,7 +109,7 @@ export default function CaseExperiencePage() {
  whileInView={{ opacity: 1, y: 0 }}
  viewport={{ once: true }}
  transition={{ duration: 0.5, delay: index * 0.1 }}
- className="p-8 md:p-10 rounded-xl bg-parchment/5 border border-gold/10 hover:border-gold/30 transition-colors"
+ className="p-8 md:p-10 rounded-xl bg-white shadow-sm border border-gold/10 hover:shadow-md transition-shadow"
  >
  <div className="flex items-start gap-4 mb-4">
  <ChevronRight className="text-gold w-6 h-6 shrink-0 mt-1" />
