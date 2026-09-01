@@ -12,17 +12,17 @@ export default function HomeHero({ locale }: { locale: string }) {
  return (
  <section className="relative w-full h-screen overflow-hidden flex items-end pb-24 md:pb-32 bg-parchment">
 
- {/* Background � subtle gold radial glow for warmth on white */}
- <div className="absolute inset-0 z-0 pointer-events-none"
- style={{
- backgroundImage: `radial-gradient(ellipse 80% 60% at 70% 50%, rgba(230,175,46,0.07) 0%, transparent 70%)`,
- }}
+ {/* ===== Background Image ===== */}
+ <div className="absolute inset-0 z-0 bg-cover bg-[70%_top] md:bg-center animate-ken-burns"
+ style={{ backgroundImage: "url('/new hero icon.png')" }}
  />
+ {/* Light wash to ensure gold/dark text is still readable if the image has dark spots */}
+ <div className="absolute inset-0 z-10 pointer-events-none bg-parchment/10" />
 
  {/* Content */}
  <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full h-full flex flex-col pt-32 pb-24 md:pb-32">
 
- {/* Top � Motto */}
+ {/* Top  Motto */}
  <motion.div
  initial={{ opacity: 0, y: -20 }}
  animate={{ opacity: 1, y: 0 }}

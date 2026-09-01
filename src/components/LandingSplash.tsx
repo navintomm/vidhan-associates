@@ -78,7 +78,7 @@ export default function LandingSplash() {
  onClick={() => {
  setStep("splash");
  }}
- className="bg-parchment text-white px-6 md:px-10 py-3 md:py-4 text-xs md:text-sm tracking-widest font-bold uppercase hover:bg-parchment/90 transition-colors rounded-sm w-full md:w-auto"
+ className="bg-ink text-parchment px-6 md:px-10 py-3 md:py-4 text-xs md:text-sm tracking-widest font-bold uppercase hover:bg-ink/90 transition-colors rounded-sm w-full md:w-auto"
  >
  I Agree
  </button>
