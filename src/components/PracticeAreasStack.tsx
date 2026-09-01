@@ -149,7 +149,7 @@ export default function PracticeAreasStack() {
  
  {/* Background Texture/Watermark */}
  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
-   <h2 className="text-[8vw] lg:text-[10vw] font-serif font-black tracking-[0.15em] text-ink/[0.08] whitespace-nowrap select-none">
+   <h2 className="text-[10vw] lg:text-[13vw] font-serif font-black tracking-[0.12em] text-ink/[0.16] whitespace-nowrap select-none">
      P R A C T I C E &nbsp; A R E A S
    </h2>
  </div>
