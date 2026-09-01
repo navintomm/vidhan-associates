@@ -12,17 +12,17 @@ export default function HomeHero({ locale }: { locale: string }) {
   return (
     <section className="relative w-full h-screen overflow-hidden flex items-end pb-20 md:pb-28 bg-parchment">
 
-      {/* ===== Isolated Lady of Justice Statue (Confined to right side to guarantee zero overlap with logo) ===== */}
-      <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[80%] md:w-[62%] lg:w-[54%] xl:w-[48%] z-0 pointer-events-none flex items-center justify-end overflow-hidden">
-        <div className="relative w-full h-full">
-          <Image
-            src="/new hero icon.png"
-            alt="Lady Justice"
-            fill
-            className="object-contain object-right md:object-right-center"
-            priority
-          />
-        </div>
+      {/* ===== Full-Screen Enlarged Lady of Justice Background ===== */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <Image
+          src="/new hero icon.png"
+          alt="Lady Justice"
+          fill
+          className="object-cover object-[72%_center] md:object-[80%_center] lg:object-[83%_center] scale-100 md:scale-105"
+          priority
+        />
+        {/* Soft parchment wash on the left to maintain clean logo isolation */}
+        <div className="absolute inset-0 bg-gradient-to-r from-parchment/70 via-parchment/20 to-transparent pointer-events-none" />
       </div>
 
       {/* Content */}
