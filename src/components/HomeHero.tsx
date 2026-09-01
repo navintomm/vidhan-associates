@@ -21,8 +21,8 @@ export default function HomeHero({ locale }: { locale: string }) {
           className="object-cover object-[72%_center] md:object-[80%_center] lg:object-[83%_center] scale-100 md:scale-105"
           priority
         />
-        {/* High-contrast parchment wash on the left to guarantee 100% text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/80 md:via-parchment/50 to-transparent pointer-events-none" />
+        {/* Soft parchment wash on the left to maintain clean logo isolation */}
+        <div className="absolute inset-0 bg-gradient-to-r from-parchment/70 via-parchment/20 to-transparent pointer-events-none" />
       </div>
 
       {/* Content */}
@@ -36,9 +36,9 @@ export default function HomeHero({ locale }: { locale: string }) {
             transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
             className="flex flex-col items-start"
           >
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 border border-gold/50 shadow-sm backdrop-blur-sm mb-5">
-              <span className="w-2 h-2 rounded-full bg-gold shrink-0" />
-              <span className="text-ink font-extrabold tracking-[0.2em] uppercase text-xs md:text-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-0.5 bg-ink" />
+              <span className="text-ink tracking-[0.25em] uppercase text-xs md:text-sm font-bold">
                 Advocates &amp; Legal Consultants
               </span>
             </div>
@@ -54,7 +54,7 @@ export default function HomeHero({ locale }: { locale: string }) {
 
             <Link
               href={`/${locale}/contact`}
-              className="mt-[30px] -translate-x-[5px] group inline-flex items-center gap-3.5 bg-white/95 hover:bg-gold text-ink transition-all duration-300 pl-5 md:pl-6 pr-2 py-2 rounded-full border border-gold/60 hover:border-gold shadow-md hover:shadow-xl hover:scale-[1.02] backdrop-blur-sm"
+              className="mt-[25px] -translate-x-[5px] group inline-flex items-center gap-3.5 bg-white/95 hover:bg-gold text-ink transition-all duration-300 pl-5 md:pl-6 pr-2 py-2 rounded-full border border-gold/60 hover:border-gold shadow-md hover:shadow-xl hover:scale-[1.02] backdrop-blur-sm"
             >
               <span className="text-xs md:text-sm tracking-[0.16em] uppercase font-bold">
                 Schedule a Consultation
