@@ -148,10 +148,10 @@ export default function PracticeAreasStack() {
  <div ref={containerRef} className="h-screen w-full bg-parchment flex flex-col items-center justify-center relative overflow-hidden pt-24 pb-12">
  
  {/* Background Texture/Watermark */}
- <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
- <h2 className="text-[15vw] font-serif tracking-[0.2em] text-ink/[0.08] whitespace-nowrap select-none">
- V I D H A N
- </h2>
+ <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
+   <h2 className="text-[8vw] lg:text-[10vw] font-serif font-black tracking-[0.15em] text-ink/[0.08] whitespace-nowrap select-none">
+     P R A C T I C E &nbsp; A R E A S
+   </h2>
  </div>
 
  {/* Header Text */}
