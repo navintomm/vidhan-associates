@@ -26,10 +26,10 @@ export default function HomeHero({ locale }: { locale: string }) {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full h-full flex flex-col justify-between pt-36 md:pt-44 pb-16 md:pb-24">
+      <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full h-full flex flex-col justify-center pt-32 md:pt-40 pb-16 md:pb-24">
 
-        {/* Main Left-Aligned Headline */}
-        <div className="my-auto max-w-2xl">
+        {/* Main Left-Aligned Headline with CTA directly below */}
+        <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -43,25 +43,16 @@ export default function HomeHero({ locale }: { locale: string }) {
               </span>
             </div>
             
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-ink leading-[1.06] tracking-tight mb-6">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-black text-ink leading-[1.05] tracking-tight uppercase mb-6">
               The Pursuit <br />
-              <span className="italic font-normal text-gold">of Justice</span>
+              <span className="text-gold font-extrabold">of Justice</span>
             </h1>
 
-            <p className="text-lg md:text-xl font-sans text-slate/80 leading-relaxed max-w-lg">
+            <p className="text-lg md:text-xl font-sans text-slate/85 leading-relaxed max-w-lg mb-8">
               Independent legal practice providing strategic counsel and principled advocacy across Kerala and beyond.
             </p>
-          </motion.div>
-        </div>
 
-        {/* Bottom-Right — Schedule a Consultation CTA */}
-        <div className="flex flex-col md:flex-row md:items-end justify-end">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-            className="flex-shrink-0"
-          >
+            {/* Schedule a Consultation CTA directly below the pursuit text */}
             <Link
               href={`/${locale}/contact`}
               className="group inline-flex items-center gap-4 bg-white/95 hover:bg-gold text-ink transition-all duration-300 pl-7 md:pl-9 pr-3 md:pr-3.5 py-3 md:py-3.5 rounded-full border-2 border-gold/50 hover:border-gold shadow-lg hover:shadow-2xl hover:scale-[1.02] backdrop-blur-sm"
@@ -76,6 +67,7 @@ export default function HomeHero({ locale }: { locale: string }) {
             </Link>
           </motion.div>
         </div>
+
       </div>
 
     </section>
