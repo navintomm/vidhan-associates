@@ -12,46 +12,51 @@ export default function HomeHero({ locale }: { locale: string }) {
   return (
     <section className="relative w-full h-screen overflow-hidden flex items-end pb-20 md:pb-28 bg-parchment">
 
-      {/* ===== Background Image (Lady Justice Statue shifted to right to leave left side clear) ===== */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-[85%_center] md:bg-[90%_center] lg:bg-[93%_center] bg-no-repeat"
-        style={{ backgroundImage: "url('/new hero icon.png')" }}
-      />
-      {/* Light wash to ensure crisp text contrast */}
-      <div className="absolute inset-0 z-10 pointer-events-none bg-parchment/10" />
+      {/* ===== Isolated Lady of Justice Statue (Confined to right side to guarantee zero overlap with logo) ===== */}
+      <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[80%] md:w-[62%] lg:w-[54%] xl:w-[48%] z-0 pointer-events-none flex items-center justify-end overflow-hidden">
+        <div className="relative w-full h-full">
+          <Image
+            src="/new hero icon.png"
+            alt="Lady Justice"
+            fill
+            className="object-contain object-right md:object-right-center"
+            priority
+          />
+        </div>
+      </div>
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full h-full flex flex-col pt-28 md:pt-32 pb-16 md:pb-24 justify-between">
 
-        {/* Top — Motto */}
+        {/* Top — Motto (Changed to Black / text-ink) */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="w-full flex flex-col items-center justify-center text-center mt-2 md:mt-4"
         >
-          <span className="text-gold/70 tracking-[0.4em] uppercase text-xs md:text-sm font-sans mb-1 font-semibold">
+          <span className="text-ink/60 tracking-[0.4em] uppercase text-xs md:text-sm font-sans mb-1 font-bold">
             The
           </span>
-          <p className="text-gold tracking-[0.35em] md:tracking-[0.45em] uppercase text-2xl md:text-3xl lg:text-4xl font-sans font-black drop-shadow-sm">
+          <p className="text-ink tracking-[0.35em] md:tracking-[0.45em] uppercase text-2xl md:text-3xl lg:text-4xl font-sans font-black">
             Pursuit of Justice
           </p>
         </motion.div>
 
-        {/* Center-Left — Gold Vidhan Logo (Kept strictly on left to avoid overlapping the statue) */}
+        {/* Center-Left — Gold Vidhan Logo (Isolated on Left) */}
         <div className="my-auto flex flex-col justify-center items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
-            className="w-full max-w-[340px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[500px] flex flex-col items-start"
+            className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[480px] flex flex-col items-start"
           >
             <div className="w-full flex flex-col items-center">
               <Image
                 src="/logo.png.png"
                 alt="Vidhan Law Chambers"
-                width={550}
-                height={220}
+                width={520}
+                height={200}
                 className="w-full h-auto object-contain drop-shadow-md"
                 priority
               />
@@ -62,7 +67,7 @@ export default function HomeHero({ locale }: { locale: string }) {
           </motion.div>
         </div>
 
-        {/* Bottom-Right — Schedule a Consultation CTA (Prominent, Bold & High-Contrast) */}
+        {/* Bottom-Right — Schedule a Consultation CTA */}
         <div className="flex flex-col md:flex-row md:items-end justify-end">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
