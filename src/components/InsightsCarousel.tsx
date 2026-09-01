@@ -79,28 +79,18 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
           // Normalized ratio from -1.5 (far left) to 0 (center) to 1.5 (far right)
           const ratio = (cardCenter - viewportCenter) / (window.innerWidth * 0.35);
           const clamped = Math.max(-1.5, Math.min(1.5, ratio));
+          const absRatio = Math.abs(clamped);
 
-          // Calculate continuous wave clip-path to produce the distinctive curved editorial filmstrip
-          // Left side: top slopes down-left, bottom slopes up-left
-          // Right side: top slopes up-right, bottom slopes down-right
-          const leftTaper = Math.max(0, -clamped) * 7.5; // percent taper on left
-          const rightTaper = Math.max(0, clamped) * 7.5; // percent taper on right
-
-          const topL = leftTaper;
-          const topR = 0;
-          const btmR = 100;
-          const btmL = 100 - leftTaper;
-
-          const topLRight = 0;
-          const topRRight = rightTaper;
-          const btmRRight = 100 - rightTaper;
-          const btmLRight = 100;
+          // Concave Inward Edge Tapering (Perspective geometry of a cylindrical arc)
+          // The outer edges of the left and right cards taper inward as they recede into the concave background
+          const leftTaper = Math.max(0, -clamped) * 8.5; // percent taper on outer left
+          const rightTaper = Math.max(0, clamped) * 8.5; // percent taper on outer right
 
           let clipPath = "";
           if (clamped < 0) {
-            clipPath = `polygon(0% ${topL}%, 100% ${topR}%, 100% ${btmR}%, 0% ${btmL}%)`;
+            clipPath = `polygon(0% ${leftTaper}%, 100% 0%, 100% 100%, 0% ${100 - leftTaper}%)`;
           } else {
-            clipPath = `polygon(0% ${topLRight}%, 100% ${topRRight}%, 100% ${btmRRight}%, 0% ${btmLRight}%)`;
+            clipPath = `polygon(0% 0%, 100% ${rightTaper}%, 100% ${100 - rightTaper}%, 0% 100%)`;
           }
 
           const imgBox = imgWrappers[index];
@@ -108,13 +98,15 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
             imgBox.style.clipPath = clipPath;
           }
 
-          // Dynamic scale, opacity and 3D angle
+          // Inward Concave 3D Rotation and Depth Curvature
+          // Pushes side cards backward along the Z-axis (concave bowl) and angles them inward facing center
           const isFocal = distance < window.innerWidth * 0.18;
           gsap.set(card, {
-            scale: 1 - Math.abs(clamped) * 0.05,
-            opacity: isFocal ? 1 : 0.65 - Math.abs(clamped) * 0.15,
-            rotationY: clamped * -8,
-            transformPerspective: 1000,
+            scale: 1 - absRatio * 0.04,
+            opacity: isFocal ? 1 : Math.max(0.4, 1 - absRatio * 0.3),
+            rotationY: -clamped * 18, // Angled inward toward center
+            z: -Math.pow(absRatio, 1.5) * 90, // Pushed backward into concave arc
+            transformPerspective: 1200,
             transformOrigin: "center center",
           });
         });
@@ -189,10 +181,10 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         </div>
 
         {/* Continuous Horizontal Curved Ribbon Track */}
-        <div className="relative w-full flex-grow flex items-center overflow-hidden my-auto">
+        <div className="relative w-full flex-grow flex items-center overflow-hidden my-auto [perspective:1400px]">
           <div 
             ref={trackRef} 
-            className="flex items-center px-[34vw] gap-6 md:gap-10 w-max"
+            className="flex items-center px-[34vw] gap-6 md:gap-10 w-max [transform-style:preserve-3d]"
           >
             {CAROUSEL_DATA.map((item, index) => {
               const isActive = activeCenterIndex === index;
@@ -200,7 +192,7 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
               return (
                 <div 
                   key={index}
-                  className="curved-card relative w-[75vw] sm:w-[50vw] md:w-[32vw] lg:w-[31vw] flex flex-col items-center flex-shrink-0 cursor-pointer transition-colors duration-500"
+                  className="curved-card relative w-[75vw] sm:w-[50vw] md:w-[32vw] lg:w-[31vw] flex flex-col items-center flex-shrink-0 cursor-pointer transition-colors duration-500 [transform-style:preserve-3d] will-change-transform"
                   onClick={() => setActiveModalIndex(index)}
                 >
                   {/* Image Container with Dynamic Curved / Warped Edge */}
