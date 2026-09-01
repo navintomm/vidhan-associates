@@ -26,44 +26,31 @@ export default function HomeHero({ locale }: { locale: string }) {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full h-full flex flex-col pt-28 md:pt-32 pb-16 md:pb-24 justify-between">
+      <div className="relative z-20 container mx-auto px-6 lg:px-12 w-full h-full flex flex-col justify-between pt-36 md:pt-44 pb-16 md:pb-24">
 
-        {/* Top — Motto (Changed to Black / text-ink) */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="w-full flex flex-col items-center justify-center text-center mt-2 md:mt-4"
-        >
-          <span className="text-ink/60 tracking-[0.4em] uppercase text-sm md:text-base font-sans mb-1 font-bold">
-            The
-          </span>
-          <p className="text-ink tracking-[0.35em] md:tracking-[0.45em] uppercase text-3xl md:text-4xl lg:text-5xl font-sans font-black">
-            Pursuit of Justice
-          </p>
-        </motion.div>
-
-        {/* Center-Left — Gold Vidhan Logo (Isolated on Left) */}
-        <div className="my-auto flex flex-col justify-center items-start">
+        {/* Main Left-Aligned Headline */}
+        <div className="my-auto max-w-2xl">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
-            className="w-full max-w-[340px] sm:max-w-[400px] md:max-w-[480px] lg:max-w-[540px] flex flex-col items-start"
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
+            className="flex flex-col items-start"
           >
-            <div className="w-full flex flex-col items-center">
-              <Image
-                src="/logo.png.png"
-                alt="Vidhan Law Chambers"
-                width={540}
-                height={210}
-                className="w-full h-auto object-contain drop-shadow-md"
-                priority
-              />
-              <p className="mt-4 text-gold tracking-[0.25em] uppercase text-xs md:text-sm font-bold text-center">
-                Advocates and Legal Consultants
-              </p>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-0.5 bg-gold" />
+              <span className="text-gold tracking-[0.25em] uppercase text-xs md:text-sm font-bold">
+                Advocates &amp; Legal Consultants
+              </span>
             </div>
+            
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-ink leading-[1.06] tracking-tight mb-6">
+              The Pursuit <br />
+              <span className="italic font-normal text-gold">of Justice</span>
+            </h1>
+
+            <p className="text-lg md:text-xl font-sans text-slate/80 leading-relaxed max-w-lg">
+              Independent legal practice providing strategic counsel and principled advocacy across Kerala and beyond.
+            </p>
           </motion.div>
         </div>
 
@@ -72,7 +59,7 @@ export default function HomeHero({ locale }: { locale: string }) {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.7 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
             className="flex-shrink-0"
           >
             <Link
