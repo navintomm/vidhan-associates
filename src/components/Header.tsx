@@ -6,7 +6,7 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const navLinks = [
  { key: "home", href: "/" },
@@ -135,9 +135,12 @@ export default function Header({ locale }: { locale: string }) {
 
  <Link
  href={`/${locale}/contact`}
- className={`hidden md:inline-block text-[10px] md:text-xs tracking-widest uppercase text-ink/80 hover:text-gold transition-colors border border-ink/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-4 py-1' : 'px-5 py-1.5'}`}
+ className={`hidden md:flex group items-center gap-3 bg-[#1C1C1E] rounded-full transition-all hover:bg-black ${scrolled ? 'pl-4 pr-1 py-1' : 'pl-5 pr-1.5 py-1.5'}`}
  >
- {tHeader("cta")}
+ <span className="text-white text-[10px] md:text-xs font-semibold tracking-widest uppercase">Consult</span>
+ <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[#E52525] flex items-center justify-center transition-transform duration-300 group-active:scale-90 shrink-0">
+ <ArrowRight size={14} className="text-white -rotate-45 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-active:translate-y-1 group-active:-translate-x-1" />
+ </div>
  </Link>
 
  <button

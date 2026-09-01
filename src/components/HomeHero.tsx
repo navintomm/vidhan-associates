@@ -13,7 +13,7 @@ export default function HomeHero({ locale }: { locale: string }) {
  <section className="relative w-full h-screen overflow-hidden flex items-end pb-24 md:pb-32 bg-parchment">
 
  {/* ===== Background Image ===== */}
- <div className="absolute inset-0 z-0 bg-cover bg-[70%_top] md:bg-center animate-ken-burns"
+ <div className="absolute inset-0 z-0 bg-cover bg-[70%_top] md:bg-center"
  style={{ backgroundImage: "url('/new hero icon.png')" }}
  />
  {/* Light wash to ensure gold/dark text is still readable if the image has dark spots */}
@@ -32,7 +32,7 @@ export default function HomeHero({ locale }: { locale: string }) {
  <span className="text-gold/50 tracking-[0.4em] uppercase text-xs md:text-sm font-sans mb-1">
  The
  </span>
- <p className="text-gold tracking-[0.4em] uppercase text-xl md:text-3xl font-sans font-light">
+ <p className="text-gold tracking-[0.4em] uppercase text-xl md:text-3xl font-sans font-bold">
  Pursuit of Justice
  </p>
  </motion.div>
@@ -52,7 +52,6 @@ export default function HomeHero({ locale }: { locale: string }) {
  width={600}
  height={240}
  className="w-full h-auto object-contain"
- style={{ filter: 'invert(1) sepia(1) saturate(3) hue-rotate(5deg) brightness(0.3)' }}
  priority
  />
  <p className="mt-4 text-gold tracking-[0.2em] uppercase text-[10px] md:text-xs font-medium text-center">

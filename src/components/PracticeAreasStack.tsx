@@ -149,8 +149,8 @@ export default function PracticeAreasStack() {
  
  {/* Background Texture/Watermark */}
  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
- <h2 className="text-[12vw] font-serif uppercase tracking-widest text-ink/[0.06] whitespace-nowrap select-none">
- PRACTICE AREAS
+ <h2 className="text-[15vw] font-serif tracking-[0.2em] text-ink/[0.08] whitespace-nowrap select-none">
+ V I D H A N
  </h2>
  </div>
 
@@ -163,9 +163,9 @@ export default function PracticeAreasStack() {
  </div>
 
  {/* Scroll Indicator */}
- <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none opacity-50">
- <span className="text-xs tracking-widest uppercase text-ink mb-2">{t("header.scroll")}</span>
- <div className="w-px h-12 bg-gradient-to-b from-parchment to-transparent" />
+ <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 z-20 flex flex-col items-center pointer-events-none opacity-80">
+ <span className="text-[10px] tracking-widest uppercase text-ink mb-2">Scroll</span>
+ <div className="w-px h-16 bg-gradient-to-b from-ink to-transparent" />
  </div>
 
  {/* The Card Stack */}
