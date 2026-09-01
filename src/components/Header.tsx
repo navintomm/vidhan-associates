@@ -117,15 +117,15 @@ export default function Header({ locale }: { locale: string }) {
  animate={{ opacity: 1, y: 0 }}
  exit={{ opacity: 0, y: -5 }}
  transition={{ delay: 1 }}
- className="absolute top-full left-1/2 -translate-x-1/2 mt-4 pointer-events-none drop-shadow-md z-[10001]"
+ className="absolute top-full left-1/2 -translate-x-1/2 mt-2 pointer-events-none drop-shadow-md z-[10001]"
  >
  <motion.div
  animate={{ y: [0, 4, 0] }}
  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
- className="relative bg-white text-ink text-[11px] font-medium whitespace-nowrap px-3 py-1.5 rounded-[4px]"
+ className="relative bg-gold text-ink text-[11px] font-semibold whitespace-nowrap px-3 py-1.5 rounded-[4px]"
  >
- {/* Tooltip triangle */}
- <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-white"></div>
+ {/* Tooltip triangle — gold */}
+ <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-gold"></div>
  മലയാളത്തിൽ വായിക്കുക
  </motion.div>
  </motion.div>

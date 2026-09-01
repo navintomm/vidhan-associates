@@ -149,7 +149,7 @@ export default function PracticeAreasStack() {
  
  {/* Background Texture/Watermark */}
  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
- <h2 className="text-[12vw] font-serif uppercase tracking-widest text-ink/[0.02] whitespace-nowrap select-none">
+ <h2 className="text-[12vw] font-serif uppercase tracking-widest text-ink/[0.06] whitespace-nowrap select-none">
  PRACTICE AREAS
  </h2>
  </div>
@@ -187,9 +187,10 @@ export default function PracticeAreasStack() {
  src={item.image} 
  alt={item.title}
  fill
- className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+ className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
  />
- <div className="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/80 to-transparent" />
+ {/* Dark gradient so text stays readable on photos */}
+ <div className="absolute inset-0" style={{background: 'linear-gradient(to top, rgba(1,1,1,0.80) 0%, rgba(1,1,1,0.40) 50%, rgba(1,1,1,0.10) 100%)'}} />
  
  {/* Card Content */}
  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10">
@@ -197,14 +198,14 @@ export default function PracticeAreasStack() {
  <Icon size={24} />
  </div>
  <p className="text-sm tracking-[0.2em] uppercase text-gold mb-2">{item.category}</p>
- <h3 className={`${locale === "ml" ? "text-xl md:text-2xl leading-snug mb-2 md:mb-4" : "text-2xl md:text-3xl leading-snug mb-4"} font-serif text-ink break-words`}>
+ <h3 className={`${locale === "ml" ? "text-xl md:text-2xl leading-snug mb-2 md:mb-4" : "text-2xl md:text-3xl leading-snug mb-4"} font-serif text-parchment break-words`}>
  {item.title}
  </h3>
- <p className="text-ink/70 font-sans line-clamp-2 md:line-clamp-3">
+ <p className="text-parchment/70 font-sans line-clamp-2 md:line-clamp-3">
  {item.description}
  </p>
  
- <div className="mt-6 flex items-center gap-2 text-xs uppercase tracking-widest text-ink group-hover:text-gold transition-colors">
+ <div className="mt-6 flex items-center gap-2 text-xs uppercase tracking-widest text-parchment/60 group-hover:text-gold transition-colors">
  <span>{t("viewDetails")}</span>
  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
  </div>
@@ -252,7 +253,7 @@ export default function PracticeAreasStack() {
  fill
  className="object-cover"
  />
- <div className="absolute inset-0 bg-gradient-to-t from-parchment to-transparent md:bg-gradient-to-r md:from-transparent md:to-parchment" />
+ <div className="absolute inset-0" style={{background: 'linear-gradient(to right, rgba(1,1,1,0.0) 60%, rgba(254,254,254,0.95) 100%)'}} />
  </div>
 
  {/* Right Content Pane */}

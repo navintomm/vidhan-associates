@@ -42,7 +42,7 @@
 
  /* Watermark text — giant faded background text */
  .watermark-text {
- @apply text-[12vw] font-serif uppercase tracking-wide-2xl text-ink/[0.04] select-none pointer-events-none leading-none whitespace-nowrap;
+ @apply text-[12vw] font-serif uppercase tracking-wide-2xl text-ink/[0.08] select-none pointer-events-none leading-none whitespace-nowrap;
  }
 }
 

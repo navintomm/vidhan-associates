@@ -52,6 +52,7 @@ export default function HomeHero({ locale }: { locale: string }) {
  width={600}
  height={240}
  className="w-full h-auto object-contain"
+ style={{ filter: 'invert(1) sepia(1) saturate(3) hue-rotate(5deg) brightness(0.3)' }}
  priority
  />
  <p className="mt-4 text-gold tracking-[0.2em] uppercase text-[10px] md:text-xs font-medium text-center">
