@@ -21,8 +21,9 @@ export default function HomeHero({ locale }: { locale: string }) {
           className="object-cover object-[72%_center] md:object-[80%_center] lg:object-[83%_center] scale-100 md:scale-105"
           priority
         />
-        {/* Soft parchment wash on the left to maintain clean logo isolation */}
-        <div className="absolute inset-0 bg-gradient-to-r from-parchment/70 via-parchment/20 to-transparent pointer-events-none" />
+        {/* Soft parchment wash on left and bottom to maintain clean seamless background continuity */}
+        <div className="absolute inset-0 bg-gradient-to-r from-parchment/80 via-parchment/30 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-parchment to-transparent pointer-events-none" />
       </div>
 
       {/* Content */}
