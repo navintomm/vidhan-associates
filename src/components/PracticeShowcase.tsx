@@ -86,8 +86,8 @@ export default function PracticeShowcase() {
  
  {/* BACKGROUND WATERMARK */}
  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
- <h2 className="text-[16vw] lg:text-[20vw] font-serif font-black uppercase tracking-[0.2em] text-ink/[0.08] whitespace-nowrap select-none">
- V I D H A N
+ <h2 className="text-[15vw] lg:text-[18vw] font-serif uppercase tracking-widest text-ink/[0.06] whitespace-nowrap select-none">
+ VIDHAN
  </h2>
  </div>
 
