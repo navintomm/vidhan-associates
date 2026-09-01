@@ -73,9 +73,10 @@ export default function HomeHero({ locale }: { locale: string }) {
  href={`/${locale}/contact`}
  className="group inline-flex items-center gap-4 text-ink/70 hover:text-gold transition-colors"
  >
- <span className="text-base tracking-wide-xl uppercase">{t("cta")}</span>
- <span className="w-14 h-14 rounded-full border border-ink/20 group-hover:border-gold/60 flex items-center justify-center transition-colors">
- <ArrowRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
+ <span className="text-base tracking-widest uppercase font-medium">Book a Consultation</span>
+ <span className="w-14 h-14 rounded-full border border-ink/20 group-hover:border-gold/60 flex items-center justify-center transition-colors relative overflow-hidden">
+ <ArrowRight size={20} className="absolute transition-transform duration-500 ease-in-out group-hover:translate-x-14 group-active:translate-x-14" />
+ <ArrowRight size={20} className="absolute -translate-x-14 transition-transform duration-500 ease-in-out group-hover:translate-x-0 group-active:translate-x-0" />
  </span>
  </Link>
  </motion.div>

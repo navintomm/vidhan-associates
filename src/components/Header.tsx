@@ -102,7 +102,7 @@ export default function Header({ locale }: { locale: string }) {
  {/* Actions */}
  <div className="flex items-center gap-3 ml-auto">
  {/* Language Switcher */}
- <div className="relative flex items-center justify-center">
+ <div className="relative inline-flex items-center justify-center shrink-0">
  <button
  onClick={toggleLanguage}
  className={`text-[10px] md:text-xs font-medium tracking-widest uppercase text-ink/60 hover:text-gold transition-colors border border-ink/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-3 py-1' : 'px-4 py-1.5'}`}
@@ -135,11 +135,12 @@ export default function Header({ locale }: { locale: string }) {
 
  <Link
  href={`/${locale}/contact`}
- className={`hidden md:flex group items-center gap-3 bg-[#1C1C1E] rounded-full transition-all hover:bg-black ${scrolled ? 'pl-4 pr-1 py-1' : 'pl-5 pr-1.5 py-1.5'}`}
+ className={`hidden md:inline-flex group items-center gap-2 text-[10px] md:text-xs tracking-widest uppercase text-ink/80 hover:text-gold transition-colors border border-ink/20 hover:border-gold/50 rounded-full ${scrolled ? 'px-4 py-1' : 'px-5 py-1.5'}`}
  >
- <span className="text-white text-[10px] md:text-xs font-semibold tracking-widest uppercase">Consult</span>
- <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[#E52525] flex items-center justify-center transition-transform duration-300 group-active:scale-90 shrink-0">
- <ArrowRight size={14} className="text-white -rotate-45 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-active:translate-y-1 group-active:-translate-x-1" />
+ <span>Consult</span>
+ <div className="relative w-4 h-4 overflow-hidden flex items-center justify-center">
+ <ArrowRight size={12} className="absolute transition-transform duration-500 ease-in-out group-hover:translate-x-6 group-active:translate-x-6" />
+ <ArrowRight size={12} className="absolute -translate-x-6 transition-transform duration-500 ease-in-out group-hover:translate-x-0 group-active:translate-x-0" />
  </div>
  </Link>
 
