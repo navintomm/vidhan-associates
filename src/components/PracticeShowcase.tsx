@@ -41,9 +41,9 @@ export default function PracticeShowcase() {
           trigger: sectionRef.current,
           pin: true,
           pinSpacing: true,
-          scrub: 1.8, // Smooth cinematic dampening
+          scrub: 1.0, // Responsive, buttery-smooth synchronization directly matching user scroll
           start: "top top",
-          end: "+=900vh", // Generous 9 screens of scroll distance for relaxed pacing
+          end: () => `+=${window.innerHeight * 7.5}`, // Proper dynamic calculation (~7.5 screens of relaxed, slow scrolling)
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
@@ -57,26 +57,26 @@ export default function PracticeShowcase() {
       gsap.set(otherPillars, { x: "50vw", xPercent: -71, z: -600, rotationY: 45, opacity: 0 });
 
       // Phase 1: Pillar 0 rises
-      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 2, ease: "power2.out" });
+      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 2, ease: "power1.out" });
 
       // Hold Phase 0 (Vision)
-      tl.to({}, { duration: 2.5 });
+      tl.to({}, { duration: 2 });
 
       // Build the transitions dynamically for the 6 pillars (V - I - D - H - A - N)
       for (let i = 0; i < WORDS.length - 1; i++) {
         const transLabel = `trans${i}`;
         
-        // Current pillar arcs left and exits
-        tl.to(`.pillar-${i}`, { x: "-50vw", z: -600, rotationY: -45, opacity: 0, duration: 2.5, ease: "power2.inOut" }, transLabel)
+        // Current pillar arcs left and exits gradually matching the scroll
+        tl.to(`.pillar-${i}`, { x: "-50vw", z: -600, rotationY: -45, opacity: 0, duration: 2.5, ease: "power1.inOut" }, transLabel)
         // Next pillar arcs in from right to center
-        .to(`.pillar-${i+1}`, { x: 0, z: 0, rotationY: 0, opacity: 1, duration: 2.5, ease: "power2.inOut" }, transLabel);
+        .to(`.pillar-${i+1}`, { x: 0, z: 0, rotationY: 0, opacity: 1, duration: 2.5, ease: "power1.inOut" }, transLabel);
         
         // Hold Phase for each pillar so user can read comfortably
-        tl.to({}, { duration: 2.5 });
+        tl.to({}, { duration: 2 });
       }
 
       // Final Hold for Nobility (N)
-      tl.to({}, { duration: 2.5 });
+      tl.to({}, { duration: 2 });
 
       setTimeout(() => {
         ScrollTrigger.sort();
