@@ -39,7 +39,6 @@ export default function Header({ locale }: { locale: string }) {
  return () => window.removeEventListener("scroll", onScroll);
  }, []);
 
- const isHome = pathname === "/" || pathname === "/en" || pathname === "/ml" || pathname === "/en/" || pathname === "/ml/";
 
  const toggleLanguage = () => {
  const nextLocale = locale === "en" ? "ml" : "en";

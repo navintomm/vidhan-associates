@@ -7,7 +7,6 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export default function HomeHero({ locale }: { locale: string }) {
- const t = useTranslations("home.hero");
 
   return (
     <section className="relative w-full h-screen overflow-hidden flex items-end pb-20 md:pb-28 bg-parchment">

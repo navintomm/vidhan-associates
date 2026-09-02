@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Link as LinkIcon, Mail } from "lucide-react";
+import { X, Mail } from "lucide-react";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 
