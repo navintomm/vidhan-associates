@@ -33,6 +33,10 @@ export default function PracticeShowcase() {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
+    // Global listener to ensure triggers are sorted by DOM order during resize/refresh
+    const sortTriggers = () => ScrollTrigger.sort();
+    ScrollTrigger.addEventListener("refreshInit", sortTriggers);
+
     mm.add("all", () => {
       if (!sectionRef.current) return;
 
@@ -79,7 +83,6 @@ export default function PracticeShowcase() {
       tl.to({}, { duration: 2 });
 
       setTimeout(() => {
-        ScrollTrigger.sort();
         ScrollTrigger.refresh();
       }, 150);
 
@@ -88,7 +91,10 @@ export default function PracticeShowcase() {
       };
     });
 
-    return () => mm.revert();
+    return () => {
+      ScrollTrigger.removeEventListener("refreshInit", sortTriggers);
+      mm.revert();
+    };
   }, [isReducedMotion]);
 
  return (

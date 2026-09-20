@@ -52,66 +52,130 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
-  const [activeCenterIndex, setActiveCenterIndex] = useState(1);
+  const activeCenterIndex = useRef(1);
 
   useEffect(() => {
     if (!sectionRef.current || !trackRef.current) return;
 
+    // Ensure ScrollTriggers are always sorted in DOM order before any refresh.
+    // This perfectly fixes the issue where InsightsCarousel triggers during the PracticeShowcase (Pillars)
+    // animation because of React's dynamic mount/re-render order causing triggers to be created out-of-order.
+    const sortTriggers = () => ScrollTrigger.sort();
+    ScrollTrigger.addEventListener("refreshInit", sortTriggers);
+
     const ctx = gsap.context(() => {
+      const anchors = gsap.utils.toArray<HTMLElement>(".curved-card-anchor");
       const cards = gsap.utils.toArray<HTMLElement>(".curved-card");
       const imgWrappers = gsap.utils.toArray<HTMLElement>(".curved-img-box");
 
       const updateCardCurvature = () => {
         const viewportCenter = window.innerWidth / 2;
+        
+        // Calculate dynamic physical spacing between cards based on DOM
+        const anchor0 = anchors[0]?.getBoundingClientRect();
+        const anchor1 = anchors[1]?.getBoundingClientRect();
+        const spacing = (anchor1 && anchor0) ? (anchor1.left - anchor0.left) : window.innerWidth * 0.35;
+
         let closestIndex = 0;
         let minDistance = Infinity;
 
-        cards.forEach((card, index) => {
-          const rect = card.getBoundingClientRect();
+        // Batch reads to avoid layout thrashing
+        const states = anchors.map((anchor, index) => {
+          const rect = anchor.getBoundingClientRect();
           const cardCenter = rect.left + rect.width / 2;
           const distance = Math.abs(cardCenter - viewportCenter);
-
+          const imgHeight = imgWrappers[index]?.offsetHeight || 0;
+          
           if (distance < minDistance) {
             minDistance = distance;
             closestIndex = index;
           }
+          
+          return { rect, cardCenter, distance, imgHeight };
+        });
 
-          // Normalized ratio from -1.5 (far left) to 0 (center) to 1.5 (far right)
-          const ratio = (cardCenter - viewportCenter) / (window.innerWidth * 0.35);
-          const clamped = Math.max(-1.5, Math.min(1.5, ratio));
-          const absRatio = Math.abs(clamped);
+        activeCenterIndex.current = closestIndex;
 
-          // Concave Inward Edge Tapering (Perspective geometry of a cylindrical arc)
-          // The outer edges of the left and right cards taper inward as they recede into the concave background
-          const leftTaper = Math.max(0, -clamped) * 8.5; // percent taper on outer left
-          const rightTaper = Math.max(0, clamped) * 8.5; // percent taper on outer right
+        const isMobile = window.innerWidth < 768;
+        const maxCurve = isMobile ? 10 : 20; // Elegant, refined curve depth
+        const maxDistance = window.innerWidth * (isMobile ? 0.85 : 0.65); // Flatter on mobile
 
-          let clipPath = "";
-          if (clamped < 0) {
-            clipPath = `polygon(0% ${leftTaper}%, 100% 0%, 100% 100%, 0% ${100 - leftTaper}%)`;
-          } else {
-            clipPath = `polygon(0% 0%, 100% ${rightTaper}%, 100% ${100 - rightTaper}%, 0% 100%)`;
+        // Batch writes
+        states.forEach((state, index) => {
+          const { rect, cardCenter, imgHeight } = state;
+          
+          // Pure continuous normalization relative to natural card spacing
+          const nRatio = (cardCenter - viewportCenter) / spacing;
+          
+          // Gaussian bell curve for strict focal strength. 
+          // Solves the "two large cards" problem by rapidly decaying dominance outside the absolute center.
+          const focalStrength = Math.exp(-Math.pow(nRatio * 2.2, 2));
+
+          // Perspective & Scale interpolates smoothly across infinite scroll states
+          // Max scale is 1.0 to prevent the card from ballooning and dominating adjacent gaps
+          const scale = 0.82 + 0.18 * focalStrength; 
+          const rotationYAmount = nRatio * -16 * (1 - focalStrength * 0.2); // Subtle cinematic wrap
+          
+          // Continuous Parabolic Clip Path for the IMAX cinematic screen effect
+          let clipPath = "polygon(";
+          const steps = 15;
+          
+          // Top edge: mathematically perfect parabola across the entire viewport width
+          for (let i = 0; i <= steps; i++) {
+            const percentX = i / steps;
+            const globalX = rect.left + (rect.width * percentX);
+            const dist = globalX - viewportCenter;
+            const nX = dist / maxDistance;
+            const offset = Math.pow(Math.abs(nX), 2.2) * maxCurve;
+            const topY = maxCurve - Math.min(maxCurve, offset);
+            clipPath += `${(percentX * 100).toFixed(2)}% ${topY.toFixed(2)}%, `;
           }
+          
+          // Bottom edge
+          for (let i = steps; i >= 0; i--) {
+            const percentX = i / steps;
+            const globalX = rect.left + (rect.width * percentX);
+            const dist = globalX - viewportCenter;
+            const nX = dist / maxDistance;
+            const offset = Math.pow(Math.abs(nX), 2.2) * maxCurve;
+            const bottomY = (100 - maxCurve) + Math.min(maxCurve, offset);
+            clipPath += `${(percentX * 100).toFixed(2)}% ${bottomY.toFixed(2)}%${i === 0 ? "" : ", "}`;
+          }
+          clipPath += ")";
 
           const imgBox = imgWrappers[index];
           if (imgBox) {
             imgBox.style.clipPath = clipPath;
           }
 
-          // Inward Concave 3D Rotation and Depth Curvature
-          // Pushes side cards backward along the Z-axis (concave bowl) and angles them inward facing center
-          const isFocal = distance < window.innerWidth * 0.18;
+          // Move the title strictly parallel to the newly curved bottom edge continuously
+          const cardNX = (cardCenter - viewportCenter) / maxDistance;
+          const cardOffset = Math.pow(Math.abs(cardNX), 2.2) * maxCurve;
+          const bottomCutPercent = maxCurve - Math.min(maxCurve, cardOffset);
+          const shiftY = -(imgHeight * (bottomCutPercent / 100));
+
+          const card = cards[index];
+          
+          // Set purely continuous transform driven entirely by the Gaussian focal curve
           gsap.set(card, {
-            scale: 1 - absRatio * 0.04,
-            opacity: isFocal ? 1 : Math.max(0.4, 1 - absRatio * 0.3),
-            rotationY: -clamped * 18, // Angled inward toward center
-            z: -Math.pow(absRatio, 1.5) * 90, // Pushed backward into concave arc
-            transformPerspective: 1200,
+            scale: scale,
+            opacity: 0.35 + 0.65 * focalStrength,
+            rotationY: rotationYAmount,
+            z: -100 * (1 - focalStrength), // Recedes outer cards backwards
+            transformPerspective: 1400,
             transformOrigin: "center center",
           });
-        });
 
-        setActiveCenterIndex(closestIndex);
+          // Animate title prominence continuously
+          const titleWrapper = card.querySelector('.insight-title-wrapper');
+          if (titleWrapper) {
+            gsap.set(titleWrapper, { 
+              y: shiftY,
+              opacity: 0.4 + 0.6 * focalStrength
+              // Note: scale is inherited perfectly from the parent card, maintaining exact relative proportions
+            });
+          }
+        });
       };
 
       // Set initial frame
@@ -126,9 +190,10 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
-          scrub: 1.2,
+          scrub: 2.0, // Heavy, controlled, premium cinematic inertia
           start: "top top",
-          end: () => `+=${getScrollDistance() + window.innerHeight * 0.8}`,
+          // Massive scroll extension for a dedicated cinematic sequence without rushing
+          end: () => `+=${getScrollDistance() * 3 + window.innerHeight * 2.5}`,
           pinSpacing: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -140,15 +205,21 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
       tl.to(trackRef.current, {
         x: () => -getScrollDistance(),
         ease: "none",
+        duration: 1,
       });
 
+      // Brief hold composition at the very end before smoothly unpinning
+      tl.to({}, { duration: 0.15 });
+
       setTimeout(() => {
-        ScrollTrigger.sort();
         ScrollTrigger.refresh();
       }, 150);
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ScrollTrigger.removeEventListener("refreshInit", sortTriggers);
+      ctx.revert();
+    };
   }, []);
 
   // Lock body scroll when modal is active
@@ -190,48 +261,48 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         <div className="relative w-full flex-grow flex items-center overflow-hidden my-auto [perspective:1400px]">
           <div 
             ref={trackRef} 
-            className="flex items-center px-[34vw] gap-6 md:gap-10 w-max [transform-style:preserve-3d]"
+            className="flex items-center px-[35vw] gap-6 md:gap-10 w-max [transform-style:preserve-3d]"
           >
-            {CAROUSEL_DATA.map((item, index) => {
-              const isActive = activeCenterIndex === index;
-
-              return (
+            {CAROUSEL_DATA.map((item, index) => (
+              <div 
+                key={index}
+                className="curved-card-anchor relative w-[75vw] sm:w-[50vw] md:w-[35vw] lg:w-[32vw] flex-shrink-0 flex justify-center items-center"
+              >
                 <div 
-                  key={index}
-                  className="curved-card relative w-[75vw] sm:w-[50vw] md:w-[32vw] lg:w-[31vw] flex flex-col items-center flex-shrink-0 cursor-pointer transition-colors duration-500 [transform-style:preserve-3d] will-change-transform"
+                  className="curved-card w-full flex flex-col items-center cursor-pointer transition-colors duration-500 will-change-transform [transform-style:preserve-3d]"
                   onClick={() => setActiveModalIndex(index)}
                 >
                   {/* Image Container with Dynamic Curved / Warped Edge */}
-                  <div className="curved-img-box relative w-full h-[240px] sm:h-[280px] md:h-[320px] lg:h-[350px] overflow-hidden bg-white group shadow-xl border border-gold/15 transition-all duration-300">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width: 768px) 80vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      priority={index < 3}
-                    />
-                    <div className="absolute inset-0 bg-parchment/15 group-hover:bg-transparent transition-colors duration-500" />
+                  <div className="relative w-full drop-shadow-2xl">
+                    <div className="curved-img-box relative w-full h-[320px] sm:h-[400px] md:h-[480px] lg:h-[550px] overflow-hidden bg-white group transition-all duration-300 will-change-transform">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 80vw, 33vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        priority={index < 3}
+                      />
+                      <div className="absolute inset-0 bg-parchment/15 group-hover:bg-transparent transition-colors duration-500" />
+                    </div>
                   </div>
 
-                  {/* Title underneath (moves together as one single unit) */}
-                  <div className="pt-6 md:pt-8 text-center px-4 max-w-sm">
-                    <h3 className={`font-serif text-lg md:text-xl lg:text-2xl leading-snug transition-colors duration-300 ${
-                      isActive ? "text-ink font-semibold drop-shadow-sm" : "text-ink/60 font-normal"
-                    }`}>
+                  {/* Title underneath (moves seamlessly with the clipped curve) */}
+                  <div className="insight-title-wrapper pt-4 md:pt-6 text-center px-4 max-w-sm will-change-transform origin-top">
+                    <h3 className="insight-title font-serif text-lg md:text-xl lg:text-2xl leading-snug text-ink drop-shadow-sm font-semibold">
                       {item.title}
                     </h3>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Bottom Callout & "See Details" indicator */}
         <div className="container mx-auto px-6 text-center flex-shrink-0 z-20 flex flex-col items-center">
           <button
-            onClick={() => setActiveModalIndex(activeCenterIndex)}
+            onClick={() => setActiveModalIndex(activeCenterIndex.current)}
             className="group inline-flex items-center gap-3 text-xs md:text-sm font-sans tracking-widest uppercase text-ink/80 hover:text-gold transition-colors py-2"
           >
             <span className="font-bold">See Details</span>
