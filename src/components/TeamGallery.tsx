@@ -12,6 +12,7 @@ const IMAGES: Record<string, string> = {
  "sreejith-vk": "/images/team/sreejith.png",
  "abhijay-varghese": "/images/team/abhijay.jpg",
  "antony-george-mavumkal": "/images/team/antony.jpeg",
+ "krishna-suresh": "/images/team/krishna-suresh.jpeg",
 };
 
 export default function TeamGallery() {
