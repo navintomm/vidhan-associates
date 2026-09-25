@@ -61,7 +61,7 @@ export default function PracticeShowcase() {
       gsap.set(otherPillars, { x: "50vw", xPercent: -71, z: -600, rotationY: 45, opacity: 0 });
 
       // Phase 1: Pillar 0 rises
-      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 2, ease: "power1.out" });
+      tl.to(".pillar-0", { y: 0, opacity: 1, duration: 2, ease: "none" });
 
       // Hold Phase 0 (Vision)
       tl.to({}, { duration: 2 });
@@ -71,9 +71,9 @@ export default function PracticeShowcase() {
         const transLabel = `trans${i}`;
         
         // Current pillar arcs left and exits gradually matching the scroll
-        tl.to(`.pillar-${i}`, { x: "-50vw", z: -600, rotationY: -45, opacity: 0, duration: 2.5, ease: "power1.inOut" }, transLabel)
+        tl.to(`.pillar-${i}`, { x: "-50vw", z: -600, rotationY: -45, opacity: 0, duration: 2.5, ease: "none" }, transLabel)
         // Next pillar arcs in from right to center
-        .to(`.pillar-${i+1}`, { x: 0, z: 0, rotationY: 0, opacity: 1, duration: 2.5, ease: "power1.inOut" }, transLabel);
+        .to(`.pillar-${i+1}`, { x: 0, z: 0, rotationY: 0, opacity: 1, duration: 2.5, ease: "none" }, transLabel);
         
         // Hold Phase for each pillar so user can read comfortably
         tl.to({}, { duration: 2 });
