@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { ArrowRight, X } from "lucide-react";
 
-// Extended mock data matching the reference image aesthetic
 const CAROUSEL_DATA = [
   {
     image: "/images/insights/insight_property_v2.jpg",
@@ -52,137 +51,17 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
-  const activeCenterIndex = useRef(1);
 
   useEffect(() => {
     if (!sectionRef.current || !trackRef.current) return;
 
-    // Ensure ScrollTriggers are always sorted in DOM order before any refresh.
-    // This perfectly fixes the issue where InsightsCarousel triggers during the PracticeShowcase (Pillars)
-    // animation because of React's dynamic mount/re-render order causing triggers to be created out-of-order.
     const sortTriggers = () => ScrollTrigger.sort();
     ScrollTrigger.addEventListener("refreshInit", sortTriggers);
 
     const ctx = gsap.context(() => {
-      const anchors = gsap.utils.toArray<HTMLElement>(".curved-card-anchor");
-      const cards = gsap.utils.toArray<HTMLElement>(".curved-card");
-      const imgWrappers = gsap.utils.toArray<HTMLElement>(".curved-img-box");
-
-      const updateCardCurvature = () => {
-        const viewportCenter = window.innerWidth / 2;
-        
-        // Calculate dynamic physical spacing between cards based on DOM
-        const anchor0 = anchors[0]?.getBoundingClientRect();
-        const anchor1 = anchors[1]?.getBoundingClientRect();
-        const spacing = (anchor1 && anchor0) ? (anchor1.left - anchor0.left) : window.innerWidth * 0.35;
-
-        let closestIndex = 0;
-        let minDistance = Infinity;
-
-        // Batch reads to avoid layout thrashing
-        const states = anchors.map((anchor, index) => {
-          const rect = anchor.getBoundingClientRect();
-          const cardCenter = rect.left + rect.width / 2;
-          const distance = Math.abs(cardCenter - viewportCenter);
-          const imgHeight = imgWrappers[index]?.offsetHeight || 0;
-          
-          if (distance < minDistance) {
-            minDistance = distance;
-            closestIndex = index;
-          }
-          
-          return { rect, cardCenter, distance, imgHeight };
-        });
-
-        activeCenterIndex.current = closestIndex;
-
-        const isMobile = window.innerWidth < 768;
-        const maxCurve = isMobile ? 10 : 20; // Elegant, refined curve depth
-        const maxDistance = window.innerWidth * (isMobile ? 0.85 : 0.65); // Flatter on mobile
-
-        // Batch writes
-        states.forEach((state, index) => {
-          const { rect, cardCenter, imgHeight } = state;
-          
-          // Pure continuous normalization relative to natural card spacing
-          const nRatio = (cardCenter - viewportCenter) / spacing;
-          
-          // Gaussian bell curve for strict focal strength. 
-          // Solves the "two large cards" problem by rapidly decaying dominance outside the absolute center.
-          const focalStrength = Math.exp(-Math.pow(nRatio * 2.2, 2));
-
-          // Perspective & Scale interpolates smoothly across infinite scroll states
-          // Max scale is 1.0 to prevent the card from ballooning and dominating adjacent gaps
-          const scale = 0.82 + 0.18 * focalStrength; 
-          const rotationYAmount = nRatio * -16 * (1 - focalStrength * 0.2); // Subtle cinematic wrap
-          
-          // Continuous Parabolic Clip Path for the IMAX cinematic screen effect
-          let clipPath = "polygon(";
-          const steps = 15;
-          
-          // Top edge: mathematically perfect parabola across the entire viewport width
-          for (let i = 0; i <= steps; i++) {
-            const percentX = i / steps;
-            const globalX = rect.left + (rect.width * percentX);
-            const dist = globalX - viewportCenter;
-            const nX = dist / maxDistance;
-            const offset = Math.pow(Math.abs(nX), 2.2) * maxCurve;
-            const topY = maxCurve - Math.min(maxCurve, offset);
-            clipPath += `${(percentX * 100).toFixed(2)}% ${topY.toFixed(2)}%, `;
-          }
-          
-          // Bottom edge
-          for (let i = steps; i >= 0; i--) {
-            const percentX = i / steps;
-            const globalX = rect.left + (rect.width * percentX);
-            const dist = globalX - viewportCenter;
-            const nX = dist / maxDistance;
-            const offset = Math.pow(Math.abs(nX), 2.2) * maxCurve;
-            const bottomY = (100 - maxCurve) + Math.min(maxCurve, offset);
-            clipPath += `${(percentX * 100).toFixed(2)}% ${bottomY.toFixed(2)}%${i === 0 ? "" : ", "}`;
-          }
-          clipPath += ")";
-
-          const imgBox = imgWrappers[index];
-          if (imgBox) {
-            imgBox.style.clipPath = clipPath;
-          }
-
-          // Move the title strictly parallel to the newly curved bottom edge continuously
-          const cardNX = (cardCenter - viewportCenter) / maxDistance;
-          const cardOffset = Math.pow(Math.abs(cardNX), 2.2) * maxCurve;
-          const bottomCutPercent = maxCurve - Math.min(maxCurve, cardOffset);
-          const shiftY = -(imgHeight * (bottomCutPercent / 100));
-
-          const card = cards[index];
-          
-          // Set purely continuous transform driven entirely by the Gaussian focal curve
-          gsap.set(card, {
-            scale: scale,
-            opacity: 0.35 + 0.65 * focalStrength,
-            rotationY: rotationYAmount,
-            z: -100 * (1 - focalStrength), // Recedes outer cards backwards
-            transformPerspective: 1400,
-            transformOrigin: "center center",
-          });
-
-          // Animate title prominence continuously
-          const titleWrapper = card.querySelector('.insight-title-wrapper');
-          if (titleWrapper) {
-            gsap.set(titleWrapper, { 
-              y: shiftY,
-              opacity: 0.4 + 0.6 * focalStrength
-              // Note: scale is inherited perfectly from the parent card, maintaining exact relative proportions
-            });
-          }
-        });
-      };
-
-      // Set initial frame
-      updateCardCurvature();
-
       const getScrollDistance = () => {
         if (!trackRef.current) return 0;
+        // The total scrollable width minus the viewport width
         return trackRef.current.scrollWidth - window.innerWidth;
       };
 
@@ -190,30 +69,21 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
-          scrub: 2.0, // Heavy, controlled, premium cinematic inertia
+          scrub: 1, // Smooth interpolation
           start: "top top",
-          // Massive scroll extension for a dedicated cinematic sequence without rushing
-          end: () => `+=${getScrollDistance() * 3 + window.innerHeight * 2.5}`,
+          end: () => `+=${getScrollDistance()}`,
           pinSpacing: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onUpdate: updateCardCurvature,
         },
       });
 
-      // Continuous horizontal movement to the right as user scrolls down
+      // Linear, clean horizontal slide
       tl.to(trackRef.current, {
         x: () => -getScrollDistance(),
         ease: "none",
-        duration: 1,
       });
 
-      // Brief hold composition at the very end before smoothly unpinning
-      tl.to({}, { duration: 0.15 });
-
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 150);
     }, sectionRef);
 
     return () => {
@@ -241,55 +111,62 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         className="relative w-full h-screen bg-parchment text-ink flex flex-col justify-between py-12 md:py-16 overflow-hidden select-none z-10 border-t border-gold/10"
       >
         {/* Top Header */}
-        <div className="container mx-auto px-6 text-center flex-shrink-0 z-20">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <span className="w-8 h-0.5 bg-gold" />
-            <span className="text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-gold">
-              Legal Perspectives
-            </span>
-            <span className="w-8 h-0.5 bg-gold" />
+        <div className="container mx-auto px-6 lg:px-12 flex-shrink-0 z-20 flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-0">
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-8 h-0.5 bg-gold" />
+              <span className="text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-gold">
+                Legal Perspectives
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-serif tracking-wide text-ink">
+              Insights & Updates
+            </h2>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif tracking-[0.35em] uppercase text-ink mb-3 pl-[0.35em]">
-            I N S I G H T S
-          </h2>
-          <p className="text-base md:text-lg font-sans text-ink/70 tracking-wide max-w-lg mx-auto">
-            {t("sublabel") || "Insight turns complexity into clarity at the right Momento."}
+          <p className="text-base md:text-lg font-sans text-ink/70 max-w-md">
+            {t("sublabel") || "Insight turns complexity into clarity at the right moment."}
           </p>
         </div>
 
-        {/* Continuous Horizontal Curved Ribbon Track */}
-        <div className="relative w-full flex-grow flex items-center overflow-hidden my-auto [perspective:1400px]">
+        {/* Clean Editorial Horizontal Track */}
+        <div className="relative w-full flex-grow flex items-center overflow-hidden my-auto">
           <div 
             ref={trackRef} 
-            className="flex items-center px-[35vw] gap-6 md:gap-10 w-max [transform-style:preserve-3d]"
+            className="flex items-start px-6 lg:px-12 gap-8 md:gap-12 w-max"
           >
             {CAROUSEL_DATA.map((item, index) => (
               <div 
                 key={index}
-                className="curved-card-anchor relative w-[75vw] sm:w-[50vw] md:w-[35vw] lg:w-[32vw] flex-shrink-0 flex justify-center items-center"
+                className="relative w-[85vw] sm:w-[50vw] md:w-[40vw] lg:w-[30vw] flex-shrink-0"
               >
                 <div 
-                  className="curved-card w-full flex flex-col items-center cursor-pointer transition-colors duration-500 will-change-transform [transform-style:preserve-3d]"
+                  className="w-full flex flex-col cursor-pointer group"
                   onClick={() => setActiveModalIndex(index)}
                 >
-                  {/* Image Container with Dynamic Curved / Warped Edge */}
-                  <div className="relative w-full drop-shadow-2xl">
-                    <div className="curved-img-box relative w-full h-[320px] sm:h-[400px] md:h-[480px] lg:h-[550px] overflow-hidden bg-white group transition-all duration-300 will-change-transform">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        sizes="(max-width: 768px) 80vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        priority={index < 3}
-                      />
-                      <div className="absolute inset-0 bg-parchment/15 group-hover:bg-transparent transition-colors duration-500" />
-                    </div>
+                  <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-slate/5 mb-6">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 768px) 85vw, 35vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      priority={index < 3}
+                    />
+                    {/* Subtle Overlay */}
+                    <div className="absolute inset-0 bg-ink/5 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
-
-                  {/* Title underneath (moves seamlessly with the clipped curve) */}
-                  <div className="insight-title-wrapper pt-4 md:pt-6 text-center px-4 max-w-sm will-change-transform origin-top">
-                    <h3 className="insight-title font-serif text-lg md:text-xl lg:text-2xl leading-snug text-ink drop-shadow-sm font-semibold">
+                  
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-bold tracking-widest uppercase text-gold">
+                        {item.category}
+                      </span>
+                      <span className="w-1 h-1 rounded-full bg-gold/50" />
+                      <span className="text-xs font-medium tracking-wider uppercase text-ink/50">
+                        {item.date}
+                      </span>
+                    </div>
+                    <h3 className="font-serif text-2xl md:text-3xl leading-snug text-ink group-hover:text-gold transition-colors">
                       {item.title}
                     </h3>
                   </div>
@@ -297,19 +174,6 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Bottom Callout & "See Details" indicator */}
-        <div className="container mx-auto px-6 text-center flex-shrink-0 z-20 flex flex-col items-center">
-          <button
-            onClick={() => setActiveModalIndex(activeCenterIndex.current)}
-            className="group inline-flex items-center gap-3 text-xs md:text-sm font-sans tracking-widest uppercase text-ink/80 hover:text-gold transition-colors py-2"
-          >
-            <span className="font-bold">See Details</span>
-            <span className="w-8 h-8 rounded-full border border-ink/20 group-hover:border-gold group-hover:text-gold flex items-center justify-center transition-colors bg-white/60">
-              <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-            </span>
-          </button>
         </div>
       </section>
 
@@ -329,18 +193,18 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
 
             {/* Modal Card */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
-              className="relative z-10 w-full max-w-5xl max-h-[90vh] bg-parchment text-ink rounded-2xl shadow-2xl border border-gold/30 overflow-hidden flex flex-col md:flex-row my-auto"
+              className="relative z-10 w-full max-w-5xl max-h-[90vh] bg-parchment text-ink rounded-sm shadow-2xl overflow-hidden flex flex-col md:flex-row my-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={() => setActiveModalIndex(null)}
                 aria-label="Close modal"
-                className="absolute top-4 right-4 md:top-6 md:right-6 z-30 w-10 h-10 rounded-full bg-white/90 border border-ink/15 text-ink hover:text-gold hover:border-gold flex items-center justify-center transition-colors shadow-md"
+                className="absolute top-4 right-4 md:top-6 md:right-6 z-30 w-10 h-10 rounded-full bg-white/90 text-ink hover:text-gold hover:bg-white flex items-center justify-center transition-colors shadow-md"
               >
                 <X size={20} />
               </button>
@@ -379,7 +243,7 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
 
                 <a
                   href={`/${locale}/blog`}
-                  className="group inline-flex items-center gap-3 bg-gold hover:bg-gold/90 text-ink font-bold font-sans uppercase tracking-widest px-8 py-3.5 rounded-full text-xs md:text-sm transition-all shadow-md w-fit"
+                  className="group inline-flex items-center gap-3 bg-ink hover:bg-ink/90 text-parchment font-bold font-sans uppercase tracking-widest px-8 py-3.5 rounded-sm text-xs md:text-sm transition-all shadow-md w-fit"
                 >
                   <span>Read Full Article</span>
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
