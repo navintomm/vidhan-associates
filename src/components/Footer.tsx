@@ -39,7 +39,7 @@ export default function Footer({ locale }: { locale: string }) {
  
  {/* Premium Developer Badge */}
  <a 
- href="https://linkedin.com/in/navintombabu" 
+ href="https://www.linkedin.com/in/navin-tom-babu-523165303" 
  target="_blank"
  rel="noopener noreferrer"
  className="group flex items-center gap-4 w-fit p-2 pr-6 rounded-full border border-ink/10 hover:border-gold/40 bg-white/40 hover:bg-white transition-all duration-300 shadow-sm hover:shadow-md"
@@ -83,11 +83,15 @@ export default function Footer({ locale }: { locale: string }) {
  
  {/* Contact Details */}
  <div className="flex flex-col mt-8">
+ <div className="border-t border-ink/20 py-6 flex flex-col items-start">
+ <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold mb-2 break-words w-full">{t("contact.phoneTitle")}</p>
+ <a href="https://wa.me/917907139328" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-sans tracking-wide mb-1 break-words hover:text-gold transition-colors block w-fit">{t("contact.phone1")}</a>
+ <a href="https://wa.me/919633749958" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-sans tracking-wide mb-1 break-words hover:text-gold transition-colors block w-fit">{t("contact.phone2")}</a>
+ <a href="https://wa.me/918606723820" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-sans tracking-wide break-words hover:text-gold transition-colors block w-fit">{t("contact.phone3")}</a>
+ </div>
  <div className="border-t border-ink/20 py-6">
- <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold mb-2 break-words">{t("contact.phoneTitle")}</p>
- <p className="text-lg md:text-xl font-sans tracking-wide mb-1 break-words">{t("contact.phone1")}</p>
- <p className="text-lg md:text-xl font-sans tracking-wide mb-1 break-words">{t("contact.phone2")}</p>
- <p className="text-lg md:text-xl font-sans tracking-wide break-words">{t("contact.phone3")}</p>
+ <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold mb-2 break-words">Email Address</p>
+ <a href="mailto:vidhanlawchamberskerala@gmail.com" className="text-base md:text-lg font-sans tracking-wide break-words hover:text-gold transition-colors">vidhanlawchamberskerala@gmail.com</a>
  </div>
  <div className="border-t border-ink/20 py-6">
  <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold mb-2 break-words">{t("contact.ernakulamTitle")}</p>
