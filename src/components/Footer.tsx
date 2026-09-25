@@ -19,21 +19,20 @@ export default function Footer({ locale }: { locale: string }) {
  
  {/* LEFT COLUMN: Navigation & Info */}
  <div className="flex flex-col justify-between h-full">
- {/* Navigation */}
- <nav className="flex flex-col gap-6 mt-8">
- {['HOME', 'ABOUT', 'PRACTICE AREAS', 'CASE EXPERIENCE', 'INSIGHTS', 'TEAM', 'CAREERS', 'CONTACT'].map((item) => (
- <Link 
- key={item}
- href={
- item === 'HOME' ? `/${locale}` : 
- `/${locale}/${item.toLowerCase().replace(' ', '-')}`
- }
- className={`${locale === "ml" ? "text-xl lg:text-2xl break-words whitespace-normal" : "text-2xl lg:text-3xl"} tracking-[0.25em] font-serif hover:text-gold transition-colors w-fit max-w-[240px] md:max-w-none font-medium`}
- >
- {t(`nav.${item}`)}
- </Link>
- ))}
- </nav>
+ {/* Developer Credit */}
+ <div className="flex flex-col gap-2 mt-8 lg:mt-16">
+  <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold">Digital Architecture</p>
+  <a 
+  href="https://linkedin.com/in/navintombabu" 
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-2xl lg:text-3xl tracking-[0.1em] font-serif text-ink hover:text-gold transition-colors w-fit font-medium group"
+  >
+  Navin Tom Babu
+  <span className="block h-px w-0 bg-gold group-hover:w-full transition-all duration-500 mt-2"></span>
+  </a>
+  <p className="text-sm font-sans text-ink/50 mt-1">Full-Stack Engineer & Designer</p>
+ </div>
 
  {/* Firm Info & Copyright */}
  <div className="mt-24 lg:mt-auto pb-8 lg:pb-32 max-w-sm md:max-w-md">
