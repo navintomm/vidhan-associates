@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Linkedin } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -17,32 +17,43 @@ export default function Footer({ locale }: { locale: string }) {
  
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 flex-grow relative z-10">
  
- {/* LEFT COLUMN: Navigation & Info */}
- <div className="flex flex-col justify-between h-full">
- {/* Developer Credit */}
- <div className="flex flex-col gap-2 mt-8 lg:mt-16">
-  <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold">Digital Architecture</p>
-  <a 
-  href="https://linkedin.com/in/navintombabu" 
-  target="_blank"
-  rel="noopener noreferrer"
-  className="text-2xl lg:text-3xl tracking-[0.1em] font-serif text-ink hover:text-gold transition-colors w-fit font-medium group"
-  >
-  Navin Tom Babu
-  <span className="block h-px w-0 bg-gold group-hover:w-full transition-all duration-500 mt-2"></span>
-  </a>
-  <p className="text-sm font-sans text-ink/50 mt-1">Full-Stack Engineer & Designer</p>
- </div>
-
- {/* Firm Info & Copyright */}
- <div className="mt-24 lg:mt-auto pb-8 lg:pb-32 max-w-sm md:max-w-md">
- <p className="text-base md:text-lg text-ink/75 font-sans leading-relaxed mb-8">
+ {/* LEFT COLUMN: Firm Info & Developer Credit */}
+ <div className="flex flex-col h-full">
+ 
+ {/* Brand/Logo Area (Top) */}
+ <div className="mt-8 mb-auto">
+ <h2 className="text-3xl md:text-4xl font-serif tracking-widest uppercase text-ink mb-6">
+ Vidhan<br/>
+ <span className="text-xl md:text-2xl text-gold">Law Chambers</span>
+ </h2>
+ <p className="text-base md:text-lg text-ink/75 font-sans leading-relaxed max-w-sm">
  {t("info.description")}
  </p>
+ </div>
+
+ {/* Copyright & Developer Credit (Bottom) */}
+ <div className="pb-8 lg:pb-32 mt-24 flex flex-col gap-6">
  <div className="flex items-center gap-3 text-sm text-ink/50 font-sans">
  <p>{t("info.copyright", { year: new Date().getFullYear() })}</p>
  </div>
+ 
+ {/* Premium Developer Badge */}
+ <a 
+ href="https://linkedin.com/in/navintombabu" 
+ target="_blank"
+ rel="noopener noreferrer"
+ className="group flex items-center gap-4 w-fit p-2 pr-6 rounded-full border border-ink/10 hover:border-gold/40 bg-white/40 hover:bg-white transition-all duration-300 shadow-sm hover:shadow-md"
+ >
+ <div className="w-10 h-10 rounded-full bg-ink flex items-center justify-center text-parchment group-hover:bg-gold transition-colors">
+ <Linkedin size={18} strokeWidth={1.5} />
  </div>
+ <div className="flex flex-col">
+ <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-ink/40 group-hover:text-gold transition-colors">Engineered By</span>
+ <span className="text-sm font-serif font-medium text-ink tracking-wide">Navin Tom Babu</span>
+ </div>
+ </a>
+ </div>
+
  </div>
 
  {/* CENTER COLUMN: Back to Top */}
