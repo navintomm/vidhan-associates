@@ -10,7 +10,7 @@ import { ArrowRight, X } from "lucide-react";
 
 const CAROUSEL_DATA = [
   {
-    image: "/images/insights/insight-1-hq.jpg",
+    image: "/images/insights/insight-5-hq.jpg",
     title: "Firm Featured in Legal Press",
     category: "Media & Recognition",
     date: "August 2026",
@@ -166,7 +166,7 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
                         {item.date}
                       </span>
                     </div>
-                    <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl leading-snug text-ink group-hover:text-gold transition-colors line-clamp-2">
+                    <h3 className="font-serif text-xl md:text-2xl lg:text-3xl leading-snug text-ink group-hover:text-gold transition-colors line-clamp-2">
                       {item.title}
                     </h3>
                   </div>
