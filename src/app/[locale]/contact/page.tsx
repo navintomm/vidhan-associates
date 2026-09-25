@@ -343,9 +343,24 @@ export default function ContactPage() {
  <h3 className="text-lg font-bold tracking-widest uppercase text-gold break-words">{t("info.directTitle")}</h3>
  </div>
  
- <div className="grid grid-cols-2 gap-6 pl-2">
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-2">
  <div className="space-y-2">
- <p className="text-ink/80 font-sans text-base">consult@vidhan.test</p>
+ <p className="text-sm font-bold tracking-widest uppercase text-gold/80 mb-1">{t("info.emailLabel")}</p>
+ <a href="mailto:vidhanlawchamberskerala@gmail.com" className="text-ink hover:text-gold transition-colors font-sans text-base break-all">vidhanlawchamberskerala@gmail.com</a>
+ </div>
+ <div className="space-y-2">
+ <p className="text-sm font-bold tracking-widest uppercase text-gold/80 mb-1">{t("info.phonesLabel")}</p>
+ <div className="flex flex-col gap-2">
+ <a href="https://wa.me/917907139328" target="_blank" rel="noopener noreferrer" className="text-ink/80 hover:text-gold transition-colors font-sans text-base block w-fit">
+ +91 7907139328 (Adv. Rohit)
+ </a>
+ <a href="https://wa.me/919633749958" target="_blank" rel="noopener noreferrer" className="text-ink/80 hover:text-gold transition-colors font-sans text-base block w-fit">
+ +91 9633749958 (Adv. Antony)
+ </a>
+ <a href="https://wa.me/918606723820" target="_blank" rel="noopener noreferrer" className="text-ink/80 hover:text-gold transition-colors font-sans text-base block w-fit">
+ +91 8606723820 (Adv. Rones)
+ </a>
+ </div>
  </div>
  </div>
  </div>
