@@ -69,7 +69,13 @@ export default function PracticeAreasStack() {
  useEffect(() => {
  const mm = gsap.matchMedia();
 
- mm.add("all", () => {
+ mm.add({
+ isDesktop: "(min-width: 768px)",
+ isMobile: "(max-width: 767px)"
+ }, (context) => {
+ let { isDesktop } = context.conditions as { isDesktop: boolean };
+ const yOffset = isDesktop ? 40 : 15;
+ 
  if (!containerRef.current) return;
 
  const cards = gsap.utils.toArray<HTMLElement>(".case-card");
@@ -77,7 +83,7 @@ export default function PracticeAreasStack() {
  // Initial Setup: Stack them with scale and Y offsets
  gsap.set(cards, {
  scale: (i) => 1 - (i * 0.05),
- y: (i) => i * 40,
+ y: (i) => i * yOffset,
  zIndex: (i) => cards.length - i,
  transformOrigin: "bottom center"
  });
@@ -116,7 +122,7 @@ export default function PracticeAreasStack() {
  
  tl.to(nextCard, {
  scale: 1 - (stackPos * 0.05),
- y: stackPos * 40,
+ y: stackPos * yOffset,
  ease: "power2.inOut",
  }, label);
  }

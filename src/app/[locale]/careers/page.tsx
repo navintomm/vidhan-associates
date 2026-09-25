@@ -140,10 +140,7 @@ export default function CareersPage() {
 
  <div className="bg-gold/5 border border-gold/20 rounded-xl p-8 md:p-10 mb-10 w-full max-w-xl mx-auto">
  <div className="flex flex-col items-center gap-3">
- <a href={`mailto:${tApply("email")}`} className="flex items-center gap-3 text-2xl md:text-3xl font-serif text-gold hover:text-gold/80 transition-colors mb-2 font-medium">
- <Mail size={28} />
- {tApply("email")}
- </a>
+ <a href={`mailto:${tApply("email")}`} className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-[1.1rem] sm:text-2xl md:text-3xl font-serif text-gold hover:text-gold/80 transition-colors mb-2 font-medium break-all text-center w-full"><Mail className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" /><span>{tApply("email")}</span></a>
  <p className="text-base font-sans text-ink/60">
  {tApply("subjectFormat")}
  </p>
@@ -177,3 +174,4 @@ export default function CareersPage() {
  </div>
  );
 }
+

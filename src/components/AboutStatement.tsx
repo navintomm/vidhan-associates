@@ -64,16 +64,16 @@ export default function AboutStatement() {
  ref={containerRef} 
  className="h-screen w-full bg-parchment flex items-center justify-center overflow-hidden border-t border-gold/10"
  >
- <div className="flex items-center gap-4 lg:gap-6 text-3xl md:text-5xl lg:text-7xl xl:text-[5.5rem] font-serif text-ink px-6">
+ <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 lg:gap-6 text-2xl sm:text-3xl md:text-5xl lg:text-7xl xl:text-[5.5rem] font-serif text-ink px-4 w-full">
  {/* Fixed word */}
- <span className="font-bold flex-shrink-0 text-gold">WE</span>
+ <span className="font-bold flex-shrink-0 text-gold text-center">WE</span>
  
  {/* Dynamic wrapper */}
- <div className="relative h-[1.2em] w-[260px] md:w-[450px] lg:w-[650px] xl:w-[800px] flex items-center overflow-visible">
+ <div className="relative h-[1.2em] w-full max-w-[320px] sm:max-w-[400px] md:max-w-none md:w-[450px] lg:w-[650px] xl:w-[800px] flex items-center justify-center md:justify-start overflow-visible">
  {STATEMENTS.map((stmt, i) => (
  <span
  key={i}
- className={`dynamic-phrase absolute left-0 top-0 h-full flex items-center w-full whitespace-nowrap ${i === 0 ? 'opacity-100' : 'opacity-0'}`}
+ className={`dynamic-phrase absolute left-0 top-0 h-full flex items-center justify-center md:justify-start w-full whitespace-nowrap md:whitespace-normal ${i === 0 ? 'opacity-100' : 'opacity-0'}`}
  style={{ transform: i === 0 ? "translateY(0)" : "translateY(60px)" }}
  >
  {stmt}
