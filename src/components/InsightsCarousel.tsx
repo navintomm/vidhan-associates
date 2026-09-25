@@ -137,18 +137,18 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
             {CAROUSEL_DATA.map((item, index) => (
               <div 
                 key={index}
-                className="relative w-[85vw] sm:w-[50vw] md:w-[40vw] lg:w-[30vw] flex-shrink-0"
+                className="relative w-[85vw] sm:w-[50vw] md:w-[35vw] lg:w-[28vw] flex-shrink-0"
               >
                 <div 
                   className="w-full flex flex-col cursor-pointer group"
                   onClick={() => setActiveModalIndex(index)}
                 >
-                  <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-slate/5 mb-6">
+                  <div className="relative w-full aspect-[3/2] overflow-hidden bg-slate/5 mb-5 rounded-sm">
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
-                      sizes="(max-width: 768px) 85vw, 35vw"
+                      sizes="(max-width: 768px) 85vw, 30vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       priority={index < 3}
                     />
@@ -156,17 +156,17 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
                     <div className="absolute inset-0 bg-ink/5 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
                   
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2.5">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs font-bold tracking-widest uppercase text-gold">
+                      <span className="text-[10px] font-bold tracking-widest uppercase text-gold">
                         {item.category}
                       </span>
                       <span className="w-1 h-1 rounded-full bg-gold/50" />
-                      <span className="text-xs font-medium tracking-wider uppercase text-ink/50">
+                      <span className="text-[10px] font-medium tracking-wider uppercase text-ink/50">
                         {item.date}
                       </span>
                     </div>
-                    <h3 className="font-serif text-2xl md:text-3xl leading-snug text-ink group-hover:text-gold transition-colors">
+                    <h3 className="font-serif text-xl md:text-2xl leading-snug text-ink group-hover:text-gold transition-colors line-clamp-2">
                       {item.title}
                     </h3>
                   </div>
