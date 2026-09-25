@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUp, Linkedin } from "lucide-react";
+import { ArrowUp, Code2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -45,7 +45,7 @@ export default function Footer({ locale }: { locale: string }) {
  className="group flex items-center gap-4 w-fit p-2 pr-6 rounded-full border border-ink/10 hover:border-gold/40 bg-white/40 hover:bg-white transition-all duration-300 shadow-sm hover:shadow-md"
  >
  <div className="w-10 h-10 rounded-full bg-ink flex items-center justify-center text-parchment group-hover:bg-gold transition-colors">
- <Linkedin size={18} strokeWidth={1.5} />
+ <Code2 size={18} strokeWidth={1.5} />
  </div>
  <div className="flex flex-col">
  <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-ink/40 group-hover:text-gold transition-colors">Engineered By</span>
