@@ -74,7 +74,7 @@ export default function PracticeAreasStack() {
  isMobile: "(max-width: 767px)"
  }, (context) => {
  const { isDesktop } = context.conditions as { isDesktop: boolean };
- const yOffset = isDesktop ? 40 : 15;
+ const yOffset = isDesktop ? 40 : 10;
  
  if (!containerRef.current) return;
 
@@ -175,7 +175,7 @@ export default function PracticeAreasStack() {
  </div>
 
  {/* The Card Stack */}
- <div className="relative w-full max-w-md md:max-w-2xl h-[60vh] md:h-[70vh] z-10 flex items-center justify-center perspective-[1000px]">
+ <div className="relative w-full max-w-md md:max-w-2xl h-[50vh] md:h-[70vh] z-10 flex items-center justify-center perspective-[1000px]">
    {practiceAreas.map((item) => {
      const Icon = item.icon;
      return (
@@ -226,7 +226,7 @@ export default function PracticeAreasStack() {
  {/* Expanded Modal */}
  <AnimatePresence>
  {activeData && (
- <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 md:p-12 pointer-events-none">
+ <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 md:p-12 pointer-events-none">
  
  {/* Backdrop */}
  <motion.div
@@ -289,6 +289,8 @@ export default function PracticeAreasStack() {
  </>
  );
 }
+
+
 
 
 

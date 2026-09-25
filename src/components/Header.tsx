@@ -124,7 +124,7 @@ export default function Header({ locale }: { locale: string }) {
  animate={{ opacity: 1, y: 0 }}
  exit={{ opacity: 0, y: -5 }}
  transition={{ delay: 1 }}
- className="absolute top-full right-0 mt-2 pointer-events-none drop-shadow-md z-[10001]"
+ className="absolute top-full right-0 mt-2 pointer-events-none drop-shadow-md z-[10001] hidden md:block"
  >
  <motion.div
  animate={{ y: [0, 4, 0] }}
@@ -199,3 +199,4 @@ export default function Header({ locale }: { locale: string }) {
  </>
  );
 }
+
