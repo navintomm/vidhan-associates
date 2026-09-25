@@ -73,7 +73,7 @@ export default function PracticeAreasStack() {
  isDesktop: "(min-width: 768px)",
  isMobile: "(max-width: 767px)"
  }, (context) => {
- let { isDesktop } = context.conditions as { isDesktop: boolean };
+ const { isDesktop } = context.conditions as { isDesktop: boolean };
  const yOffset = isDesktop ? 40 : 15;
  
  if (!containerRef.current) return;
@@ -289,3 +289,4 @@ export default function PracticeAreasStack() {
  </>
  );
 }
+
