@@ -108,10 +108,10 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
     <>
       <section 
         ref={sectionRef} 
-        className="relative w-full h-screen bg-parchment text-ink flex flex-col justify-between py-12 md:py-16 overflow-hidden select-none z-10 border-t border-gold/10"
+        className="relative w-full h-[100svh] min-h-[600px] bg-parchment text-ink flex flex-col justify-center pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden select-none z-10 border-t border-gold/10"
       >
         {/* Top Header */}
-        <div className="container mx-auto px-6 lg:px-12 flex-shrink-0 z-20 flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-0">
+        <div className="container mx-auto px-6 lg:px-12 flex-shrink-0 z-20 flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
           <div>
             <div className="flex items-center gap-3 mb-3">
               <span className="w-8 h-0.5 bg-gold" />
@@ -129,7 +129,7 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
         </div>
 
         {/* Clean Editorial Horizontal Track */}
-        <div className="relative w-full flex-grow flex items-center overflow-hidden my-auto">
+        <div className="relative w-full flex items-center overflow-visible">
           <div 
             ref={trackRef} 
             className="flex items-start px-6 lg:px-12 gap-8 md:gap-12 w-max"
