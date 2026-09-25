@@ -10,35 +10,35 @@ import { ArrowRight, X } from "lucide-react";
 
 const CAROUSEL_DATA = [
   {
-    image: "/images/insights/insight_property_v2.jpg",
+    image: "/images/insights/insight-1-hq.jpg",
     title: "Firm Featured in Legal Press",
     category: "Media & Recognition",
     date: "August 2026",
     description: "Property disputes often involve complex historical claims and fragmented titles. A thorough understanding of local tenancy laws and inheritance frameworks is required to secure a clear title.",
   },
   {
-    image: "/images/insights/insight_liberty.jpg",
+    image: "/images/insights/insight-2-hq.jpg",
     title: "Firm Recognised Among Regional Peers",
     category: "Accolades",
     date: "July 2026",
     description: "Personal liberty is a fundamental constitutional right. Bail conditions must balance the state's interest with the presumption of innocence. Understanding these nuances is critical for any accused.",
   },
   {
-    image: "/images/insights/insight_divorce.jpg",
+    image: "/images/insights/insight-3-hq.jpg",
     title: "Inheritance Planning Before the Inevitable Momento",
     category: "Estate & Family",
     date: "June 2026",
     description: "Divorce proceedings under the Hindu Marriage Act require navigating emotional turbulence alongside rigid statutory requirements regarding alimony, maintenance, and child custody.",
   },
   {
-    image: "/images/insights/insight_real_estate.jpg",
+    image: "/images/insights/insight-4-hq.jpg",
     title: "Title Verification Before Purchase: Due Diligence",
     category: "Real Estate",
     date: "May 2026",
     description: "Real estate transactions are fraught with risk. Due diligence and title verification ensure that buyers do not inherit encumbrances, litigation, or defective ownership from previous sellers.",
   },
   {
-    image: "/images/insights/insight_property_v2.jpg",
+    image: "/images/insights/insight-1-hq.jpg",
     title: "Navigating High Court Jurisprudence in Commercial Claims",
     category: "Commercial Law",
     date: "April 2026",
@@ -156,17 +156,17 @@ export default function InsightsCarousel({ locale }: { locale: string }) {
                     <div className="absolute inset-0 bg-ink/5 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
                   
-                  <div className="flex flex-col gap-2.5">
-                    <div className="flex items-center gap-3">
-                      <span className="text-[10px] font-bold tracking-widest uppercase text-gold">
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <span className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold">
                         {item.category}
                       </span>
-                      <span className="w-1 h-1 rounded-full bg-gold/50" />
-                      <span className="text-[10px] font-medium tracking-wider uppercase text-ink/50">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gold/50" />
+                      <span className="text-xs md:text-sm font-medium tracking-wider uppercase text-ink/50">
                         {item.date}
                       </span>
                     </div>
-                    <h3 className="font-serif text-xl md:text-2xl leading-snug text-ink group-hover:text-gold transition-colors line-clamp-2">
+                    <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl leading-snug text-ink group-hover:text-gold transition-colors line-clamp-2">
                       {item.title}
                     </h3>
                   </div>
