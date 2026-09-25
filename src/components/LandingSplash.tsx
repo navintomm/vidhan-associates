@@ -9,8 +9,11 @@ export default function LandingSplash() {
  const [isMounted, setIsMounted] = useState(false);
 
  useEffect(() => {
- setIsMounted(true);
- // Removed localStorage caching so the disclaimer is strictly shown on every reload
+  const hasAgreed = localStorage.getItem("vidhan_disclaimer_agreed");
+  if (hasAgreed === "true") {
+   setStep("done");
+  }
+  setIsMounted(true);
  }, []);
 
  useEffect(() => {
@@ -76,7 +79,8 @@ export default function LandingSplash() {
  <div className="px-6 py-5 md:px-12 md:py-8 shrink-0 flex justify-end bg-white border-t border-ink/5 z-10 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
  <button
  onClick={() => {
- setStep("splash");
+  localStorage.setItem("vidhan_disclaimer_agreed", "true");
+  setStep("splash");
  }}
  className="bg-ink text-parchment px-6 md:px-10 py-3 md:py-4 text-xs md:text-sm tracking-widest font-bold uppercase hover:bg-ink/90 transition-colors rounded-sm w-full md:w-auto"
  >
