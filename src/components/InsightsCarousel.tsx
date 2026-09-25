@@ -10,7 +10,7 @@ import { ArrowRight, X } from "lucide-react";
 
 const CAROUSEL_DATA = [
   {
-    image: "/images/insights/insight-5-hq.jpg",
+    image: "/images/insights/insight-5-hq-v2.jpg",
     title: "Firm Featured in Legal Press",
     category: "Media & Recognition",
     date: "August 2026",
