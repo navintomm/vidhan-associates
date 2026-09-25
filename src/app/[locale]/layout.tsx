@@ -46,7 +46,7 @@ export default async function LocaleLayout({
  <main className="min-h-screen">
  {children}
  </main>
- <Footer locale={locale} />
+ <Footer />
  <BottomNav locale={locale} />
  <WhatsAppButton />
  </SmoothScrollProvider>

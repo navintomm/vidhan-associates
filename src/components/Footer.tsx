@@ -1,11 +1,10 @@
 "use client";
 
 import { ArrowUp, Code2 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-export default function Footer({ locale }: { locale: string }) {
+export default function Footer() {
  const t = useTranslations("footer");
 
  const scrollToTop = () => {
