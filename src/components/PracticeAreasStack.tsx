@@ -161,9 +161,9 @@ export default function PracticeAreasStack() {
  </div>
 
  {/* Header Text */}
- <div className="absolute top-32 left-8 md:left-16 z-20 pointer-events-none">
+ <div className="absolute top-20 md:top-32 left-6 md:left-16 z-20 pointer-events-none">
    <p className="text-gold tracking-[0.3em] uppercase text-sm md:text-base font-bold mb-4">{t("header.subtitle")}</p>
-   <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-ink leading-tight break-words whitespace-pre-line">
+   <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-ink leading-tight break-words whitespace-pre-line">
      {t("header.title")}
    </h1>
  </div>
@@ -258,11 +258,11 @@ export default function PracticeAreasStack() {
  fill
  className="object-cover"
  />
- <div className="absolute inset-0" style={{background: 'linear-gradient(to right, rgba(1,1,1,0.0) 60%, rgba(254,254,254,0.95) 100%)'}} />
+ <div className="absolute inset-0" className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent via-transparent to-parchment" />
  </div>
 
  {/* Right Content Pane */}
- <div className="w-full md:w-1/2 h-full flex flex-col justify-start py-8 px-6 md:py-16 md:px-12 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+ <div className="w-full md:w-1/2 flex-1 flex flex-col justify-start py-8 px-6 md:py-16 md:px-12 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
  <div className="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center border border-gold/30 text-gold mb-8 flex-shrink-0">
  <activeData.icon size={32} />
  </div>
@@ -289,4 +289,8 @@ export default function PracticeAreasStack() {
  </>
  );
 }
+
+
+
+
 
