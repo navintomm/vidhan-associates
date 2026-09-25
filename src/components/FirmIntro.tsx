@@ -41,7 +41,7 @@ export default function FirmIntro({ locale }: { locale: string }) {
  Guiding Principle
  </p>
  <blockquote 
- className={`${locale === "ml" ? "text-3xl md:text-5xl lg:text-6xl leading-relaxed" : "text-5xl md:text-6xl lg:text-7xl leading-tight"} font-serif text-ink italic mb-6 transition-opacity duration-500 break-words`} 
+ className={`${locale === "ml" ? "text-3xl md:text-5xl lg:text-6xl leading-relaxed" : "text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight"} font-serif text-ink italic mb-6 transition-opacity duration-500 break-words`} 
  style={{ opacity: isMounted ? 1 : 0.4 }}
  >
  &ldquo;{dailyQuote.text}&rdquo;
@@ -87,3 +87,4 @@ export default function FirmIntro({ locale }: { locale: string }) {
  </section>
  );
 }
+

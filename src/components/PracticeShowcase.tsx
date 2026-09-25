@@ -117,7 +117,7 @@ export default function PracticeShowcase() {
  >
  {/* The Text hovering exactly on top of everything */}
  <div className="absolute bottom-[100%] left-[71%] -translate-x-1/2 mb-[22vh] md:mb-[26vh] lg:mb-[32vh] whitespace-nowrap z-40 text-center">
- <h3 className="text-5xl md:text-6xl lg:text-7xl font-serif text-ink drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] tracking-wider">
+ <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-ink drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] tracking-wider">
  <span className="text-amber-500">{item.letter}</span>
  {item.word}
  </h3>

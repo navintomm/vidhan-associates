@@ -90,7 +90,7 @@ export default function Footer() {
  </div>
  <div className="border-t border-ink/20 py-6">
  <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold mb-2 break-words">Email Address</p>
- <a href="mailto:vidhanlawchamberskerala@gmail.com" className="text-base md:text-lg font-sans tracking-wide break-words hover:text-gold transition-colors">vidhanlawchamberskerala@gmail.com</a>
+ <a href="mailto:vidhanlawchamberskerala@gmail.com" className="text-base md:text-lg font-sans tracking-wide break-all hover:text-gold transition-colors">vidhanlawchamberskerala@gmail.com</a>
  </div>
  <div className="border-t border-ink/20 py-6">
  <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gold mb-2 break-words">{t("contact.ernakulamTitle")}</p>
