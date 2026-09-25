@@ -258,7 +258,7 @@ export default function PracticeAreasStack() {
  fill
  className="object-cover"
  />
- <div className="absolute inset-0" className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent via-transparent to-parchment" />
+ <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent via-transparent to-parchment" />
  </div>
 
  {/* Right Content Pane */}
@@ -289,6 +289,7 @@ export default function PracticeAreasStack() {
  </>
  );
 }
+
 
 
 
